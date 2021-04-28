@@ -1,0 +1,888 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>HTML笔记 - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"9e0f07cebf5bd6eecad2fb7212c615ec","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Tourry's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="HTML笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-23 15:19" pubdate>
+        2021年4月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HTML笔记</h1>
+            
+            <div class="markdown-body">
+              <h1 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h1><ul>
+<li>HTML：用于搭建基础页面，展示页面的内容</li>
+<li>CSS：用于美化页面，布局页面</li>
+<li>JavaScript：控制页面元素，让页面有一些动态效果</li>
+</ul>
+<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>Hyper Text Markup Language 超文本标记语言</li>
+<li>标记语言，不是编程语言</li>
+</ul>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ul>
+<li>围堵标签：有开始标签和结束标签。如<code>&lt;html&gt;&lt;/html&gt;</code></li>
+<li>自闭合标签：开始标签和结束标签在一起。如<code>&lt;br/&gt;</code></li>
+<li>标签可以嵌套</li>
+<li>在开始标签中可以定义属性，属性由键值对构成，值需要用引号（单双都可，最好双引号）引起来。如：<code>name=&quot;value&quot;</code></li>
+<li>标签不区分大小写，建议小写</li>
+</ul>
+<h2 id="文件标签"><a href="#文件标签" class="headerlink" title="文件标签"></a>文件标签</h2><ul>
+<li><code>&lt;html&gt;</code>：根标签</li>
+<li><code>&lt;head&gt;</code>：头标签。用于指定html文档的一些属性。引入外部的资源<ul>
+<li><code>&lt;title&gt;</code>：标题标签（写在根标签下）</li>
+</ul>
+</li>
+<li><code>&lt;body&gt;</code>：体标签<ul>
+<li><code>&lt;meta charset=&quot;utf-8&quot;&gt;</code>：中文网页声明编码（写在体标签下）</li>
+</ul>
+</li>
+<li><code>&lt;!DOCTYPE html&gt;</code>：定义该文档是html文档</li>
+</ul>
+<h2 id="文本标签"><a href="#文本标签" class="headerlink" title="文本标签"></a>文本标签</h2><ul>
+<li><code>&lt;!-- --&gt;</code> <ul>
+<li>注释标签</li>
+</ul>
+</li>
+<li><code>&lt;br&gt;</code>或<code>&lt;br/&gt;</code>，未来强制<br/><ul>
+<li>换行标签</li>
+<li>所有连续的空格或空行都会被算作一个空格。</li>
+<li>所有连续的空行（换行）也被显示为一个空格。</li>
+</ul>
+</li>
+<li><code>&lt;h1&gt;~&lt;h6&gt;</code><ul>
+<li>标题标签</li>
+<li>从<code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code>字体依次减小</li>
+</ul>
+</li>
+<li><code>&lt;p&gt;</code><ul>
+<li>段落标签</li>
+<li>段落的行数依赖于浏览器窗口的大小。如果调节浏览器窗口的大小，将改变段落中的行数。</li>
+</ul>
+</li>
+<li><code>&lt;hr&gt;</code><ul>
+<li>显示一条水平线</li>
+<li>属性：<ul>
+<li><code>color</code>：颜色</li>
+<li><code>width</code>：宽度 </li>
+<li><code>size</code>：高度</li>
+<li><code>align</code>：对齐方式<ul>
+<li><code>center</code>：居中</li>
+<li><code>left</code>：左对齐</li>
+<li>`right：右对齐</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>&lt;b&gt;</code><ul>
+<li>字体加粗</li>
+</ul>
+</li>
+<li><code>&lt;i&gt;</code><ul>
+<li>斜体</li>
+</ul>
+</li>
+<li><code>&lt;font&gt;</code><ul>
+<li><p>字体标签，已过时</p>
+</li>
+<li><p>属性：</p>
+<ul>
+<li><code>color</code>：颜色</li>
+<li><code>size</code>：大小</li>
+<li><code>face</code>：字体</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>属性定义<ul>
+<li><code>color</code>：<ul>
+<li>英文单词：<code>red</code>，<code>green</code>，<code>blue</code></li>
+<li><code>rgb(a,b,c)</code>：a,b,c取值：0~255</li>
+<li><code>#abc</code>：a,b,c取值：00~FF</li>
+</ul>
+</li>
+<li><code>width</code>：<ul>
+<li>数值：<code>width=20</code>，默认单位px</li>
+<li>百分比：<code>width=50%</code>，是指占父元素的百分比 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="图片标签"><a href="#图片标签" class="headerlink" title="图片标签"></a>图片标签</h2><ul>
+<li><p><code>&lt;img&gt;</code></p>
+<p>属性：</p>
+<ul>
+<li><code>src</code><ul>
+<li>图片的地址</li>
+<li>相对地址：以./开头的路径<ul>
+<li>./代表当前目录  ./image/1.jpg (如果前面没有./默认./)</li>
+<li>../代表上一级目录 </li>
+</ul>
+</li>
+<li>绝对地址：目录下的绝对位置，直接到达目标位置，通常是从盘符开始的路径。</li>
+</ul>
+</li>
+<li><code>alt</code><ul>
+<li>未正确加载图片时，显示的文字</li>
+</ul>
+</li>
+<li><code>align</code><ul>
+<li>对齐方式（<code>middle</code>、<code>top</code>、<code>bottom</code>）</li>
+<li>在HTML 4中 align 属性已废弃，HTML5 已不支持该属性，可以使用 CSS 代替。</li>
+</ul>
+</li>
+<li><code>width</code><ul>
+<li>宽度</li>
+</ul>
+</li>
+<li><code>height</code><ul>
+<li>高度</li>
+</ul>
+</li>
+<li><code>boder</code><ul>
+<li>边框</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="列表标签"><a href="#列表标签" class="headerlink" title="列表标签"></a>列表标签</h2><ul>
+<li><code>&lt;ol&gt;&lt;li&gt;...&lt;/li&gt;  &lt;li&gt;...&lt;/li&gt;&lt;/ol&gt;</code><ul>
+<li>有序列表</li>
+<li><code>type</code>属性指定有序编号的样式<ul>
+<li><code>type=&quot;A&quot;</code>  展示ABCD</li>
+<li><code>type=&quot;1&quot;</code>  d展示1234</li>
+</ul>
+</li>
+<li><code>start</code>属性指定开始的编号<ul>
+<li><code>start=&quot;C&quot;</code> 展示CDEF</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;  &lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;</code><ul>
+<li>无序列表</li>
+<li><code>type</code>属性指定无序小圆点的样式，<strong>已过时</strong>，建议用CSS修改<ul>
+<li><code>type=&quot;disc&quot;</code> 展示实心圆点</li>
+<li><code>type=&quot;circle&quot;</code> 展示空心圆圈</li>
+<li><code>type=&quot;square&quot;</code> 展示实心矩形</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="链接标签"><a href="#链接标签" class="headerlink" title="链接标签"></a>链接标签</h2><ul>
+<li><p><code>&lt;a&gt;</code></p>
+<ul>
+<li>超链接</li>
+<li>属性：<ul>
+<li><code>href</code> ：指定访问资源的URL</li>
+<li><code>target</code>：指定资源的打开方式</li>
+</ul>
+</li>
+<li><code>target=&quot;_self&quot;</code> 当前窗口打开</li>
+<li><code>target=&quot;_blank&quot;</code>新窗口打开</li>
+</ul>
+</li>
+<li><p>和<code>&lt;img&gt;</code>标签结合使用</p>
+<ul>
+<li><p><code>&lt;a href=&quot;...&quot;&gt;&lt;img src=&quot;...&quot;&gt;&lt;/a&gt;</code> </p>
+</li>
+<li><p>推荐用JS实现</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="块标签"><a href="#块标签" class="headerlink" title="块标签"></a>块标签</h2><ul>
+<li><code>&lt;span&gt;</code><ul>
+<li>无含义，方便CSS控制样式</li>
+<li>无换行</li>
+</ul>
+</li>
+<li><code>&lt;div&gt;</code><ul>
+<li>有换行</li>
+</ul>
+</li>
+</ul>
+<h2 id="语义标签"><a href="#语义标签" class="headerlink" title="语义标签"></a>语义标签</h2><ul>
+<li><code>&lt;header&gt;</code><ul>
+<li>头，无实际作用，HTML5中为了方便阅读</li>
+</ul>
+</li>
+<li><code>&lt;footer&gt;</code><ul>
+<li>尾</li>
+</ul>
+</li>
+</ul>
+<h2 id="表格标签"><a href="#表格标签" class="headerlink" title="表格标签"></a>表格标签</h2><ul>
+<li><p><code>&lt;table&gt;</code></p>
+<ul>
+<li>定义表格，放在最外边</li>
+<li>属性：<ul>
+<li><code>boder</code>：边框大小，显示两条线，默认无边框</li>
+<li><code>width</code>：宽度</li>
+<li><code>cellpadding=&quot;0&quot;</code>，单元格边距，边沿和内容之间的空白</li>
+<li><code>cellspacing=&quot;0&quot;</code>，单元格间距，让两条线合成一条</li>
+<li><code>bgcolor</code>：背景色</li>
+<li><code>align</code>：对齐方式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;tr&gt;</code></p>
+<ul>
+<li>定义行</li>
+<li>属性：<ul>
+<li><code>boder</code>：边框大小，显示两条线</li>
+<li><code>bgcolor</code>：背景色</li>
+<li><code>align</code>：对齐方式<ul>
+<li><code>aligin=&quot;center&quot;</code> ，整行中每个数据都居中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;td&gt;</code></p>
+<ul>
+<li>定义每行的数据</li>
+<li>属性：<ul>
+<li><code>colspan=&quot;2&quot;</code>，占两列</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;th&gt;</code></p>
+<ul>
+<li>定义表头单元格</li>
+</ul>
+</li>
+<li><p><code>&lt;caption&gt;</code></p>
+<ul>
+<li>定义表格标题</li>
+</ul>
+</li>
+<li><p><code>&lt;thead&gt;</code></p>
+<ul>
+<li>定义表格头部分，方遍CSS控制样式</li>
+</ul>
+</li>
+<li><p><code>&lt;tfoot&gt;</code></p>
+<ul>
+<li>定义表格尾部分，方便CSS控制样式</li>
+</ul>
+</li>
+</ul>
+<h2 id="表单标签"><a href="#表单标签" class="headerlink" title="表单标签"></a>表单标签</h2><ul>
+<li><p><code>&lt;form&gt;</code></p>
+<ul>
+<li>表单，定义采集用户数据的范围</li>
+<li>属性：<ul>
+<li><code>action</code>：指定提交数据的URL</li>
+<li><code>method</code>：指定提交方式，一共7种，常用2种<ul>
+<li><code>get</code>：<ul>
+<li>请求参数会在地址栏中显示，封装到请求行中</li>
+<li>请求参数的大小是有限制的</li>
+<li>不安全</li>
+</ul>
+</li>
+<li><code>post</code>：<ul>
+<li>请求参数会封装在请求体中（HTTP）</li>
+<li>请求参数的大小是没有限制的</li>
+<li>安全</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>表单项(如<code>&lt;imput&gt;</code>、<code>&lt;select&gt;</code>)中的数据要想被提交，必须指定其<strong>name</strong>属性</li>
+</ul>
+</li>
+<li><p><code>&lt;input&gt;</code></p>
+<ul>
+<li>输入标签，可以通过<strong>type</strong>属性改变显示的样式</li>
+<li><code>&lt;lable&gt;</code>标签，指定输入项的文字信息<ul>
+<li><code>&lt;lable&gt;</code>标签<strong>for</strong>属性的值，需要与该<code>&lt;lable&gt;</code>标签的所提示<code>&lt;input&gt;</code>标签<strong>id</strong>属性的值一致。对应后鼠标点击<code>&lt;lable&gt;</code>标签会获取<code>&lt;input&gt;</code>标签的焦点。</li>
+</ul>
+</li>
+</ul>
+<p>在<code>&lt;input&gt;</code>标签中，<code>type</code>属性的值不同会显示不同样式：</p>
+<ul>
+<li><code>type=&quot;text&quot;</code><ul>
+<li>文本输入框，默认宽度20</li>
+<li><strong>checked</strong>属性指定默认值，其值是显示出来的</li>
+<li><strong>placeholder</strong>属性指定提示信息，其值在内容变化后消失</li>
+</ul>
+</li>
+<li><code>type=&quot;password&quot;</code><ul>
+<li>密码输入框，密文显示</li>
+<li><strong>checked</strong>属性指定默认值，其值是显示出来的</li>
+<li><strong>placeholder</strong>属性指定提示信息，其值在内容变化后消失</li>
+</ul>
+</li>
+<li><code>type=&quot;radio&quot;</code><ul>
+<li>单选框，需要<strong>name</strong>属性和<strong>value</strong>属性</li>
+<li>多个单选框要想实现单选效果，<strong>name</strong>属性的值应该相同</li>
+<li>给单选框指定<strong>value</strong>属性，用于提交数据</li>
+<li><strong>checked</strong>属性指定默认值，checked可以没有值</li>
+</ul>
+</li>
+<li><code>type=&quot;checkbox&quot;</code><ul>
+<li>复选框，需要<strong>name</strong>属性和<strong>value</strong>属性</li>
+<li>多个复选框要想实现复选效果，<strong>name</strong>属性的值应该相同</li>
+<li>给复选框指定<strong>value</strong>属性，用于提交数据</li>
+<li><strong>checked</strong>属性指定默认值，checked可以没有值</li>
+</ul>
+</li>
+<li><code>type=&quot;file&quot;</code><ul>
+<li>文件，需要配合JS</li>
+</ul>
+</li>
+<li><code>type=&quot;hidden&quot;</code><ul>
+<li>隐藏域，用于提交提示信息</li>
+</ul>
+</li>
+<li><code>type=&quot;submit&quot;</code><ul>
+<li>提交按钮，用于提交表单</li>
+</ul>
+</li>
+<li><code>type=&quot;button&quot;</code><ul>
+<li>普通按钮，需要配合JS</li>
+</ul>
+</li>
+<li><code>type=&quot;img&quot;</code><ul>
+<li>图片提交按钮，可以提交表单</li>
+<li><strong>src</strong>属性，指定图片的路径</li>
+</ul>
+</li>
+<li><code>type=&quot;date&quot;</code><ul>
+<li>日期：年月日</li>
+</ul>
+</li>
+<li><code>type=&quot;datetime-local&quot;</code></li>
+<li>日期：年月日时分</li>
+<li><code>type=&quot;number&quot;</code><ul>
+<li>只能输入数字</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>&lt;select&gt;</code></p>
+<ul>
+<li>下拉列表，放在外边定义下拉列表的范围</li>
+<li><code>&lt;option&gt;</code>标签：下拉列表的每一项<ul>
+<li>给<code>&lt;option&gt;</code>指定<strong>value</strong>属性，用于提交数据</li>
+</ul>
+</li>
+<li><strong>selected</strong>属性指定默认值，selected可以没有值</li>
+</ul>
+</li>
+<li><p><code>&lt;textarea&gt;</code></p>
+<ul>
+<li>文本域</li>
+<li>属性：<ul>
+<li><code>cols</code>：指定行数</li>
+<li><code>rows</code>：指定列数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaWeb/">JavaWeb</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/25/CSS%E7%AC%94%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CSS笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/09/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB04-%E5%9F%BA%E4%BA%8ETextRank%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%AD%E6%96%87%E6%96%87%E7%8C%AE%E8%87%AA%E5%8A%A8%E6%91%98%E8%A6%81%E6%8F%90%E5%8F%96%E7%A0%94%E7%A9%B6/">
+                        <span class="hidden-mobile">文献阅读04-基于TextRank算法的中文文献自动摘要提取研究</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        吉ICP备20001736号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?9e0f07cebf5bd6eecad2fb7212c615ec";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

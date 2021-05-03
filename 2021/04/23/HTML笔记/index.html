@@ -254,6 +254,7 @@
 <li>标签不区分大小写，建议小写</li>
 </ul>
 <h2 id="文件标签"><a href="#文件标签" class="headerlink" title="文件标签"></a>文件标签</h2><ul>
+<li><code>&lt;!DOCTYPE html&gt;</code>：定义该文档是html文档</li>
 <li><code>&lt;html&gt;</code>：根标签</li>
 <li><code>&lt;head&gt;</code>：头标签。用于指定html文档的一些属性。引入外部的资源<ul>
 <li><code>&lt;title&gt;</code>：标题标签（写在根标签下）</li>
@@ -263,17 +264,15 @@
 <li><code>&lt;meta charset=&quot;utf-8&quot;&gt;</code>：中文网页声明编码（写在体标签下）</li>
 </ul>
 </li>
-<li><code>&lt;!DOCTYPE html&gt;</code>：定义该文档是html文档</li>
 </ul>
 <h2 id="文本标签"><a href="#文本标签" class="headerlink" title="文本标签"></a>文本标签</h2><ul>
 <li><code>&lt;!-- --&gt;</code> <ul>
 <li>注释标签</li>
 </ul>
 </li>
-<li><code>&lt;br&gt;</code>或<code>&lt;br/&gt;</code>，未来强制<br/><ul>
+<li><code>&lt;br&gt;</code>或<code>&lt;br/&gt;</code>，未来强制<code>&lt;br/&gt;</code><ul>
 <li>换行标签</li>
 <li>所有连续的空格或空行都会被算作一个空格。</li>
-<li>所有连续的空行（换行）也被显示为一个空格。</li>
 </ul>
 </li>
 <li><code>&lt;h1&gt;~&lt;h6&gt;</code><ul>
@@ -295,7 +294,7 @@
 <li><code>align</code>：对齐方式<ul>
 <li><code>center</code>：居中</li>
 <li><code>left</code>：左对齐</li>
-<li>`right：右对齐</li>
+<li><code>right</code>：右对齐</li>
 </ul>
 </li>
 </ul>
@@ -343,9 +342,9 @@
 <ul>
 <li><code>src</code><ul>
 <li>图片的地址</li>
-<li>相对地址：以./开头的路径<ul>
-<li>./代表当前目录  ./image/1.jpg (如果前面没有./默认./)</li>
-<li>../代表上一级目录 </li>
+<li>相对地址：以<code>./</code>开头的路径<ul>
+<li><code>./</code>代表当前目录  <code>./image/1.jpg</code> (如果前面没有<code>./</code>默认<code>./</code>)</li>
+<li><code>../</code>代表上一级目录 </li>
 </ul>
 </li>
 <li>绝对地址：目录下的绝对位置，直接到达目标位置，通常是从盘符开始的路径。</li>
@@ -357,7 +356,7 @@
 </li>
 <li><code>align</code><ul>
 <li>对齐方式（<code>middle</code>、<code>top</code>、<code>bottom</code>）</li>
-<li>在HTML 4中 align 属性已废弃，HTML5 已不支持该属性，可以使用 CSS 代替。</li>
+<li>在HTML 4中 <code>align</code> 属性已废弃，HTML5 已不支持该属性，可以使用 CSS 代替。</li>
 </ul>
 </li>
 <li><code>width</code><ul>
@@ -380,7 +379,7 @@
 <li>有序列表</li>
 <li><code>type</code>属性指定有序编号的样式<ul>
 <li><code>type=&quot;A&quot;</code>  展示ABCD</li>
-<li><code>type=&quot;1&quot;</code>  d展示1234</li>
+<li><code>type=&quot;1&quot;</code>  展示1234</li>
 </ul>
 </li>
 <li><code>start</code>属性指定开始的编号<ul>

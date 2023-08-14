@@ -1,0 +1,1624 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="js var let const 之间的异同点  作用域：  var 声明的变量属于函数作用域。在函数外使用 var 声明变量时，该变量会成为全局变量。  let 和 const 声明的变量属于块作用域。    声明提升：  var 存在声明提升。使用 var 声明变量时，变量的声明会提升到作用域的顶部，因此可以在声明变量的语句前访问到这个变量，值是 undefined。  let 和 const">
+<meta property="og:type" content="website">
+<meta property="og:title" content="page.title">
+<meta property="og:url" content="https://zhangtuo.online/demo/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%85%AB%E8%82%A1%E6%96%87.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="js var let const 之间的异同点  作用域：  var 声明的变量属于函数作用域。在函数外使用 var 声明变量时，该变量会成为全局变量。  let 和 const 声明的变量属于块作用域。    声明提升：  var 存在声明提升。使用 var 声明变量时，变量的声明会提升到作用域的顶部，因此可以在声明变量的语句前访问到这个变量，值是 undefined。  let 和 const">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-14T11:38:54.621Z">
+<meta property="article:modified_time" content="2023-08-14T11:38:54.583Z">
+<meta property="article:author" content="ZhangTuo">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>page.title - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="page.title"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><ul>
+<li><p>var let const 之间的异同点</p>
+<ul>
+<li><p><strong>作用域</strong>：</p>
+<ul>
+<li><p>var 声明的变量属于函数作用域。在函数外使用 var 声明变量时，该变量会成为全局变量。</p>
+</li>
+<li><p>let 和 const 声明的变量属于块作用域。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>声明提升</strong>：</p>
+<ul>
+<li><p>var 存在声明提升。使用 var 声明变量时，变量的声明会提升到作用域的顶部，因此可以在声明变量的语句前访问到这个变量，值是 undefined。</p>
+</li>
+<li><p>let 和 const 不存在声明提升。在声明变量语句前访问变量会报错，也就是存在暂时性死区。</p>
+</li>
+<li><p>函数有声明提升，类没有</p>
+</li>
+</ul>
+</li>
+<li><p><strong>重复声明</strong>：</p>
+<ul>
+<li>使用 var 声明的变量可以在同一作用域内重复声明。</li>
+<li>使用 let 和 const 声明的变量不可以在同一作用域内重复声明。</li>
+</ul>
+</li>
+<li><p><strong>赋值</strong>：</p>
+<ul>
+<li>var 和 let 可以先声明后赋值，赋值后可以重新赋值。</li>
+<li>const 必须在声明变量时同时赋值，赋值后不可以重新赋值。</li>
+</ul>
+</li>
+<li><p><em>代码规范</em>：一般来说，声明变量时，优先使用 const，如果认为这个变量会重新分配，那就使用 let，任何时候都不要使用 var。</p>
+</li>
+</ul>
+</li>
+<li><p>for-in 和 for-of 区别</p>
+<ul>
+<li>for-in 用来遍历对象除 Symbol 外的可枚举属性名，包括继承的可枚举属性。for-in 会根据对象属性描述符上的 enumerable 来判断对象的属性是否可枚举。不保证遍历顺序。一般是，先遍历数字属性再遍历字符串属性，数字属性按数字大小排列，字符串属性按添加顺序遍历。</li>
+<li>for-of 用来遍历可迭代对象。for-of 会根据可迭代对象身上的 [Symbol.iterator] 方法进行遍历。常见的可迭代对象有数组、字符串、map、set、arguments 对象、NodeList 对象。</li>
+<li>直观感受是，for-in 用来遍历键，for-of 用来遍历值。</li>
+</ul>
+</li>
+<li><p>数据类型</p>
+<ul>
+<li><p>boolean string number undefined null symbol bigint object</p>
+<ul>
+<li>symbol es6</li>
+<li>bigint es2019<ul>
+<li>可以表示大于 2^53-1 的数值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>null 和 undefined 区别</p>
+<ul>
+<li>null 代表空值，undefined 代表未定义的值。undefined 是自己出现的，一般不会显式赋值一个变量为 undefined</li>
+<li>null 出现场景：<ul>
+<li>声明对象但是暂不赋值，一般初始化为 null</li>
+<li>当变量不再被使用时，赋值为 null 来解除引用</li>
+</ul>
+</li>
+<li>undefined 出现场景：<ul>
+<li>typeof 后跟一个没声明的变量</li>
+<li>声明变量但没赋值</li>
+<li>函数没有 return，或者 return 空表达式</li>
+<li>定义形参但没有传参</li>
+<li>对象上没有对应的属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>为什么 null 会被 typeof 判断成对象</p>
+<ul>
+<li>JavaScript 设计上的失误。在 JavaScript 最初的实现中，JavaScript 中的值是由一个表示类型的标签和实际数据值表示的（对象的类型标签是 0）。由于 null 代表的是空指针（大多数平台下值为 0x00），因此，null的类型标签也成为了 0，typeof null就错误的返回了”object”。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>如何检测数据类型，不同场景不同方案</p>
+<ul>
+<li>instanceof  和 typeof 区别<ul>
+<li>typeof 检测变量的类型，可以准确检测除 null 外的基本数据类型和函数</li>
+<li>instanceof 用来检测右侧构造函数是否出现在左侧实例对象的原型链上</li>
+</ul>
+</li>
+<li>判断空对象<ul>
+<li>Object.keys(obj).length &#x3D;&#x3D;&#x3D; 0 配合 obj.constructor &#x3D;&#x3D;&#x3D; Object</li>
+<li>Object.prototype.toString().call(obj) 配合 JSON.stringify(value) &#x3D;&#x3D;&#x3D; ‘{}’</li>
+</ul>
+</li>
+<li>判断数组<ul>
+<li>isArray</li>
+</ul>
+</li>
+<li>通用的解决方案是调用 Object.prototype.toString().call(obj)</li>
+</ul>
+</li>
+<li><p>基本类型和引用类型的区别</p>
+<ul>
+<li>定义：基本类型值指的是简单的数据段；引用类型值指那些可能由多个值构成的对象</li>
+<li>内存空间：js 内存分为栈内存和堆内存<ul>
+<li>基本类型变量以及变量的值存放在栈内存中</li>
+<li>引用类型变量的地址存放在栈内存中，值存放在堆内存中</li>
+</ul>
+</li>
+<li>对值的操作：<ul>
+<li>基本类型按值访问，操作的是实际保存的值</li>
+<li>引用类型按地址访问，先从栈中读取内存地址，然后按照内存地址到堆内存中取值</li>
+</ul>
+</li>
+<li>变量赋值：<ul>
+<li>将一个基本类型变量赋值给一个新变量，会在栈中创建一个新值，然后把值赋给新变量</li>
+<li>将一个引用类型变量赋值给一个新变量，赋值的是存在栈内存中的地址，两个变量会引用同一个对象。所以修改其中一个变量，另一个变量也会发生改变。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;</p>
+<ul>
+<li>&#x3D;&#x3D; 相等：先进行类型转换，然后判断</li>
+<li>&#x3D;&#x3D;&#x3D; 严格相等：不进行类型转换，直接判断</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数值</p>
+<ul>
+<li>MAX_SAFE_NUMBER 最大安全整数 2^53 - 1</li>
+</ul>
+</li>
+<li><p>对象</p>
+<ul>
+<li>new 一个对象的中间过程<ol>
+<li>在内存中创建一个新的对象</li>
+<li>新对象的隐式原型指向构造函数的显式原型</li>
+<li>构造函数内部的 this 指向新对象</li>
+<li>执行构造函数内的代码</li>
+<li>如果没有显式返回值，返回该对象</li>
+</ol>
+</li>
+<li>深拷贝、浅拷贝<ul>
+<li>深拷贝和浅拷贝都复制值和地址，都是为了解决引用类型赋值后相互影响的问题<ul>
+<li>浅拷贝进行一层复制，深层次的引用类型还是共享内存地址</li>
+<li>深拷贝是无限层级复制，拷贝后原对象和新对象互不影响</li>
+</ul>
+</li>
+<li>浅拷贝：<ul>
+<li>Object.assign()</li>
+<li>扩展运算符</li>
+</ul>
+</li>
+<li>深拷贝<ul>
+<li>JSON.parse(JSON.stringfiy(obj)) 缺点：<ul>
+<li>忽略 undefined symbol function</li>
+<li>NaN、Infinity 会被序列化为 null</li>
+<li>存在循环引用的问题</li>
+</ul>
+</li>
+<li>手写深拷贝<ul>
+<li>处理 typeof 不为 object 的情况：除 null 外原始类型和函数</li>
+<li>处理 null</li>
+<li>处理日期、正则、NodeList</li>
+<li>处理对象、数组</li>
+<li>解决循环引用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>遍历对象属性<ul>
+<li>for-in 遍历对象身上除 Symbol 外的可枚举属性名，包括继承的可枚举属性。</li>
+<li>如果不想遍历原型身上的属性，可以使用 hasOwnProperty() 方法加判断。或者使用 Object.keys()。</li>
+<li>Object.keys() 返回对象身上除 symbol 外的可枚举属性名，不包括继承的可枚举属性。</li>
+<li>Object.getOwnPropertyNames()，返回对象自身上除 Symbol 外的属性名，包括不可枚举属性。</li>
+<li>Object.getOwnPropertySymbols()，返回对象自身上的 Symbol 属性。</li>
+<li>Reflect.ownKeys()，返回对象身上的属性，包括字符串属性和符号属性。</li>
+</ul>
+</li>
+<li>继承的实现方式（todo）<ul>
+<li>原型链继承<ul>
+<li>子类构造函数原型指向父类构造函数的实例</li>
+<li>优点：可以继承父类实例以及父类原型的属性和方法</li>
+<li>缺点：<ul>
+<li>父类引用类型属性会被子类共享，一个子类修改父类引用类型属性后，其他子类也会被影响。</li>
+<li>子类无法给父类构造函数传参</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>构造函数继承<ul>
+<li>子类构造函数内部调用父类构造函数</li>
+<li>优点：子类间不会相互影响父类的引用类型属性，子类可以给父类构造函数传参</li>
+<li>缺点：子类无法访问到父类原型上的属性和方法</li>
+</ul>
+</li>
+<li>组合继承<ul>
+<li>子类构造函数内部调用父类函数，并且子类构造函数原型指向父类构造函数的实例</li>
+<li>优点：子类间不会相互影响父类的引用类型属性，子类可以给父类构造函数传参，子类可以访问到父类原型上的属性和方法</li>
+<li>缺点：父类的构造函数会被调用两次。父类的属性和方法不仅会存在子类实例上，还会存在子类实例的原型链上。存在性能问题。</li>
+</ul>
+</li>
+<li>原型式继承</li>
+<li>寄生式继承</li>
+<li>组合寄生式继承</li>
+<li>es6 extends</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数组</p>
+<ul>
+<li>数组方法有哪些<ul>
+<li>改变原始数组的<ul>
+<li>push pop shift unshift reverse splice sort</li>
+</ul>
+</li>
+<li>迭代方法<ul>
+<li>forEach filter map every some</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>函数</p>
+<ul>
+<li>this 总是指向函数执行时的当前对象<ul>
+<li><p>作为对象的方法调用</p>
+<ul>
+<li>this 指向该对象</li>
+</ul>
+</li>
+<li><p>作为普通函数调用</p>
+<ul>
+<li>this 指向全局对象</li>
+</ul>
+</li>
+<li><p>作为构造函数调用</p>
+<ul>
+<li>this 指向返回的这个对象</li>
+</ul>
+</li>
+<li><p>作为事件处理函数</p>
+<ul>
+<li>this 指向事件的目标元素</li>
+</ul>
+</li>
+<li><p>call 和 apply</p>
+<ul>
+<li>this 指向传入的参数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>箭头函数</p>
+<ul>
+<li>怎么介绍箭头函数？哪些特性？<ul>
+<li>箭头函数是es6新增的使用箭头来定义的函数，语法更简洁、功能受限。</li>
+</ul>
+</li>
+<li>箭头函数和普通函数的区别<ul>
+<li>箭头函数没有 prototype 属性。不能使用 arguments、super 和 new.target，也不能用作构造函数。箭头函数的 this 指向定义箭头函数的作用域</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>尾递归优化</p>
+<ul>
+<li>尾递归：函数的返回值是调用自身</li>
+<li>尾递归优化：函数执行时有一个调用栈。满足尾递归时，帧在压入调用栈前会先弹出上一个帧。无论递归多少次，调用栈中只有一个帧</li>
+</ul>
+</li>
+<li><p>call apply bind</p>
+<ul>
+<li>call 和 apply 功能相同，都是以指定的 this 值来调用函数。call 和 apply 的一个参数都是指定的 this 值。但是 call 和 apply 之后传参的方式不同：call 是将从第二个开始的参数一个个传给原函数；apply 是将第二个参数作为参数数组，拆分后传给原函数。</li>
+<li>bind 的传参方式和 call 相同，但是不会执行函数，而是返回一个新的函数。返回的新函数中的 this 就是传入的 this 值。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>异步</p>
+<ul>
+<li>对 promise 的理解。解决了什么问题？用法？方法？<ul>
+<li>解决回调地狱问题。</li>
+<li>三种状态。pending、fulfilled&#x2F;resolved、rejected。</li>
+<li>控制状态。通过调用执行器函数的两个参数可以改变 promise 的状态。一般被命名为 resovle 和 reject。</li>
+<li>直接创建 resolved 或者 rejected 状态的 promise 对象。 Promise.resolve()、Promise.reject() </li>
+<li>then()、catch()、finally() 方法，用来访问异步操作返回的数据。可以链式调用</li>
+<li>Promise.all()、Promise.allSettled()、Promse.race()、Promise.any()<ul>
+<li>Promise.all()：当传入的 promise 对象数组全兑现时，Promise.all() 返回的 promise 对象也被兑现，兑现的值是所有兑现值的数组（按传入数组的顺序）；只要有一个 promise 对象被拒绝，Promise.all() 返回的 promise 对象会立刻被拒绝，拒绝原因是第一个 promise 对象拒绝的原因。</li>
+<li>Promise.allSettled()：等待所有的传入的 promise 对象解决或者拒绝，Promise.allSettled 会被兑现，兑现值是所有 promise 解决值或者拒接原因的对象数组。</li>
+<li>Promise.race()：根据传入的 promise 对象数组首先落定的 promise 状态，如果首先落定为解决，返回的 promise 就解决，如果首先落定为拒绝，返回的 promise 就拒绝。解决值和拒绝理由和首先落定的对象相同。</li>
+<li>Promise.any()：当传入的 promise 数组有一个解决时，Promise.any() 返回的 promise 就解决，解决值相同。当传入的 promise 都拒绝时，返回的对象才拒绝，拒绝原因是所有拒绝原因的数组。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>async await</p>
+<ul>
+<li>async 标识一个函数为异步函数。异步函数内部的返回值会被 Promise.resolve() 包装成一个 promise 对象。</li>
+<li>await 可以阻塞异步函数后面的代码，等待异步函数执行完毕后，对异步函数的返回的 promise 对象进行解包。await 只能在异步函数中使用，不能在顶级上下文中使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>客户端存储</p>
+<ul>
+<li>cookie<ul>
+<li>name&#x2F;value&#x2F;domain&#x2F;path<ul>
+<li>cookie 的名、值、访问哪些域会带上这个 cookie（只区分域，与协议和端口无关）、哪些目录可以共享这个 cookie</li>
+</ul>
+</li>
+<li>samesite<ul>
+<li>strict：完全禁止 cookie 发送到第三方网站</li>
+<li>lax（默认）：允许部分操作（ a 标签、预加载请求、get 表单）携带 cookie 发送到第三方网站。可以防止 csrf 攻击</li>
+<li>none：不限制 cookie 发送到第三方网站</li>
+</ul>
+</li>
+<li>httponly<ul>
+<li>设置后，cookie 不能通过 JavaScript 操作。可以防止 xss 攻击</li>
+</ul>
+</li>
+<li>secure<ul>
+<li>设置后，只有 https 协议才能携带该 cookie，http 协议不能携带该 cookie</li>
+</ul>
+</li>
+<li>expires&#x2F;maxage<ul>
+<li>过期时间。expires 是 http 1.0 的用法，值是绝对时间。maxage 是 http 1.1 的用法，优先级更高，值是相对时间，单位秒</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cookie session token（todo）<ul>
+<li>cookie 和 session</li>
+<li>token</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>localStorge sessionStorge<ul>
+<li>相同点<ul>
+<li>作用：在客户端存储数据</li>
+<li>API：key() getItem() setItem() removeItem() clear()</li>
+<li>存储大小：最大5m</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>生命周期：localStorge 里的数据可以长期保留，sessionStorge 里的数据会在页面关闭时清除</li>
+<li>作用域：localStorge 里的数据可以在同源文档间共享，sessionStorge 里的数据只能在同一页面会话中共享</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>路由</p>
+<ul>
+<li><p>什么是路由？</p>
+<ul>
+<li>路由把URL转发到对应的视图上。SPA 中，浏览器地址的变化不会引起网页的重新加载。路由主要通过监听事件，动态改变网页的内容。主要有 hash 和 history 两种模式。</li>
+</ul>
+</li>
+<li><p>history 和 hash 路由的区别？</p>
+<ul>
+<li><p>用户能感知到的区别是，hash 路由在地址栏中会有一个#，history 路由没有</p>
+</li>
+<li><p>实现路由的方式不同：</p>
+<ul>
+<li><p>hash 模式通过监听 hashchange 事件，执行回调函数来改变页面；</p>
+</li>
+<li><p>history 模式主要利用重写的history.pushState()、history.replaceState()方法，使其触发 popstate事件，再监听popstate事件实现路由</p>
+</li>
+</ul>
+</li>
+<li><p>hash 模式不需要后端配合，history模式需要后端配合。因为history模式下，刷新页面会向服务器发送请求，默认请求url下的index.html，服务器没有这个资源就会报错</p>
+</li>
+</ul>
+</li>
+<li><p>hash 模式：</p>
+<ul>
+<li>地址栏中的hash变化时，网页不会刷新</li>
+<li>实现路由的方式：监听 windows 的 hashchange 事件。</li>
+<li>可以通过 windows.location.hash 来获取和设置 hash。windows.location.hash 的变化会直接显示到地址栏。</li>
+</ul>
+</li>
+<li><p>history 模式：</p>
+<ul>
+<li>history 对象表示当前窗口的浏览历史。history 对象发生变化时，地址栏会变化，但是不会刷新页面</li>
+<li>实现路由的方式：监听 popstate 事件。</li>
+<li>history.back()、history.forward()、history.go() <ul>
+<li>后退、前进、跳转。在历史记录中跳转。</li>
+<li>会触发popstate事件</li>
+</ul>
+</li>
+<li>history.pushState()、history.replaceState()<ul>
+<li>将页面压入历史记录栈中、将页面替换历史记录栈最上面的页面</li>
+<li>不会触发 popstate 事件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>节流防抖</p>
+<ul>
+<li>防抖<ul>
+<li>在事件触发的n秒后再执行回调函数，如果n秒内再次触发，则重新开始计时。类似于lol中的回城机制。</li>
+<li>应用场景：文本框输入后搜索、表单项验证</li>
+</ul>
+</li>
+<li>节流<ul>
+<li>在事件触发后n秒内不能再次触发。类似于lol中的技能cd。</li>
+<li>应用场景：避免按钮高频点击、避免表单重复提交</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>任务队列和事件循环</p>
+<ul>
+<li>什么是事件循环机制<ul>
+<li>javascript是单线程的，为了执行异步任务，维护了一个任务队列。异步任务条件达成时，会将回调函数加入任务队列主线程不断从任务队列中取出事件执行。为了平衡实时性和效率又把任务分为了宏任务和微任务。主线程执行完同步代码后取出消息队列中的一个宏任务执行，执行结束后再把将这段时间收集到的微任务全部执行完，随后进行DOM渲染。</li>
+</ul>
+</li>
+<li>运行顺序：<ul>
+<li>执行一个<code>宏任务</code>（栈中没有就从<code>事件队列</code>中获取）</li>
+<li>执行过程中如果遇到<code>微任务</code>，就将它添加到<code>微任务</code>的任务队列中</li>
+<li><code>宏任务</code>执行完毕后，立即执行当前<code>微任务队列</code>中的所有<code>微任务</code>（依次执行）</li>
+<li>当前<code>宏任务</code>执行完毕，开始检查渲染，然后<code>GUI线程</code>接管渲染</li>
+<li>渲染完毕后，<code>JS线程</code>继续接管，开始下一个<code>宏任务</code>（从事件队列中获取）</li>
+</ul>
+</li>
+<li>宏任务、微任务<ul>
+<li>宏任务：定时器任务、IO任务、网络任务、DOM渲染、页面交互</li>
+<li>微任务：Promise、MutationObserver</li>
+</ul>
+</li>
+<li>为什么区分宏任务和微任务<ul>
+<li>平衡实时性和效率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>原型和原型链</p>
+<ul>
+<li>原型<ul>
+<li>每个构造函数都有一个 prototype 属性，这个属性是一个对象，包含应该由该构造函数构造出来的实例所共享的属性和方法。这个对象就是所创建实例的原型。</li>
+</ul>
+</li>
+<li>原型链<ul>
+<li>实例的<code>__proto__</code>属性指向实例的构造函数的<code>prototype</code>属性。同时，构造函数的<code>prototype</code>属性也是一个对象，这个对象的属性指向它的构造函数的<code>prototype</code>属性。就像这样以<code>__proto__</code>属性得到的对象组成了原型链。默认情况下，所有引用类型都继承自Object。按照这样的规则，最后会找到Object这个构造函数的<code>prototype</code>属性，这个属性对象的<code>__proto__</code>属性指向null。这就是原型链的终点。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>闭包</p>
+<ul>
+<li><p>指函数可以访问其词法作用域外的变量，并且保留对这些变量的引用，即使在函数执行完毕后仍然有效。</p>
+</li>
+<li><p>内存泄漏怎么解决</p>
+<ul>
+<li>不再使用时指向null，释放资源</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>执行上下文和作用域</p>
+<ul>
+<li>执行上下文<ul>
+<li>全局执行上下文</li>
+<li>函数执行上下文</li>
+</ul>
+</li>
+<li>作用域<ul>
+<li>全局作用域</li>
+<li>函数作用域</li>
+<li>块级作用域</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>内存</p>
+<ul>
+<li><p>栈内存和堆内存</p>
+<ul>
+<li>基本类型数据存放在栈内存中；引用类型数据存放在堆内存中，同时栈内存中存变量在堆内存中的地址</li>
+<li>为什么要区分栈内存和堆内存<ul>
+<li>js引擎需要栈内存来维护程序执行期间上下文的状态，如果所有数据都放在栈里的话，就会影响到上下文切换的效率。引用类型的数据，一般会占用较大的内存，而且可能动态变化。所以一般情况下，栈内存存放基本类型数据，堆内存存放引用类型数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>垃圾回收机制</p>
+<ul>
+<li><p>栈内存</p>
+<ul>
+<li>ESP，也就是指向当前上下文的指针，向下移动。之后入栈的上下文会覆盖掉这块内存。</li>
+</ul>
+</li>
+<li><p>堆内存</p>
+<ul>
+<li><p>代际假说</p>
+<ul>
+<li>第一个是大部分对象在内存中存在的时间很短，简单来说，就是很多对象一经分配内存，很快就变得不可访问；</li>
+<li>第二个是不死的对象，会活得更久。</li>
+</ul>
+</li>
+<li><p>垃圾回收流程：第一步，标记空间中活动对象和非活动对象；第二步，回收非活动对象所占用的内促；第三步，内存整理</p>
+</li>
+<li><p>副垃圾回收器，主要负责新生代的垃圾回收。</p>
+<ul>
+<li><p>Scavenge 算法，把新生代空间对半划分为两个区域，一半是对象区域，一半是空闲区域。</p>
+</li>
+<li><p>新加入的对象都会存放到对象区域，当对象区域快被写满时，就需要执行一次垃圾清理操作。</p>
+<p>在垃圾回收过程中，首先要对对象区域中的垃圾做标记；标记完成之后，就进入垃圾清理阶段，副垃圾回收器会把这些存活的对象复制到空闲区域中，同时它还会把这些对象有序地排列起来，所以这个复制过程，也就相当于完成了内存整理操作，复制后空闲区域就没有内存碎片了。</p>
+<p>完成复制后，对象区域与空闲区域进行角色翻转，也就是原来的对象区域变成空闲区域，原来的空闲区域变成了对象区域。这样就完成了垃圾对象的回收操作，同时这种角色翻转的操作还能让新生代中的这两块区域无限重复使用下去。</p>
+<p>由于新生代中采用的 Scavenge 算法，所以每次执行清理操作时，都需要将存活的对象从对象区域复制到空闲区域。但复制操作需要时间成本，如果新生区空间设置得太大了，那么每次清理的时间就会过久，所以为了执行效率，一般新生区的空间会被设置得比较小。</p>
+<p>也正是因为新生区的空间不大，所以很容易被存活的对象装满整个区域。为了解决这个问题，JavaScript 引擎采用了对象晋升策略，也就是经过两次垃圾回收依然还存活的对象，会被移动到老生区中。</p>
+</li>
+</ul>
+</li>
+<li><p>主垃圾回收器，主要负责老生代的垃圾回收。</p>
+<ul>
+<li><p>标记-清除和标记-整理</p>
+</li>
+<li><p>主垃圾回收器主要负责老生区中的垃圾回收。除了新生区中晋升的对象，一些大的对象会直接被分配到老生区。因此老生区中的对象有两个特点，一个是对象占用空间大，另一个是对象存活时间长。</p>
+<p>由于老生区的对象比较大，若要在老生区中使用 Scavenge 算法进行垃圾回收，复制这些大的对象将会花费比较多的时间，从而导致回收执行效率不高，同时还会浪费一半的空间。因而，主垃圾回收器是采用标记 - 清除（Mark-Sweep）的算法进行垃圾回收的。首先是标记过程阶段。标记阶段就是从一组根元素开始，递归遍历这组根元素，在这个遍历过程中，能到达的元素称为活动对象，没有到达的元素就可以判断为垃圾数据。然后统一清除垃圾数据。</p>
+<p>不过对一块内存多次执行标记 - 清除算法后，会产生大量不连续的内存碎片。而碎片过多会导致大对象无法分配到足够的连续内存，于是又产生了另外一种算法——标记 - 整理（Mark-Compact），这个标记过程仍然与标记 - 清除算法里的是一样的，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
+</li>
+</ul>
+</li>
+<li><p>全停顿</p>
+<ul>
+<li>JavaScript 是运行在主线程之上的，一旦执行垃圾回收算法，都需要将正在执行的 JavaScript 脚本暂停下来，待垃圾回收完毕后再恢复脚本执行。我们把这种行为叫做全停顿（Stop-The-World）</li>
+<li>增量标记<ul>
+<li>为了降低老生代的垃圾回收而造成的卡顿，V8 将标记过程分为一个个的子标记过程，同时让垃圾回收标记和 JavaScript 应用逻辑交替进行，直到标记阶段完成，我们把这个算法称为增量标记（Incremental Marking）算法。</li>
+<li>使用增量标记算法，可以把一个完整的垃圾回收任务拆分为很多小的任务，这些小的任务执行时间比较短，可以穿插在其他的 JavaScript 任务中间执行，这样当执行上述动画效果时，就不会让用户因为垃圾回收任务而感受到页面的卡顿了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>网络请求</p>
+<ul>
+<li>原生 ajax 发请求<ul>
+<li>open() send() abort()</li>
+<li>status状态码 responseText响应体 readyState阶段码 onreadystatechange阶段码变化事件</li>
+<li>setRequestHeader() setRequestHeader()</li>
+</ul>
+</li>
+<li>如何取消请求<ul>
+<li>abort()</li>
+<li>什么时候可以取消请求<ul>
+<li>收到响应之前</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>模块规范（todo）</p>
+<ul>
+<li>cjs</li>
+<li>esm</li>
+</ul>
+</li>
+<li><p>async 和 defer 区别</p>
+<ul>
+<li>async 是脚本下载和dom解析并行执行，脚本下载完立即阻塞dom解析执行脚本</li>
+<li>defer 是脚本下载和dom解析并行执行，脚本下载完会等待dom解析完再去执行脚本</li>
+</ul>
+</li>
+<li><p>map 和 set</p>
+<ul>
+<li>map 和 set 什么区别<ul>
+<li>set 值唯一</li>
+</ul>
+</li>
+<li>map 和 object 什么区别<ul>
+<li>map 可以使用任意类型的作为键；object 只能使用数字、字符串或者symbol类型</li>
+<li>map的键的顺序是插入顺序；object 键的顺序是先数字，然后字符串</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><ul>
+<li><p>浏览器分为哪些进程？</p>
+<ul>
+<li>浏览器进程</li>
+<li>渲染进程<ul>
+<li>GUI 渲染线程</li>
+<li>JS引擎线程</li>
+<li>事件触发线程</li>
+<li>定时器触发线程</li>
+<li>http请求线程</li>
+</ul>
+</li>
+<li>网络进程</li>
+<li>GPU进程</li>
+<li>插件进程</li>
+</ul>
+</li>
+<li><p>浏览器为什么是多进程的？</p>
+<ul>
+<li>各个进程负责不同的功能，相互隔离，防止一个功能模块崩溃导致浏览器崩溃</li>
+</ul>
+</li>
+<li><p>从url到页面展示，这中间发生了什么</p>
+<ul>
+<li>用户输入url并回车</li>
+<li>浏览器进程检查url，组装协议，构成完整的url</li>
+<li>浏览器进程通过进程间通信（IPC）把url请求发送给网络进程</li>
+<li>网络进程接收到url请求后检查本地缓存是否缓存了该请求资源，如果有则将该资源返回给浏览器进程</li>
+<li>如果没有，网络进程向web服务器发起http请求（网络请求），请求流程如下<ul>
+<li>进行DNS解析，获取服务器ip地址，端口（端口是通过dns解析获取的吗？这里有个疑问）</li>
+<li>利用ip地址和服务器建立tcp连接</li>
+<li>构建请求头信息</li>
+<li>发送请求头信息</li>
+<li>服务器响应后，网络进程接收响应头和响应信息，并解析响应内容</li>
+</ul>
+</li>
+<li>网络进程解析响应流程<ul>
+<li>检查状态码，如果是301&#x2F;302，则需要重定向，从Location自动中读取地址，重新进行第4步 （301&#x2F;302跳转也会读取本地缓存吗？这里有个疑问），如果是200，则继续处理请求。</li>
+<li>200响应处理：检查响应类型Content-Type，如果是字节流类型，则将该请求提交给下载管理器，该导航流程结束，不再进行后续的渲染，如果是html则通知浏览器进程准备渲染进程准备进行渲染。</li>
+</ul>
+</li>
+<li>准备渲染进程<ul>
+<li>浏览器进程检查当前url是否和之前打开的渲染进程根域名是否相同，如果相同，则复用原来的进程，如果不同，则开启新的渲染进程</li>
+</ul>
+</li>
+<li>传输数据、更新状态<ul>
+<li>渲染进程准备好后，浏览器向渲染进程发起“提交文档”的消息，渲染进程接收到消息和网络进程建立传输数据的“管道”</li>
+<li>渲染进程接收完数据后，向浏览器发送“确认提交”</li>
+<li>浏览器进程接收到确认消息后更新浏览器界面状态：安全、地址栏url、前进后退的历史状态、更新web页面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>浏览器关键渲染路径</p>
+<ul>
+<li>html生成dom，css生成cssom，两者组合成render tree</li>
+<li>layout布局：决定页面的什么位置放置什么元素</li>
+<li>paint绘制：把元素渲染为实际的像素</li>
+</ul>
+</li>
+<li><p>重排和重绘</p>
+<ul>
+<li><p>重排reflow：</p>
+<ul>
+<li>元素的位置发生变动：发生在布局阶段，计算每一个元素在设备视口内的确切位置和大小。当一个元素位置发生变化时，其父元素及其后边的元素位置都可能发生变化，代价极高。</li>
+</ul>
+</li>
+<li><p>重绘repaint：</p>
+<ul>
+<li>元素的样式发生变动：发生在绘制阶段，把元素渲染成实际的像素</li>
+</ul>
+</li>
+<li><p>重排一定会引起重绘</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="dom"><a href="#dom" class="headerlink" title="dom"></a>dom</h2><ul>
+<li><p>获取、修改 div 的内容</p>
+<ul>
+<li><p>获取 </p>
+<ul>
+<li>document.getElementById()、getElementsByTagName()、getElementsByName()</li>
+<li>document.querySelector()、document.querySelectorAll()</li>
+</ul>
+</li>
+<li><p>修改</p>
+<ul>
+<li>innerHTML、outerHTML、innerText、outerText</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>事件流：事件触发的顺序</p>
+<ul>
+<li>事件捕获：从外到内，由不具体到具体 </li>
+<li>到达事件</li>
+<li>事件冒泡：从内到外，由具体到不具体（默认）</li>
+</ul>
+</li>
+<li><p>事件监听</p>
+<ul>
+<li>onclick</li>
+<li>addEventListener</li>
+</ul>
+</li>
+<li><p>事件委托</p>
+<ul>
+<li>多个子元素的事件可以委托给父元素，以达到节省事件处理程序所占内存的目的。</li>
+<li>事件处理函数中的event.target，表示事件实际发生在哪个元素上 event.currentTarget，表示事件绑定到哪个元素上。</li>
+</ul>
+</li>
+</ul>
+<h2 id="css"><a href="#css" class="headerlink" title="css"></a>css</h2><ul>
+<li><p>BFC</p>
+<ul>
+<li><p>块级格式化上下文，BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。</p>
+</li>
+<li><p>触发 BFC</p>
+<ol>
+<li><p>浮动 (float:left|right)</p>
+</li>
+<li><p>overflow:auto|hidden|scroll|overlay</p>
+</li>
+<li><p>display:inline-block</p>
+</li>
+<li><p>网格布局(grid | inline-grid)</p>
+</li>
+<li><p>表格布局(table | table-cell | table-caption | inline-table)</p>
+</li>
+<li><p>弹性布局(flex | inline-flex)</p>
+</li>
+<li><p>定位 (absolute | fixed)</p>
+</li>
+</ol>
+</li>
+<li><p>BFC 特性</p>
+<ul>
+<li>同一bfc中，外边距会发生折叠</li>
+<li>bfc会包含浮动元素</li>
+<li>bfc会阻止元素被浮动元素覆盖</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>清除浮动</p>
+<ul>
+<li><p>浮动的特点</p>
+<p>1.文字环绕</p>
+<p>2.浮动可以让块级元素同行显示</p>
+<p>3.元素脱离文档流，父容器的高度塌陷</p>
+<p>4.浮动元素可以让行内元素可以设置宽高</p>
+<p>5.浮动元素可以设置margin，但是不能用margin:0 auto居中；</p>
+</li>
+</ul>
+<ul>
+<li>清除浮动就是保留需要的特性，同时解决浮动带来的父容器高度塌陷问题<ul>
+<li>方法1：直接设置父容器的高度（不推荐，因为这样无法使高度自适应）</li>
+<li>方法2：添加一个辅助空容器并设置属性clear（不推荐，因为会增加一个无关元素）</li>
+<li>方法3：利用伪元素设置 <code>xx::after&#123; content: &#39;&#39;; display: block; clear:both;&#125;</code>（常用）</li>
+<li>方法4：给之后受影响的容器添加 <code>clear:both;</code>（不推荐，因为受影响的容器数量不定）</li>
+<li>方法5：借助BFC容器的特点，抵消浮动的负面影响</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>行内元素和块级元素</p>
+<ul>
+<li>行内元素：span a</li>
+<li>块级元素：div p</li>
+<li>区别：<ul>
+<li><p>行内元素不会换行显示；块级元素会换行</p>
+</li>
+<li><p>给行内元素设置宽高无效；</p>
+</li>
+<li><p>给行内元素在垂直方向上的margin 和 padding无效；</p>
+</li>
+<li><p>行内元素内不能包含块级元素</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>display 属性值</p>
+<ul>
+<li><p>外部表现</p>
+<ul>
+<li>block</li>
+<li>inline</li>
+</ul>
+</li>
+<li><p>内部表现</p>
+<ul>
+<li>flex</li>
+<li>grid</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>选择器</p>
+<ul>
+<li>选择器<ul>
+<li>基本选择器<ul>
+<li>元素选择器  p</li>
+<li>id选择器  #foo</li>
+<li>类选择器 .foo</li>
+</ul>
+</li>
+<li>组合器选择器<ul>
+<li>后代选择器 空格      元素所有层级的后代</li>
+<li>子选择器 &gt;        元素的直接后代</li>
+<li>相邻同辈选择器 +</li>
+<li>通用同辈选择器 ~</li>
+</ul>
+</li>
+<li>通过选择器 ~</li>
+<li>属性选择器 []</li>
+<li>伪元素选择器 ::</li>
+<li>伪类选择器 :</li>
+</ul>
+</li>
+<li>层叠与优先级<ul>
+<li>标注为 <code>!important</code> 的用户样式表 &gt; 标注为 <code>!important</code> 的作者样式表 &gt;作者样式表 &gt; 用户样式表 &gt; 浏览器的默认样式表</li>
+<li>优先级<ul>
+<li>4个级别：<ol>
+<li>行内样式</li>
+<li>id 选择器</li>
+<li>类选择器 伪类选择器 属性选择器</li>
+<li>元素选择器 伪元素选择器</li>
+</ol>
+</li>
+<li>通用选择器优先级最低，相同级别的优先级看数量，数量也相同看定义的先后，后定义覆盖先定义的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>布局</p>
+<ul>
+<li>两栏布局<ul>
+<li>左侧固定，右侧自适应<ul>
+<li>flex</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>三栏布局<ul>
+<li>左右两边固定，中间自适应<ul>
+<li>圣杯布局</li>
+<li>双飞翼布局</li>
+<li>flex</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>flex 布局（todo）</p>
+<ul>
+<li>flex 布局是一种一维布局模型，</li>
+<li>垂直居中</li>
+</ul>
+</li>
+<li><p>position（todo）</p>
+</li>
+<li><p>单位</p>
+<ul>
+<li><p>相对单位</p>
+<ul>
+<li><p>字体相对单位</p>
+<ul>
+<li>em：1em 等于元素的 font-size 属性的值。如果自身元素是没有设置字体大小的，那么就会根据其父元素的字体大小作为参照去计算，如果元素本身已经设置了字体，那么就会基于自身的字体大小进行计算</li>
+<li>rem：1rem等于根元素 font-size 属性的值</li>
+</ul>
+</li>
+<li><p>视窗相对单位</p>
+<ul>
+<li>vw：视窗宽度的百分比</li>
+<li>vh：视窗高度的百分比</li>
+<li>vmax：vw和vh中较大的</li>
+<li>vmin：vw和vh中较大的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>绝对单位</p>
+<ul>
+<li>px：像素</li>
+<li>pt：为了印刷</li>
+</ul>
+</li>
+<li><p>百分比单位</p>
+</li>
+</ul>
+</li>
+<li><p>盒模型（todo）</p>
+<ul>
+<li>宽高由什么决定</li>
+</ul>
+<ul>
+<li>外边距重叠</li>
+</ul>
+</li>
+<li><p>z-index（todo）</p>
+</li>
+<li><p>颜色</p>
+<ul>
+<li>颜色词：red</li>
+<li>rgba：rgb(255, 0, 0, 1)</li>
+<li>hsla：hsl(0, 1000%, 50%)</li>
+<li>十六进制数值：#FF0000</li>
+</ul>
+</li>
+</ul>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><ul>
+<li>语义化标签<ul>
+<li>aside header footer nav section</li>
+<li>好处：内容结构化，易读易维护；有利于 SEO</li>
+</ul>
+</li>
+</ul>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><ul>
+<li><p>Vue2 和 vue3 区别</p>
+<ul>
+<li>Vue3 多了哪些api</li>
+<li>diff 算法的区别</li>
+<li>开发中能感知的到的</li>
+<li>生命周期函数</li>
+<li>单根节点 多根节点</li>
+<li>选项api 组合api</li>
+<li>异步组件</li>
+<li>teleport</li>
+<li>响应式原理</li>
+<li>diff 算法</li>
+<li>虚拟dom的区别</li>
+<li>vue的getter为什么设置成一个函数，而不是一个对象</li>
+</ul>
+</li>
+<li><p>如何监听深层次对象</p>
+</li>
+<li><p>$set 用法</p>
+</li>
+<li><p>Vue 生命周期</p>
+<ul>
+<li>哪个阶段可以访问已经存在的真实dom</li>
+</ul>
+</li>
+<li><p>watch 和 computed 的区别？</p>
+<ul>
+<li>应用场景</li>
+<li>缓存</li>
+</ul>
+</li>
+<li><p>双向绑定</p>
+<ul>
+<li>Object.defineProperty，数据劫持，订阅发布</li>
+<li>vue 改变数据的时候怎么变成前端的ui</li>
+</ul>
+</li>
+<li><p>v-if 和 v-for</p>
+</li>
+<li><p>watchEffect</p>
+</li>
+<li><p>虚拟dom 和 真实dom 的区别</p>
+</li>
+<li><p>双向绑定原理</p>
+</li>
+<li><p>v-model 原理？</p>
+<ul>
+<li>语法糖</li>
+</ul>
+</li>
+<li><p>keep-alive</p>
+</li>
+<li><p>组件间通信方式</p>
+<ul>
+<li>父子</li>
+<li>兄弟</li>
+<li>event bus 实现方式</li>
+</ul>
+</li>
+<li><p>v-for 的 key 作用</p>
+</li>
+<li><p>双向绑定原理</p>
+</li>
+<li><p>pinia 和vuex区别</p>
+</li>
+<li><p>vue-router 模式</p>
+</li>
+<li><p>模版编译原理 ast语法树</p>
+</li>
+<li><p>nextTick</p>
+</li>
+<li><p>seo</p>
+</li>
+<li><p>css 防止冲突</p>
+</li>
+</ul>
+<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><ul>
+<li>loader 和 plugin 区别</li>
+<li>tree shaking 原理</li>
+<li>前端项目如何打包上线</li>
+<li>提高构建速度</li>
+</ul>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><ul>
+<li><p>网址的组成部分</p>
+<ul>
+<li>query 和 hash</li>
+</ul>
+</li>
+<li><p>进程和线程区别</p>
+<ul>
+<li>进程间通信方式</li>
+</ul>
+</li>
+<li><p>7层模型、5层模型、4层模型</p>
+</li>
+<li><p>http</p>
+<ul>
+<li><p>请求有哪几种状态</p>
+</li>
+<li><p>头部有哪些字段</p>
+<ul>
+<li>content-type</li>
+</ul>
+</li>
+<li><p>ws</p>
+</li>
+<li><p>状态码</p>
+<ul>
+<li>304 和缓存有关的状态码</li>
+</ul>
+</li>
+<li><p>http方法</p>
+<ul>
+<li>get 和 post 区别</li>
+<li>post 两次请求</li>
+</ul>
+</li>
+<li><p>https 安全机制</p>
+<ul>
+<li>对称加密和非对称加密</li>
+<li>CA机构</li>
+</ul>
+</li>
+<li><p>http1.0 &#x2F; 1.1 &#x2F; 2.0</p>
+<ul>
+<li>http 1.1 队头阻塞</li>
+<li>http 2.0 多路复用原理</li>
+<li>http 3 ？</li>
+<li>长链接 缓存处理</li>
+<li>传输格式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>tcp</p>
+<ul>
+<li><p>tcp 和 udp 的区别</p>
+<ul>
+<li>为什么udp不安全</li>
+</ul>
+</li>
+<li><p>tcp 校验和的作用</p>
+</li>
+<li><p>三次握手四次挥手</p>
+<ul>
+<li>为什么3次 4次</li>
+<li>四次挥手 4和2能不能合并</li>
+</ul>
+</li>
+<li><p>粘包问题</p>
+</li>
+<li><p>重传问题</p>
+</li>
+</ul>
+</li>
+<li><p>浏览器缓存策略</p>
+<ul>
+<li>强缓存和协商缓存</li>
+<li>协商缓存的具体位置</li>
+<li>相关头部</li>
+<li>手动刷新与强制刷新，对缓存有什么影响</li>
+</ul>
+</li>
+<li><p>跨域</p>
+<ul>
+<li>跨域是怎么出现的</li>
+<li>同源策略<ul>
+<li>iframe 跨域通信</li>
+</ul>
+</li>
+<li>解决方案<ul>
+<li>jsonp、nginx、webpack的代理、cors</li>
+<li>具体到实际用法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>cdn</p>
+<ul>
+<li>原理</li>
+<li>缺点</li>
+</ul>
+</li>
+<li><p>端口的作用</p>
+</li>
+</ul>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><ul>
+<li>xss</li>
+<li>csrf</li>
+</ul>
+<h2 id="页面性能优化"><a href="#页面性能优化" class="headerlink" title="页面性能优化"></a>页面性能优化</h2><ul>
+<li>如何测试性能</li>
+<li>图片 预加载 懒加载</li>
+</ul>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><ul>
+<li>知道哪些设计模式，使用场景</li>
+<li>发布订阅模式<ul>
+<li>风险有哪些</li>
+</ul>
+</li>
+</ul>
+<h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><ul>
+<li>git pull 和 git fetch</li>
+<li>回滚</li>
+</ul>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><ul>
+<li><p>有序数组的合并</p>
+</li>
+<li><p>topK</p>
+</li>
+<li><p>斐波那契数列两种实现方式</p>
+</li>
+<li><p>力扣221. 最大正方形</p>
+</li>
+<li><p>hardman</p>
+</li>
+<li><p>大数相加</p>
+</li>
+<li><p>逆序数查找</p>
+</li>
+<li><p>找数组中第k大的数</p>
+</li>
+<li><p>最大岛屿面积</p>
+</li>
+<li><p>排序</p>
+<ul>
+<li>快排</li>
+<li>归并</li>
+<li>各种排序的复杂度</li>
+</ul>
+</li>
+<li><p>栈和队列</p>
+<ul>
+<li>两个栈模拟队列</li>
+<li>两个队列模拟栈</li>
+</ul>
+</li>
+<li><p>树</p>
+<ul>
+<li>求一颗树的高度</li>
+<li><ul>
+<li>层序遍历</li>
+<li>递归</li>
+</ul>
+</li>
+<li>最近公共父节点</li>
+<li>LeetCode129题(求根节点到叶节点数字之和)</li>
+<li>层序输出</li>
+<li>中序后序构造二叉树</li>
+</ul>
+</li>
+<li><p>字符串</p>
+<ul>
+<li>最长回文子串</li>
+<li>最长不重复子串</li>
+</ul>
+</li>
+<li><p>链表</p>
+<ul>
+<li>奇偶有序输出</li>
+<li>判断链表是否相交话费</li>
+</ul>
+</li>
+<li><p>给定一个list，求list子数组中求和最大的值</p>
+</li>
+<li><p>找数组中出现的重复元素</p>
+</li>
+<li><p>lru</p>
+</li>
+</ul>
+<ul>
+<li>LeetCode1488</li>
+</ul>
+<h2 id="手撕前端"><a href="#手撕前端" class="headerlink" title="手撕前端"></a>手撕前端</h2><ul>
+<li><p>数组打平函数</p>
+<ul>
+<li>数组去重</li>
+<li>打平并去重</li>
+</ul>
+</li>
+<li><p>节流防抖</p>
+<ul>
+<li>立即执行</li>
+</ul>
+</li>
+<li><p>利用promise实现隔1秒输出1，输出1后，然后再隔2秒输出2…..直到再隔10秒输出10.</p>
+</li>
+<li><p>类数组对象转数组</p>
+</li>
+<li><p>手写 instanceof</p>
+</li>
+<li><p>求多个数组的交集</p>
+</li>
+<li><p>js解析url</p>
+</li>
+<li><p>深拷贝</p>
+</li>
+<li><p>字符串字母去重，忽略大小写</p>
+</li>
+<li><p>手写原型继承</p>
+</li>
+</ul>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

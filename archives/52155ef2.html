@@ -1,0 +1,1072 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="《JavaScript高级程序设计（第4版）》笔记。原书第3章：语言基础。主要内容：Undefined 类型、Null 类型、Boolean 类型、Number、String 类型、Symbol 类型和 Object 类型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JavaScript红宝书】5.语言基础 - 数据类型">
+<meta property="og:url" content="https://zhangtuo.online/archives/52155ef2.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="《JavaScript高级程序设计（第4版）》笔记。原书第3章：语言基础。主要内容：Undefined 类型、Null 类型、Boolean 类型、Number、String 类型、Symbol 类型和 Object 类型。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+<meta property="article:published_time" content="2022-04-27T08:30:27.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.915Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【JavaScript红宝书】5.语言基础 - 数据类型 - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【JavaScript红宝书】5.语言基础 - 数据类型"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-27 16:30" pubdate>
+          2022年4月27日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          58 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【JavaScript红宝书】5.语言基础 - 数据类型</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>ECMAScript 2015 <strong>之前</strong>共有 6 种数据类型。其中，有 5 种<strong>简单数据类型</strong>（原始类型)：Undefined，Null，Boolean，String，Number。还有1种<strong>复杂数据类型</strong>（对象类型）：Object。</p>
+<p>ECMAScript 2015 新增了 Symbol 原始类型。</p>
+<p>ECMAScript 2020 新增了 BigInt 原始类型。</p>
+<p><strong>至此，ECMAScript 共有 8 种数据类型。包括 7 种原始类型：Undefined，Null，Boolean，String，Number，Symbol，BigInt。还有对象类型 Object</strong>。</p>
+<h2 id="1-typeof-操作符"><a href="#1-typeof-操作符" class="headerlink" title="1 typeof 操作符"></a>1 typeof 操作符</h2><p>使用 typeof 操作符可以确定变量的数据类型。typeof 操作符的使用结果是 8 个字符串之一：”undefined”、”boolean”、”number”、”string”、’’bigint’’、”object”、”function”和”symbol”。</p>
+<ol>
+<li><p>调用 <code>typeof null</code> 会返回 <code>&quot;object&quot;</code>，因为 null 被认为是<strong>空对象</strong>的引用。</p>
+</li>
+<li><p>函数并不是一种数据类型，但是调用 typeof 会返回 <code>&quot;function&quot;</code>。</p>
+</li>
+<li><p>typeof 是操作符不是函数，但也可以当作函数进行传参：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">typeof</span>(a))</code></pre></div></li>
+</ol>
+<h2 id="2-Undefined-类型"><a href="#2-Undefined-类型" class="headerlink" title="2 Undefined 类型"></a>2 Undefined 类型</h2><p>Undefined 类型只有一个值 undefined。声明变量但未赋予初始值就相当于赋值 undefined。</p>
+<ol>
+<li><p>对已声明但未初始化的变量调用 typeof，返回的是<code>&quot;undefined&quot;</code>。对未声明的变量调用 typeof，返回的也是<code>&quot;undefined&quot;</code>。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> a);	<span class="hljs-comment">// undefined</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> b);	<span class="hljs-comment">// undefined</span></code></pre></div>
+</li>
+<li><p>undefined 是一个假值（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy"><strong>falsy</strong> 值</a>）。</p>
+</li>
+</ol>
+<h2 id="3-Null-类型"><a href="#3-Null-类型" class="headerlink" title="3 Null 类型"></a>3 Null 类型</h2><p>Null 类型只有一个值 null。表示一个空对象指针。</p>
+<ol>
+<li><p>在定义一个将来要保存<strong>对象值</strong>的变量时，建议使用 null 来初始化。</p>
+</li>
+<li><p>undefined 是由 null 派生来的，因此<strong>表面上</strong>相等：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>);		<span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">undefined</span> === <span class="hljs-literal">null</span>);	<span class="hljs-comment">// false</span></code></pre></div>
+</li>
+<li><p>null 是一个假值。</p>
+</li>
+</ol>
+<h2 id="4-Boolean-类型"><a href="#4-Boolean-类型" class="headerlink" title="4 Boolean 类型"></a>4 Boolean 类型</h2><p>Boolean 类型有两个字面值：true 和 false。</p>
+<ol>
+<li><p>任何值都有对应的布尔值等价形式，<code>Boolean()</code> 转型函数可以将任意值转成相应的布尔值。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>转换为true的值</th>
+<th>转换为false的值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>非空字符串</td>
+<td>空串</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>非0数值</td>
+<td>0、NaN</td>
+</tr>
+<tr>
+<td>BigInt</td>
+<td>非0数值</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>任何符号</td>
+<td>无</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>任意对象</td>
+<td>无</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>无</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>无</td>
+<td>undefined</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>if 等流程控制语句会自动执行上面的转换。</p>
+</li>
+</ol>
+<h2 id="5-Number-类型"><a href="#5-Number-类型" class="headerlink" title="5 Number 类型"></a>5 Number 类型</h2><p>Number 类型使用 IEEE 754 表示整数和浮点值（双精度值）。</p>
+<h3 id="5-1-整数"><a href="#5-1-整数" class="headerlink" title="5.1 整数"></a>5.1 整数</h3><ol>
+<li><p>最基本的数值字面量是十进制。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">5</span></code></pre></div>
+</li>
+<li><p>八进制字面量：<code>0</code>或<code>0o</code>开头，然后是八进制数字（0-7）。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-number">076</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a);     	<span class="hljs-comment">// 62</span>
+
+<span class="hljs-keyword">let</span> b = <span class="hljs-number">0o76</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b);     	<span class="hljs-comment">// 62</span></code></pre></div>
+
+<p><code>0</code>开头表示八进制数时，如果有数字超出八进制数字范围，引擎会忽略前置0，并将后面内容按十进制数处理。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">078</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num); 		<span class="hljs-comment">// 78</span></code></pre></div>
+
+<p><code>0o</code>开头表示八进制数时，如果有数字超出八进制数字范围，会报错。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = 0o79;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num);  		<span class="hljs-comment">// 报错</span></code></pre></div>
+</li>
+<li><p>十六进制字面量：<code>0x</code> 开头（这里的<code>0x</code>严格小写），然后是十六进制数字（0-9，A-F）。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">0x2a</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num); 		<span class="hljs-comment">// 42</span></code></pre></div></li>
+</ol>
+<p>注意：</p>
+<ol>
+<li><p>使用八进制和十六进制格式创建的数值在所有<strong>数学操作</strong>种都被视为十进制。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num1 = <span class="hljs-number">043</span>;
+<span class="hljs-keyword">let</span> num2 = <span class="hljs-number">032</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num1, num2);  <span class="hljs-comment">// 35 26</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num1 + num2); <span class="hljs-comment">// 61</span></code></pre></div>
+</li>
+<li><p>正0等于负0。</p>
+</li>
+</ol>
+<h3 id="5-2-浮点数"><a href="#5-2-浮点数" class="headerlink" title="5.2 浮点数"></a>5.2 浮点数</h3><ol>
+<li><p>定义浮点数，数值中必须含有<strong>小数点</strong>，而且小数点后至少有一个数字。小数点前不是必须有整数，但是推荐加上。</p>
+</li>
+<li><p>浮点数内存空间是整数的两倍。为节省空间，ECMAScript 总是想办法把值转化为整数。比如：小数点后没有数字时会被视为整数；小数点后面都是0时会被视为整数。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">1.0</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num); <span class="hljs-comment">// 1</span></code></pre></div>
+</li>
+<li><p>小数点后至少含有 6 个 0 的浮点数会被转换为科学计数法。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">0.0000001</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num);     <span class="hljs-comment">// 1e-7</span></code></pre></div>
+</li>
+<li><p>因为使用了 IEEE 754数值，存在舍入错误。比如：<code>0.1 + 0.2 !== 0.3</code>。因此<strong>不要</strong>测试特定的浮点值。</p>
+</li>
+</ol>
+<h3 id="5-3-值的范围"><a href="#5-3-值的范围" class="headerlink" title="5.3 值的范围"></a>5.3 值的范围</h3><ol>
+<li><p>由于内存限制，JavaScript 中可以表示的最大值为<code>Number.MAX_VALUE</code>，最小值为<code>Number.MIN_VALUE</code>。无法表示的正数用<code>Infinity</code>表示，无法表示的负数用<code>-Infinity</code>表示。</p>
+</li>
+<li><p>使用<code>isFinite()</code>函数来判断是否在最大值和最小值之间。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">2</span> * <span class="hljs-title class_">Infinity</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isFinite</span>(num));		<span class="hljs-comment">// false</span></code></pre></div></li>
+</ol>
+<h3 id="5-4-NaN-和-Infinity"><a href="#5-4-NaN-和-Infinity" class="headerlink" title="5.4 NaN 和 Infinity"></a>5.4 NaN 和 Infinity</h3><p><code>NaN</code> 是一个特殊的数（即<strong>不是数值</strong>），表示本来要返回数值的操作失败了。</p>
+<ol>
+<li><p>0、-0、+0之间相除会得到 NaN：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">0</span>/<span class="hljs-number">0</span>);		<span class="hljs-comment">// NaN</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(-<span class="hljs-number">0</span>/+<span class="hljs-number">0</span>);		<span class="hljs-comment">// NaN</span></code></pre></div>
+</li>
+<li><p>分母是 0、-0、+0，但分子不是。此时得到 <code>Infinity</code>和<code>-Infinity</code></p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span> / <span class="hljs-number">0</span>);	<span class="hljs-comment">// Infinity</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(-<span class="hljs-number">1</span> / <span class="hljs-number">0</span>);	<span class="hljs-comment">// -Infinity</span></code></pre></div>
+</li>
+<li><p>涉及 <code>NaN</code> 的操作都返回 <code>NaN</code>。</p>
+</li>
+<li><p><code>NaN</code> 不等于包括自己在内的任何数。</p>
+</li>
+<li><p><code>isNaN()</code> 函数可以判断是否<strong>不是数值</strong>。这个函数接收任意类型的参数，并尝试将转换成数值。不能转换成数值则返回 true。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-title class_">Infinity</span>))	<span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-literal">true</span>));		<span class="hljs-comment">// false (可以转换成数值1)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-literal">false</span>));		<span class="hljs-comment">// false (可以转换成数值0)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-string">&quot;10&quot;</span>));		<span class="hljs-comment">// false (可以转换成数值10)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-string">&quot;1.4&quot;</span>));		<span class="hljs-comment">// false (可以转换成数值1.4)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-number">2</span>));			<span class="hljs-comment">// fasle (2)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-string">&quot;1true&quot;</span>));	<span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">isNaN</span>(<span class="hljs-string">&quot;true&quot;</span>));		<span class="hljs-comment">// true</span></code></pre></div></li>
+</ol>
+<h3 id="5-5-数值转换"><a href="#5-5-数值转换" class="headerlink" title="5.5 数值转换"></a>5.5 数值转换</h3><h4 id="5-5-1-Number-转型函数"><a href="#5-5-1-Number-转型函数" class="headerlink" title="5.5.1 Number() 转型函数"></a>5.5.1 Number() 转型函数</h4><p>可用于任何数据类型，规则如下：</p>
+<ol>
+<li><p>undefined，返回 NaN。null，返回0。</p>
+</li>
+<li><p>true，返回1。false，返回0。</p>
+</li>
+<li><p>数值直接返回。</p>
+</li>
+<li><p>字符串：</p>
+<ul>
+<li>如果字符串是表示数值字符（整数浮点数都可以），包括前面的正负号，则会转换成一个十进制的数。此时会<strong>忽略前缀0</strong>，也就是说只识别<code>0o</code>开头的八进制数和<code>0x</code>开头的十六进制数。不识别<code>0</code>开头的八进制数，<code>0</code>开头的会被当作十进制。</li>
+<li><strong>空串返回0</strong>。</li>
+<li>其余情况返回 NaN。</li>
+</ul>
+</li>
+<li><p>对象。调用<code>valueOf()</code>方法，并按照以上规则转换返回的值。如果转换结果是<code>NaN</code>，则调用<code>toString()</code>方法。再按照转换字符串的规则进行转换。</p>
+</li>
+</ol>
+<h4 id="5-5-2-parseInt-函数"><a href="#5-5-2-parseInt-函数" class="headerlink" title="5.5.2 parseInt() 函数"></a>5.5.2 parseInt() 函数</h4><p><code>parseInt()</code>函数更专注于<strong>字符串</strong>中是否含有数值。接收两个参数，第一个参数是需要转换的字符串，第二个参数是进制，规则如下：</p>
+<ol>
+<li><p>字符串前面的空格会被忽略，从第一个非零数值开始转换。如果第一个字符不是数值字符、正负号，那么立即返回 NaN。也就是说，<strong>空串返回 NaN</strong>。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;&quot;</span>));      	<span class="hljs-comment">// NaN  </span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&#x27;qwe&#x27;</span>));		<span class="hljs-comment">// NaN</span></code></pre></div>
+</li>
+<li><p>继续检测每一个字符，直到字符串末尾或者是遇到<strong>非整数字符</strong>。（小数点不是有效的整数字符）</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;1234blue&quot;</span>));	<span class="hljs-comment">// 1234</span></code></pre></div>
+</li>
+<li><p>可以识别不同进制的整数。比如：<code>0</code>开头的整数会被识别成<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt">八进制或十进制</a>（多数情况下会被识别成十进制，不同环境的实现不同），<code>0o</code>开头的整数会被识别成八进制，<code>0x</code>开头的整数会被识别成十六进制。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&#x27;073&#x27;</span>));		<span class="hljs-comment">// 73</span></code></pre></div>
+</li>
+<li><p>在使用 parseInt() 时，建议<strong>指定第二个参数</strong>，用一个整数规定进制。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&#x27;073&#x27;</span>,<span class="hljs-number">8</span>));		<span class="hljs-comment">// 59</span></code></pre></div></li>
+</ol>
+<h4 id="5-5-3-parseFloat-函数"><a href="#5-5-3-parseFloat-函数" class="headerlink" title="5.5.3 parseFloat() 函数"></a>5.5.3 parseFloat() 函数</h4><p><code>parseFloat()</code>函数和<code>parseInt()</code>函数类似。</p>
+<ol>
+<li><code>parseFloat()</code>函数解析到字符串末尾或者解析到第一个无效的字符串。</li>
+<li>第一个出现的小数点是有效的，第二个出现的小数点及其之后的内容无效，不会被识别。</li>
+<li><strong>只接收一个字符串参数</strong>。只能解析十进制数，不能指定底数。</li>
+</ol>
+<h2 id="6-String-类型"><a href="#6-String-类型" class="headerlink" title="6  String 类型"></a>6  String 类型</h2><p>字符串可以使用单引号<code>&#39;&#39;</code>、双引号<code>&quot;&quot;</code>或反引号&#96;&#96;标识。</p>
+<h3 id="6-1-字符字面量"><a href="#6-1-字符字面量" class="headerlink" title="6.1 字符字面量"></a>6.1 字符字面量</h3><p><code>\n</code> 、<code>\t</code>、<code>\xnn</code>（十六进制编码表示的字符）、<code>\unnnn</code>（十六进制编码表示的 Unicode 字符）</p>
+<p>字符字面量被作为单个字符解释。</p>
+<h3 id="6-2-字符串的不可变性"><a href="#6-2-字符串的不可变性" class="headerlink" title="6.2 字符串的不可变性"></a>6.2 字符串的不可变性</h3><p>字符串是不可变的。如果改变字符串的值，会销毁之前的值，并把新值保存到变量中。这是后台发生的，前台无感知。</p>
+<h3 id="6-3-转换为字符串"><a href="#6-3-转换为字符串" class="headerlink" title="6.3 转换为字符串"></a>6.3 转换为字符串</h3><h4 id="6-3-1-toString-方法"><a href="#6-3-1-toString-方法" class="headerlink" title="6.3.1 toString() 方法"></a>6.3.1 toString() 方法</h4><p>该函数的作用是返回当前值的字符串等价物。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-literal">true</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a.<span class="hljs-title function_">toString</span>());		<span class="hljs-comment">// &quot;true&quot;</span>
+<span class="hljs-keyword">let</span> b = <span class="hljs-number">10</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b.<span class="hljs-title function_">toString</span>());		<span class="hljs-comment">// &quot;10&quot;</span></code></pre></div>
+
+<ol>
+<li><p><strong>undefined 和 null 没有 toString() 方法</strong>。</p>
+</li>
+<li><p>可以接收一个参数来指定底数。即以什么底数来输出数值的字符串表示。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">10</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>(<span class="hljs-number">10</span>));	<span class="hljs-comment">// 10</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>(<span class="hljs-number">8</span>));	<span class="hljs-comment">// 12</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>(<span class="hljs-number">16</span>));	<span class="hljs-comment">// a</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num.<span class="hljs-title function_">toString</span>(<span class="hljs-number">2</span>));	<span class="hljs-comment">// 1010</span></code></pre></div></li>
+</ol>
+<h4 id="6-3-2-String-转型函数"><a href="#6-3-2-String-转型函数" class="headerlink" title="6.3.2 String() 转型函数"></a>6.3.2 String() 转型函数</h4><p>如果不确定一个值是不是 undefined 或者 null，可以使用 String() 转型函数。String() 函数的规则如下：</p>
+<ol>
+<li>如果值有 toString() 方法则调用值的 toString() 方法。</li>
+<li>undefined，返回”undefined”；null，返回”null”。</li>
+</ol>
+<h4 id="6-3-3-“”-转成字符串"><a href="#6-3-3-“”-转成字符串" class="headerlink" title="6.3.3 + “” 转成字符串"></a>6.3.3 + “” 转成字符串</h4><p>给一个值加上空串也可以将其转为字符串。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">10</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num + <span class="hljs-string">&quot;&quot;</span>);	<span class="hljs-comment">// 10</span></code></pre></div>
+
+<h3 id="6-4-模板字面量"><a href="#6-4-模板字面量" class="headerlink" title="6.4 模板字面量"></a>6.4 模板字面量</h3><ol>
+<li><p>使用反引号标识的字符串是模板字面量。</p>
+</li>
+<li><p>可以保留换行符，可以跨行定义字符串。因此定义模板时特别有用。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> pageHtml = <span class="hljs-string">`</span>
+<span class="hljs-string">&lt;div&gt;</span>
+<span class="hljs-string">	&lt;span&gt;&lt;/span&gt;</span>
+<span class="hljs-string">&lt;/div&gt;</span>
+<span class="hljs-string">`</span></code></pre></div>
+
+<p>模板字面量会保留反引号内部的空格，因此可能会看起来缩进不当。</p>
+</li>
+</ol>
+<h3 id="6-5-字符串插值"><a href="#6-5-字符串插值" class="headerlink" title="6.5 字符串插值"></a>6.5 字符串插值</h3><p>模板字面量支持字符串插值：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">let</span> sum = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">let</span> stirng = <span class="hljs-string">`<span class="hljs-subst">$&#123;num&#125;</span> + <span class="hljs-subst">$&#123;num&#125;</span> = <span class="hljs-subst">$&#123;sum&#125;</span>`</span>;	<span class="hljs-comment">// 1 + 1 = 2 </span></code></pre></div>
+
+<ol>
+<li>插入的值会使用 toString() 方法强制转为字符串，undefined 插值显示 “undefined”，null 插值显示 “null”。</li>
+<li>任何 <strong>JavaScript 表达式</strong>都可以用于插值表达式，可以调用函数和方法。</li>
+<li>可以嵌套使用。</li>
+<li>可以插入自己之前的值。</li>
+</ol>
+<h2 id="7-Symbol-类型"><a href="#7-Symbol-类型" class="headerlink" title="7 Symbol 类型"></a>7 Symbol 类型</h2><p>Symbol（符号） 是 ES6 新增的数据类型。符号实例是唯一的不可变的。符号的用途是保证对象属性使用唯一的标识符，不会发生属性冲突。符号的作用是用来创建唯一记号，进而用作非字符串形式的对象属性。</p>
+<h3 id="7-1-基本用法"><a href="#7-1-基本用法" class="headerlink" title="7.1 基本用法"></a>7.1 基本用法</h3><ol>
+<li><p>使用 Symbol() 函数初始化。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> s = <span class="hljs-title class_">Symbol</span>()
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s);		<span class="hljs-comment">// Symbol()</span></code></pre></div>
+</li>
+<li><p>可以传入一个字符串参数作为符号的描述。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> s = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;foo&quot;</span>);	
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s)		<span class="hljs-comment">// Symbol(foo)</span></code></pre></div>
+
+<p>这个字符串参数和符号没有任何关系，仅仅是为了调试代码。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> s1 = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;foo&quot;</span>);
+<span class="hljs-keyword">let</span> s2 = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;foo&quot;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s1 === s2);		<span class="hljs-comment">// false</span></code></pre></div>
+</li>
+<li><p>符号没有字面量。只要创建 Symbol() 实例并将其作为对象的新属性，就可以保证它不会覆盖原有属性。</p>
+</li>
+<li><p>Symbol() 函数不能用作构造函数，不能与 <code>new</code> 关键字一同使用。</p>
+</li>
+</ol>
+<h3 id="7-2-全局符号注册表"><a href="#7-2-全局符号注册表" class="headerlink" title="7.2 全局符号注册表"></a>7.2 全局符号注册表</h3><p>如果运行时的不同部分需要<strong>共享和重用</strong>符号，可以使用一个字符串为键，在<strong>全局符号注册表</strong>中创建并使用符号。</p>
+<h4 id="7-2-1-Symbol-for-方法"><a href="#7-2-1-Symbol-for-方法" class="headerlink" title="7.2.1 Symbol.for() 方法"></a>7.2.1 Symbol.for() 方法</h4><div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> fooSymbol = <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;foobar&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fooSymbol);	<span class="hljs-comment">// Symbol(foobar)</span></code></pre></div>
+
+<p>Symbol.for() 和 Symbol() 定义的符号不相同。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> fooSymbol = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;foobar&quot;</span>);
+<span class="hljs-keyword">let</span> barSymbol = <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(<span class="hljs-string">&quot;foobar&quot;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fooSymbol === barSymbol);	<span class="hljs-comment">// false</span></code></pre></div>
+
+<p>Symbol.for() 对每个字符串执行<strong>幂等操作</strong>。第一次使用某个字符串时，检查全局运行时注册表，发现不存在对应的符号，于是会生成一个符号实例并添加到注册表中。后续使用相同的字符串调用时，会同样检查注册表，发现存在于该字符串对应的符号，则返回这个实例。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> fooSymbol = <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(<span class="hljs-string">&quot;foobar&quot;</span>);	<span class="hljs-comment">// 创建新符号</span>
+<span class="hljs-keyword">let</span> barSymbol = <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(<span class="hljs-string">&quot;foobar&quot;</span>);	<span class="hljs-comment">// 返回已有的符号</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fooSymbol === barSymbol);	<span class="hljs-comment">// true</span></code></pre></div>
+
+<h4 id="7-2-2-Symbol-keyFor-方法"><a href="#7-2-2-Symbol-keyFor-方法" class="headerlink" title="7.2.2 Symbol.keyFor() 方法"></a>7.2.2 Symbol.keyFor() 方法</h4><p>使用<code>Symbol.keyFor()</code> 来查询全局注册表。这个方法接收符号，返回全局符号对应的字符串。如果查询不到字符串则返回 undefined。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> barSymbol = <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(<span class="hljs-string">&quot;foobar&quot;</span>);	
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">keyFor</span>(barSymbol));	<span class="hljs-comment">// foobar</span></code></pre></div>
+
+<h3 id="7-3-使用符号作为属性"><a href="#7-3-使用符号作为属性" class="headerlink" title="7.3 使用符号作为属性"></a>7.3 使用符号作为属性</h3><div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> s1 = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;foo&quot;</span>);
+<span class="hljs-keyword">let</span> s2 = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;bar&quot;</span>);
+<span class="hljs-keyword">let</span> obj = &#123;
+	[s1]: <span class="hljs-string">&quot;foo val&quot;</span>,
+&#125;;
+obj[s2]=<span class="hljs-string">&#x27;bar val&#x27;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj);	<span class="hljs-comment">// &#123;Symbol(foo): &#x27;foo val&#x27;, Symbol(bar): &#x27;bar val&#x27;&#125;</span></code></pre></div>
+
+<h2 id="8-BigInt-类型"><a href="#8-BigInt-类型" class="headerlink" title="8 BigInt 类型"></a>8 BigInt 类型</h2><p>参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/BigInt">MDN</a>。</p>
+<h2 id="9-Object-类型"><a href="#9-Object-类型" class="headerlink" title="9 Object 类型"></a>9 Object 类型</h2><p>ECMAScript 中，对象是一组数据和功能的集合。</p>
+<ol>
+<li><p>对象通过 new 操作符后跟上对象类型的名称来创建。也可以通过创建 Object 类型实例来创建自己的对象，随后添加属性和方法。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> o = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>()</code></pre></div>
+
+<p>ECMAScript 只要求在给构造函数传递参数时使用括号，如果不传参数，可以省略括号。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> o = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span></code></pre></div>
+</li>
+<li><p>Object 是其它对象的基类，Object 类型的所有属性和方法在派生的对象上同样存在。</p>
+</li>
+<li><p>每个 Object 实例上都有下面的属性和方法：</p>
+<ul>
+<li><code>constructor</code>：用于创建当前对象（函数）。</li>
+<li><code>hasOwnProperty(propertyName)</code>：判断当前对象实例（而不是原型）上是否存在在给定的属性。</li>
+<li><code>isPrototypeof(object)</code>：判断当前对象是否为另一个对象的原型。</li>
+<li><code>propertyIsEnumerable(propertyName)</code>：判断给定的属性是否可枚举。</li>
+<li><code>toLocaleString()</code>：返回对象的字符串表示。该字符串反映对象所在的<strong>本地化环境</strong>。</li>
+<li><code>toString()</code>：返回对象的字符串表示。</li>
+<li><code>valueOf()</code>：返回对象的原始值。</li>
+</ul>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【JavaScript红宝书】5.语言基础 - 数据类型</div>
+      <div>https://zhangtuo.online/archives/52155ef2.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/385fbcdb.html" title="【JavaScript红宝书】6.语言基础 - 操作符、语句">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【JavaScript红宝书】6.语言基础 - 操作符、语句</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/78d9e65d.html" title="【JavaScript红宝书】4.语言基础 - 变量">
+                        <span class="hidden-mobile">【JavaScript红宝书】4.语言基础 - 变量</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

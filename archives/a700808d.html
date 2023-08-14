@@ -1,0 +1,965 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="JavaScript">
+  
+    <meta name="description" content="JavaScript设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JavaScript设计模式】设计模式与开发实践">
+<meta property="og:url" content="https://zhangtuo.online/archives/a700808d.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="JavaScript设计模式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/js%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.png">
+<meta property="article:published_time" content="2022-11-15T03:43:00.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.922Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/js%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【JavaScript设计模式】设计模式与开发实践 - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【JavaScript设计模式】设计模式与开发实践"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-15 11:43" pubdate>
+          2022年11月15日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【JavaScript设计模式】设计模式与开发实践</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-原型模式"><a href="#1-原型模式" class="headerlink" title="1 原型模式"></a>1 原型模式</h2><p>原型模式是一种用来创建对象的模式。JavaScript没有选择类式继承，而是通过原型委托的方式来实现对象和对象之间的继承。</p>
+<p>原型编程泛型的基本原则：</p>
+<ul>
+<li><p>所有的数据都是对象</p>
+<p>在JavaScript中，除了undefined外一切皆对象（number、boolean、string类型数据可以通过包装类的方式成为对象）。JavaScript中，所有对象都是从Object.prototype这个对象克隆得到的。</p>
+</li>
+<li><p>得到一个对象的方法不是通过实例化类，而是找到一个对象作为原型并克隆它</p>
+<p>new操作符后面跟上构造函数所执行的动作：</p>
+<p>1首先创建一个对象，2把这个对象的re’s属性设置为构造函数的原型，3把构造函数的this指向新对象，4执行构造函数内部代码，5如果构造函数不返回对象那就返回新对象。34两步可以调用构造函数的call或apply方法。</p>
+</li>
+<li><p>对象记住它的原型</p>
+<p>对象通过proto属性来记住它原型。</p>
+</li>
+<li><p>对象在无法响应某个请求时委托给原型</p>
+<p>访问对象的某个属性时，如果对象身上没有这个属性，那就去它的原型身上去找，如果仍然没有找到，那就沿着原型链找下去，直到找到该属性或者到达原型链的终点，也就是Object.prototype的原型null。</p>
+</li>
+</ul>
+<p>this总是指向调用所在函数时的环境（谁调用就指向谁）。this指向有四种：</p>
+<ol>
+<li>this所在函数作为对象的属性调用。此时this指向该对象。</li>
+<li>this所在函数作为普通函数被调用。此时this指向全局对象。</li>
+<li>this所在函数作为构造函数被调用。此时this指向新创建的对象。（通常情况下，this就指向返回的对象。如果构造函数<strong>显式</strong>返回一个<strong>对象</strong>，那么this不指向这个返回的对象。）</li>
+<li>函数对象的call和apply方法。此时的this指向传入的参数。</li>
+</ol>
+<p>call和apply。都是用来改变函数运行时内部的this值的。区别在于apply接受两个参数，第一个参数是this指向，第二参数是类数组对象。apply会将类数组对象中的所有元素作为参数传给被调用的函数。call参数数量不固定，第一个参数依然是this指向，之后的参数全部传给被调用的函数。</p>
+<p>（TODO）手写实现bind函数。</p>
+<p>闭包。</p>
+<p>高阶函数。高阶函数是指可以作为参数被传递或者作为返回值输出的函数。</p>
+<h2 id="2-单例模式"><a href="#2-单例模式" class="headerlink" title="2 单例模式"></a>2 单例模式</h2><p>单例模式：保证一个类只有一个实例，并提供一个访问它的全局访问点。</p>
+<h3 id="2-1-标准的单例模式"><a href="#2-1-标准的单例模式" class="headerlink" title="2.1 标准的单例模式"></a>2.1 标准的单例模式</h3><p>用一个变量来标志当前是否已经为某个类创建过对象。如果创建过，则在下一次获取该类的实例时，直接返回之前创建的对象。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Singleton</span>(<span class="hljs-params">name</span>)&#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">instence</span> = <span class="hljs-literal">null</span>
+&#125;
+
+<span class="hljs-title class_">Singleton</span>.<span class="hljs-property">getInstence</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)&#123;
+    <span class="hljs-keyword">if</span>(!<span class="hljs-variable language_">this</span>.<span class="hljs-property">instence</span>)&#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">instence</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>(name)
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">instence</span>
+&#125;
+
+<span class="hljs-keyword">const</span> s1 = <span class="hljs-title class_">Singleton</span>(<span class="hljs-string">&#x27;foo&#x27;</span>)
+<span class="hljs-keyword">const</span> s2 = <span class="hljs-title class_">Singleton</span>(<span class="hljs-string">&#x27;bar&#x27;</span>)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s1 === s2)  <span class="hljs-comment">// true</span></code></pre></div>
+
+<p>或者将实例封装在闭包中：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Singlelon</span>(<span class="hljs-params">name</span>)&#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+&#125;
+
+<span class="hljs-title class_">Singlelon</span>.<span class="hljs-property">getInstance</span> = (<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
+    <span class="hljs-keyword">let</span> instance = <span class="hljs-literal">null</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)&#123;
+        <span class="hljs-keyword">if</span>(!instance)&#123;
+            instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singlelon</span>(name)
+        &#125;
+        <span class="hljs-keyword">return</span> instance
+    &#125;
+&#125;)()
+
+
+<span class="hljs-keyword">const</span> s1 = <span class="hljs-title class_">Singlelon</span>.<span class="hljs-title function_">getInstance</span>(<span class="hljs-string">&#x27;foo&#x27;</span>)
+<span class="hljs-keyword">const</span> s2 = <span class="hljs-title class_">Singlelon</span>.<span class="hljs-title function_">getInstance</span>(<span class="hljs-string">&#x27;bar&#x27;</span>)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s1 === s2)	<span class="hljs-comment">// true</span></code></pre></div>
+
+<p><strong>缺点</strong>：用户必须知道这是一个单例类，必须使用特定的Singleton.getIntance方法来获取实例。这和一般情况下使用new 不同，增加了行为的不一致性和类的不透明性。</p>
+<h3 id="2-2-透明的单例模式"><a href="#2-2-透明的单例模式" class="headerlink" title="2.2 透明的单例模式"></a>2.2 透明的单例模式</h3><p>用户从这个类中创建对象时，可以像任何其他普通类一样：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> <span class="hljs-title class_">Singlelon</span> = (<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
+    <span class="hljs-keyword">let</span> instance = <span class="hljs-literal">null</span>
+    <span class="hljs-keyword">let</span> <span class="hljs-title class_">Singlelon</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)&#123;
+        <span class="hljs-keyword">if</span>(!instance)&#123;
+            <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+            instance = <span class="hljs-variable language_">this</span>
+        &#125;
+        <span class="hljs-keyword">return</span> instance
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Singlelon</span>
+&#125;)()
+
+<span class="hljs-keyword">const</span> s1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singlelon</span>(<span class="hljs-string">&#x27;foo&#x27;</span>)
+<span class="hljs-keyword">const</span> s2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singlelon</span>(<span class="hljs-string">&#x27;bar&#x27;</span>)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s1 === s2) <span class="hljs-comment">//true</span></code></pre></div>
+
+<p>缺点：Singlelon 构造函数同时负责创建单例和管理单例（保证单例对象只有一个），违反了单一职责原则。</p>
+<h3 id="2-3-抽取管理单例的逻辑-代理"><a href="#2-3-抽取管理单例的逻辑-代理" class="headerlink" title="2.3 抽取管理单例的逻辑 - 代理"></a>2.3 抽取管理单例的逻辑 - 代理</h3><p>其中一种解决方案是，将负责管理单例的逻辑移到代理类中：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Singlelon</span>(<span class="hljs-params">name</span>)&#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+&#125;
+
+<span class="hljs-keyword">let</span> <span class="hljs-title class_">ProxySinglelon</span> = (<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
+    <span class="hljs-keyword">let</span> instance = <span class="hljs-literal">null</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)&#123;
+        <span class="hljs-keyword">if</span>(!instance)&#123;
+            instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singlelon</span>(name)
+        &#125;
+        <span class="hljs-keyword">return</span> instance
+    &#125;
+&#125;)()
+
+<span class="hljs-keyword">const</span> s1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ProxySinglelon</span>(<span class="hljs-string">&#x27;foo&#x27;</span>)
+<span class="hljs-keyword">const</span> s2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ProxySinglelon</span>(<span class="hljs-string">&#x27;bar&#x27;</span>)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s1 === s2)</code></pre></div>
+
+<h3 id="2-4-抽取管理单例的逻辑-封装"><a href="#2-4-抽取管理单例的逻辑-封装" class="headerlink" title="2.4 抽取管理单例的逻辑 - 封装"></a>2.4 抽取管理单例的逻辑 - 封装</h3><p>另一种解决方案是把管理单例的逻辑抽取出来，把这些逻辑封装在 getSingle 函数的内部，创建对象的方法 Constructor 被当作是参数动态传入 getSingle 函数。</p>
+<div class="code-wrapper"><pre><code class="hljs shell">function getSingle(Constructor)&#123;
+    let result = null
+    return function()&#123;
+        return result || (result = Constructor(arguments))
+    &#125;
+&#125;
+
+function Singlelon(name)&#123;
+    this.name = name
+&#125;
+
+const s1 = getSingle(Singlelon)(&#x27;foo&#x27;)
+const s2 = getSingle(Singlelon)(&#x27;bar&#x27;)
+
+console.log(s1 === s2)</code></pre></div>
+
+<h2 id="3-策略模式"><a href="#3-策略模式" class="headerlink" title="3 策略模式"></a>3 策略模式</h2><p>策略模式：定义一系列算法，把它们一个个封装起来，并且使他们可以相互替换。目的是将算法的使用和算法的实现分离开。</p>
+<p>一个基于策略模式的程序至少由两部分组成。第一个部分是一组策略类，策略类封装了具体的算法，并负责具体的计算过程。第二个部分是环境类 Context，Context 接受客户的请求，随后把请求委托给某一个策略类。要做到这点，说明 Context 中要维持对某个策略对象的引用。</p>
+<p>优点：</p>
+<ol>
+<li>策略模式利用组合、委托和多态等技术和思想，可以有效地避免多重条件选择语句。</li>
+<li>策略模式提供了对开放—封闭原则的完美支持，将算法封装在独立的 strategy 中，使得它 们易于切换，易于理解，易于扩展。</li>
+</ol>
+<p>在函数作为一等对象的语言中，策略模式是隐形的。 strategy 就是值为函数的变量。实际上在 JavaScript 这种将函数作为一等对象的语言里，策略模式已经融入到了语言本身 当中，我们经常用高阶函数来封装不同的行为，并且把它传递到另一个函数中。当我们对这些函 数发出“调用”的消息时，不同的函数会返回不同的执行结果。</p>
+<h3 id="3-1-例子-计算奖金"><a href="#3-1-例子-计算奖金" class="headerlink" title="3.1 例子 - 计算奖金"></a>3.1 例子 - 计算奖金</h3><p>计算奖金，奖金的数目由薪水和绩效评级决定。绩效评级为S的，获得4倍薪水；A有3倍；B有2倍。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> strategies = &#123;
+    S : <span class="hljs-keyword">function</span>(<span class="hljs-params">salary</span>)&#123;
+        <span class="hljs-keyword">return</span> salary * <span class="hljs-number">4</span>
+    &#125;,
+
+    A : <span class="hljs-keyword">function</span>(<span class="hljs-params">salary</span>)&#123;
+        <span class="hljs-keyword">return</span> salary * <span class="hljs-number">3</span>
+    &#125;,
+
+    B : <span class="hljs-keyword">function</span>(<span class="hljs-params">salary</span>)&#123;
+        <span class="hljs-keyword">return</span> salary * <span class="hljs-number">2</span>
+    &#125;
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">calculateBonus</span>(<span class="hljs-params">level, salary</span>)&#123;
+    <span class="hljs-keyword">return</span> strategies[level](salary)
+&#125;
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">calculateBonus</span>(<span class="hljs-string">&#x27;S&#x27;</span>, <span class="hljs-number">100</span>))   <span class="hljs-comment">// 400</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">calculateBonus</span>(<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-number">150</span>))   <span class="hljs-comment">// 450</span></code></pre></div>
+
+<p>在此代码中，strategies 作为策略对象，calculateBonus 作为 contex，负责接受请求并委托给策略对象。</p>
+<h3 id="3-2-例子-表单校验"><a href="#3-2-例子-表单校验" class="headerlink" title="3.2 例子 - 表单校验"></a>3.2 例子 - 表单校验</h3><p>注册页的几条校验逻辑：</p>
+<ol>
+<li>用户名不能为空</li>
+<li>密码长度不能少于6位</li>
+<li>手机号码必须符合格式</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 不同的表单校验策略</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">let</span> strategies = &#123;
+    <span class="hljs-attr">isNotEmpty</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">value, errorMsg</span>)&#123;
+        <span class="hljs-keyword">if</span>(value === <span class="hljs-string">&#x27;&#x27;</span>)&#123;<span class="hljs-keyword">return</span> errorMsg&#125;
+    &#125;,
+    <span class="hljs-attr">minLength</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">value, length, errorMsg</span>)&#123;
+        <span class="hljs-keyword">if</span>(value.<span class="hljs-property">length</span> &lt; length)&#123;<span class="hljs-keyword">return</span> errorMsg&#125;
+    &#125;,
+    <span class="hljs-attr">isMobile</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">value, errorMsg</span>)&#123;
+        <span class="hljs-keyword">if</span>(<span class="hljs-string">&#x27;!/(^1[3|5|8][0-9]&#123;9&#125;$)/&#x27;</span>.<span class="hljs-title function_">test</span>( value ))&#123;<span class="hljs-keyword">return</span> errorMsg&#125;
+    &#125;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 策略类</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Validator</span>(<span class="hljs-params"></span>)&#123;
+    <span class="hljs-comment">// ValidatorList 中存放的是校验函数</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ValidatorList</span> = []
+&#125;
+
+<span class="hljs-title class_">Validator</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">add</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">dom, rule, errorMsg</span>)&#123;
+    <span class="hljs-keyword">const</span> array = rule.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;:&#x27;</span>)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ValidatorList</span>.<span class="hljs-title function_">push</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
+        <span class="hljs-keyword">const</span> strategy = array.<span class="hljs-title function_">shift</span>()
+        array.<span class="hljs-title function_">unshift</span>(dom.<span class="hljs-property">value</span>)
+        array.<span class="hljs-title function_">push</span>(errorMsg)
+        <span class="hljs-keyword">return</span> strategies[strategy].<span class="hljs-title function_">apply</span>(dom, array)
+    &#125;)
+&#125;
+
+<span class="hljs-title class_">Validator</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">start</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ValidatorList</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">func</span>=&gt;</span>&#123;
+        <span class="hljs-keyword">const</span> msg = <span class="hljs-title function_">func</span>()
+        <span class="hljs-keyword">if</span>(msg)&#123;
+            <span class="hljs-keyword">return</span> msg
+        &#125;
+    &#125;)
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">validateFunc</span>(<span class="hljs-params"></span>)&#123;
+    <span class="hljs-keyword">const</span> validator = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Validator</span>()
+
+    validator.<span class="hljs-title function_">add</span>(registerForm.<span class="hljs-property">userName</span>, <span class="hljs-string">&#x27;isNonEmpty&#x27;</span>, <span class="hljs-string">&#x27;用户名不能为空&#x27;</span>)
+    validator.<span class="hljs-title function_">add</span>(registerForm.<span class="hljs-property">password</span>, <span class="hljs-string">&#x27;minLength:6&#x27;</span>, <span class="hljs-string">&#x27;密码长度不能少于 6 位&#x27;</span>)
+    validator.<span class="hljs-title function_">add</span>(registerForm.<span class="hljs-property">phoneNumber</span>, <span class="hljs-string">&#x27;isMobile&#x27;</span>, <span class="hljs-string">&#x27;手机号码格式不正确&#x27;</span>)
+
+    <span class="hljs-keyword">const</span> errorMsg = validator.<span class="hljs-title function_">start</span>()
+    <span class="hljs-keyword">return</span> errorMsg
+&#125;
+
+<span class="hljs-keyword">const</span> registerForm = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;registerForm&#x27;</span>)
+registerForm.<span class="hljs-property">onsubmit</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
+    <span class="hljs-keyword">const</span> errorMsg = <span class="hljs-title function_">validateFunc</span>()
+    <span class="hljs-keyword">if</span>(errorMsg)&#123;
+        <span class="hljs-title function_">alert</span>(errorMsg)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    &#125;
+&#125;</code></pre></div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【JavaScript设计模式】设计模式与开发实践</div>
+      <div>https://zhangtuo.online/archives/a700808d.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/15bd4d53.html" title="【JavaScript红宝书】25.期约和异步函数">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【JavaScript红宝书】25.期约和异步函数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/cc1c6456.html" title="【Pro Git】Git常用命令总结">
+                        <span class="hidden-mobile">【Pro Git】Git常用命令总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

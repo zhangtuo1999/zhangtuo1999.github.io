@@ -1,0 +1,1033 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="《新闻文本关键词提取算法研究与实现》">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文献阅读01-新闻文本关键词提取算法研究与实现">
+<meta property="og:url" content="https://zhangtuo.online/archives/b7cabb8d.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="《新闻文本关键词提取算法研究与实现》">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-03T13:11:27.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.928Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="毕设">
+<meta property="article:tag" content="文献">
+<meta property="article:tag" content="关键词提取">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>文献阅读01-新闻文本关键词提取算法研究与实现 - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="文献阅读01-新闻文本关键词提取算法研究与实现"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-04-03 21:11" pubdate>
+          2021年4月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">文献阅读01-新闻文本关键词提取算法研究与实现</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="新闻文本关键词提取算法研究与实现-田脉"><a href="#新闻文本关键词提取算法研究与实现-田脉" class="headerlink" title="新闻文本关键词提取算法研究与实现_田脉"></a>新闻文本关键词提取算法研究与实现_田脉</h1><h2 id="网址"><a href="#网址" class="headerlink" title="网址"></a>网址</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://tsg.buct.edu.cn/https/77726476706e69737468656265737421fbf952d2243e635930068cb8/KCMS/detail/detail.aspx?filename=1019863619.nh&dbname=CMFDTEMP">文章地址</a>（需要北化校园网）</li>
+</ul>
+<h2 id="论文结构及主要内容"><a href="#论文结构及主要内容" class="headerlink" title="论文结构及主要内容"></a>论文结构及主要内容</h2><h3 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h3><h4 id="一、研究背景及意义"><a href="#一、研究背景及意义" class="headerlink" title="一、研究背景及意义"></a>一、研究背景及意义</h4><ul>
+<li>互联网上新闻数据高速增长，新闻标题党严重，影响用户的阅读体验</li>
+<li>关键词的概念，关键词的应用场景，关键词提取的用处</li>
+<li>人工关键词提取的缺点，推出新闻类关键词提取的研究意义</li>
+</ul>
+<h4 id="二、国内外研究现状"><a href="#二、国内外研究现状" class="headerlink" title="二、国内外研究现状"></a>二、国内外研究现状</h4><h5 id="国外研究现状"><a href="#国外研究现状" class="headerlink" title="国外研究现状"></a>国外研究现状</h5><ul>
+<li>关键词自动提取的开始</li>
+<li>有监督提取方法——建立语料库<ul>
+<li>二分类方向</li>
+<li>语言模型方向</li>
+</ul>
+</li>
+<li>半监督提取方法</li>
+<li>无监督提取方法<ul>
+<li>基于统计的方法：TF-IDF</li>
+<li>基于网络图的方法：TestRank</li>
+<li>基于主题模型的方法：LDA</li>
+</ul>
+</li>
+</ul>
+<h5 id="国内研究现状"><a href="#国内研究现状" class="headerlink" title="国内研究现状"></a>国内研究现状</h5><ul>
+<li>汉语的独特性，不能照搬英语</li>
+<li>基于TF-IDF的改进算法</li>
+<li>基于语义的网络图的算法</li>
+<li>运用机器学习进行关键词提取</li>
+</ul>
+<h4 id="三、研究内容"><a href="#三、研究内容" class="headerlink" title="三、研究内容"></a>三、研究内容</h4><ul>
+<li>有监督、半监督、无监督的特点；无监督关键词提取方法的分类；本文针对新闻类文本的改进</li>
+<li>本文的研究的对象、目的；研究的主要内容、方法；研究的数据源</li>
+<li>研究的重难点：如何将卡方检验、齐普夫定律与 TF-IDF 相结合，如何将 TF-<br>IDF，TextRank，LDA 三种关键词算法融合为新的算法模型。</li>
+</ul>
+<h4 id="四、组织结构"><a href="#四、组织结构" class="headerlink" title="四、组织结构"></a>四、组织结构</h4><ul>
+<li>介绍论文每一章节的主要内容</li>
+</ul>
+<h3 id="第一章-关键词提取研究"><a href="#第一章-关键词提取研究" class="headerlink" title="第一章 关键词提取研究"></a>第一章 关键词提取研究</h3><h4 id="第一节-关键词提取算法介绍"><a href="#第一节-关键词提取算法介绍" class="headerlink" title="第一节  关键词提取算法介绍"></a>第一节  关键词提取算法介绍</h4><h5 id="一、TF-IDF算法"><a href="#一、TF-IDF算法" class="headerlink" title="一、TF-IDF算法"></a>一、TF-IDF算法</h5><ul>
+<li>一种基于词频统计的方法，根据词频（TF）和逆文档频率（IDF）计算文本中词语的关键性，用于评估一个 词语对于语料库特定文本的重要程度</li>
+<li>TF-IDF 的算法原理是：一个词语在目标文本中出现的概率越大，同时在相应的语料库其他文本中出现的概率越小，那么，该词语对于目标文本越重要，越能传达目标文本的语义</li>
+<li>TF：词频，指某个词语在目标文本中出现的次数</li>
+<li>IDF：逆文档频率，是指语料库中文本总数 N 与语料库中包含词 i 的所有文本数量𝑛的比值再取对数（防止分母为 0，因此对𝑛做加1 处理）</li>
+<li>TF-IDF 的计算公式：TF-IDF&#x3D;TF*IDF；TF-IDF 值越大，对应的词语就越有可能是文本 j 的关键词</li>
+</ul>
+<h5 id="二、TextRank算法"><a href="#二、TextRank算法" class="headerlink" title="二、TextRank算法"></a>二、TextRank算法</h5><ul>
+<li><p>TextRank 算法来源于 Google 的 PageRank 算法，PageRank 是一种网站排名算法，它的 PageRank 值是用来衡量网站质量的重要指标。TextRank 算法将一篇文本分割为若干组成词语，然后构建词图模型，类似于 PageRank 算法中的各个网页构成网络图。利用词语构造的网络图发掘词语之间的联系程度进行打分，从而根据分数排序提取出关键词。</p>
+</li>
+<li><p>构建的词图分为无权图与有权图。如果两个顶点之间有固定权重就构成了有权图。</p>
+</li>
+<li><p>TextRank 算法流程：<br>1）构造候选词表 S&#x3D;{c1，c2，…，cn}<br>2）由 1）的候选词表构造关键词图 G&#x3D;(V,E)，然后利用共现关系构造词图的边。假设共现窗口为 K，最多共现 K 个词语<br>3） 依据迭代法直到收敛，得到每个词语的得分<br>4）根据得分高低排序，提取前 m 个作为提取的关键词</p>
+</li>
+</ul>
+<h5 id="三、LDA主题模型算法"><a href="#三、LDA主题模型算法" class="headerlink" title="三、LDA主题模型算法"></a>三、LDA主题模型算法</h5><ul>
+<li><p>该方法的理论基础是贝叶斯理论。LDA 根据词的共现信息的分析，拟合出词语—文本—主题的分布，进而将词、文本都映射到一个语义空间中</p>
+</li>
+<li><p>主题模型认为每个文本拥有一个或多个主题，而每个主题都有对应的词分布，通过概率选取出主题，可以得到每个文本的分布。主题模型将没有直接联系的词语与文档使用主题将两者串联起来，一个表达三者联系的经典公式</p>
+</li>
+<li><p>LDA 模型的训练过程如下：<br>1）对文本分词、词性过滤、去停用词等初始化后，对所有文本中的所有词语 x，<br>随机赋予一个主题 t。<br>2）再次读取语料库，对语料库中所有词语使用 Gibbs 采样重新处理并更新。<br>3）重复 2），直到吉布斯采样收敛。<br>4）统计主题—词语的分布矩阵。<br>经过上面的训练，得到了一个 LDA 模型。接下来对新文本的主题进行预估，过<br>程如下：<br>1）对文本分词、词性过滤、去停用词等初始化后，对当前文本中的所有词语 x，<br>随机选取一个主题 t 赋予它。<br>2）读取当前文本，对其进行 Gibbs 采样，重新采样主题。<br>3）重复 2），直到吉布斯采样收敛。<br>4）统计文本—主题分布矩阵。<br>经过以上两个流程，得到了文本—主题分布矩阵和主题—词语分布矩阵。可以利<br>用这些信息计算文本与词的相似度，获得文本最相似的词语列表，最终获得文本的关<br>键词。</p>
+</li>
+</ul>
+<h4 id="第二节-实验数据"><a href="#第二节-实验数据" class="headerlink" title="第二节  实验数据"></a>第二节  实验数据</h4><h5 id="一、语料库的构建"><a href="#一、语料库的构建" class="headerlink" title="一、语料库的构建"></a>一、语料库的构建</h5><ul>
+<li>语料库需要具备全面、丰富的新闻语料特点，选取搜狗实验室提供的搜狐新闻数据集，并进行解析筛选处理作为新闻语料库。</li>
+</ul>
+<h5 id="二、-测试集构建"><a href="#二、-测试集构建" class="headerlink" title="二、 测试集构建"></a>二、 测试集构建</h5><ul>
+<li>测试集涉及到需要高质量、高精度的关键词，如果全部人工标注难以实现。经广泛阅读查找发现，网易新闻网的新闻标有少量关键词，比较符合。因此可以爬取网易新闻网的新闻及关键词，然后对爬取的关键词进行人工二次加工处理，最终得到可以作为<strong>金标准</strong>的测试集。</li>
+<li>使用 python 中 Scrapy 框架进行采集数据</li>
+</ul>
+<h4 id="第三节-数据处理"><a href="#第三节-数据处理" class="headerlink" title="第三节  数据处理"></a>第三节  数据处理</h4><h5 id="一、分词与词性标注"><a href="#一、分词与词性标注" class="headerlink" title="一、分词与词性标注"></a>一、分词与词性标注</h5><ul>
+<li><p>英文分词：以空格作为分隔符</p>
+</li>
+<li><p>中文分词：基于字符串匹配的分词方法、基于统计的分词方法、基于语义的分词方法</p>
+</li>
+<li><p>词性标注：基于统计的方法和基于规则的方法。</p>
+</li>
+</ul>
+<h5 id="二、去停用词"><a href="#二、去停用词" class="headerlink" title="二、去停用词"></a>二、去停用词</h5><ul>
+<li>停用词表是一些无实际意义的虚词、助词等构成</li>
+</ul>
+<h5 id="三、词性过滤"><a href="#三、词性过滤" class="headerlink" title="三、词性过滤"></a>三、词性过滤</h5><ul>
+<li>代词、连词、介词等词性的词语与新闻文本的主旨联系不大，几乎没有参考价值，因此可有将此类词性的词语直接过滤掉。</li>
+</ul>
+<h4 id="第四节-评测指标"><a href="#第四节-评测指标" class="headerlink" title="第四节  评测指标"></a>第四节  评测指标</h4><ul>
+<li><p>在关键词提取的评测标准上，我们借鉴 MUC（Message Understanding Conference）信息抽<br>取的评测标准，计算准确率（Precision）、召回率（Recall）和 F1 值（F-score）这三个指标。</p>
+</li>
+<li><p>准确率和召回率的值在 0 到 1 之间，越接近数值 1，准确率或召回率就越高，关键词提取的效果就越好。在关键词提取时，往往会设定一个固定提取数目，这样会造成提取的数目和标注的数目不一致。Zesch提出每篇文档的关键词提取数目和标注数目一致，然后计算准确率 p，当 p 接近 1 时，表示提取的效果最好。</p>
+</li>
+<li><p>本章总结</p>
+</li>
+</ul>
+<h3 id="第二章-基于齐普夫定律与卡方检验的新闻关键词提取"><a href="#第二章-基于齐普夫定律与卡方检验的新闻关键词提取" class="headerlink" title="第二章  基于齐普夫定律与卡方检验的新闻关键词提取"></a>第二章  基于齐普夫定律与卡方检验的新闻关键词提取</h3><ul>
+<li><p>针对 TF-IDF 算法提取效率低和精度差的缺点，本章提出了一种基于齐普夫定律与卡方检验的 TF-IDF 改进算法。首先，根据齐普夫定律，得到不同频次词的权值，并结合卡方检验用于关键词提取。 </p>
+</li>
+<li><p>具体原理与应用</p>
+</li>
+</ul>
+<h3 id="第三章-基于模型融合的新闻关键词提取"><a href="#第三章-基于模型融合的新闻关键词提取" class="headerlink" title="第三章  基于模型融合的新闻关键词提取"></a>第三章  基于模型融合的新闻关键词提取</h3><ul>
+<li>模型融合就是考虑模型的差异性，得出不同的结果，并将它们的最终结果融合到一起。在关键词提取中，使用单个的提取算法虽然可以得到关键词，但是单个模型的提取精度并不高，存在很大的提升空间。</li>
+</ul>
+<h4 id="第一节-模型融合"><a href="#第一节-模型融合" class="headerlink" title="第一节  模型融合"></a>第一节  模型融合</h4><h5 id="一、瀑布融合"><a href="#一、瀑布融合" class="headerlink" title="一、瀑布融合"></a>一、瀑布融合</h5><ul>
+<li><p>瀑布融合是将多个算法模型以串联的形式连接起来，每个算法类似于一个过滤器，通过不同的算法过滤从而得到最终结果。</p>
+</li>
+<li><p>对于瀑布融合而言，前一个算法过滤的结果将作为下一个算法过滤的输入，候选结果经过层层过滤，最终得到量少质量高的结果</p>
+</li>
+</ul>
+<h5 id="二、-并行组合融合"><a href="#二、-并行组合融合" class="headerlink" title="二、   并行组合融合"></a>二、   并行组合融合</h5><ul>
+<li>组合方法采用一组可扩展的算法，通过算法的组合，可以实现不同方式的过滤。在关键词提取上有以下几种组合方案。 <ul>
+<li>1）串行方案：关键词提取的算法以串联的方式应用，其中前一个算法的输出数据为后一个算法提供数据输入。即上述的瀑布融合。 </li>
+<li>2）并行方案：将几种算法应用于从原始文档中提取关键词的单独实现，然后将结果以相交的形式，取交集得到结果。 </li>
+<li>3）投票方案：投票的方法是并行发的一种改进特例，每个术语都由关键词提取算法进行投票，以获得是否属于关键词，当它从算法中获得足够的票数时，一个术语最终才能确定为关键词。</li>
+</ul>
+</li>
+</ul>
+<h4 id="第二节-基于模型融合的新闻关键词提取设计"><a href="#第二节-基于模型融合的新闻关键词提取设计" class="headerlink" title="第二节  基于模型融合的新闻关键词提取设计"></a>第二节  基于模型融合的新闻关键词提取设计</h4><h5 id="一、-TF-IDF、TextRank、LDA-优缺点分析"><a href="#一、-TF-IDF、TextRank、LDA-优缺点分析" class="headerlink" title="一、 TF-IDF、TextRank、LDA 优缺点分析"></a>一、 TF-IDF、TextRank、LDA 优缺点分析</h5><ul>
+<li><p>TF-IDF</p>
+<ul>
+<li>优点：通俗易懂，上手方便</li>
+<li>缺点：严重依赖语料库，不能反应词语的位置信息（对于一篇新闻文本，文本首句和末尾局往往比其他位置的词语更加重要，需要赋予更高的权重，然而 TF-IDF 一视同仁的对待 )</li>
+</ul>
+</li>
+<li><p>TextRank</p>
+<ul>
+<li>优点：不需要语料库，省略了语料库的构建</li>
+<li>缺点：计算复杂度远远高于 TF-IDF。同时，由于与其他文本语料没有联系，也造成主题缺失</li>
+</ul>
+</li>
+<li><p>LDA</p>
+<ul>
+<li>在某些场景下，基于文本本身的关键词提取还是不够的。需要挖掘词语与文本之间隐含的联系，比如说主题关系。</li>
+<li>优点：将词语、文本之间通过一个网络空间联系起来，分析挖掘潜在隐含联系。</li>
+<li>缺点：无法反馈准确的文档主题。同时 LDA 算法的运算时间较长，需要大量的实践训练，时间复杂度很高。</li>
+</ul>
+</li>
+</ul>
+<h5 id="二、-瀑布融合实验设计"><a href="#二、-瀑布融合实验设计" class="headerlink" title="二、 瀑布融合实验设计"></a>二、 瀑布融合实验设计</h5><ul>
+<li><p>对于上述三种经典算法，两两排列组合会有六种组合。因此瀑布融合方法会有六种可行的方案，但是通过上文对三种关键词提取算法的优缺点进行详细的分析，TextRank 算法与 LDA 主题模型算法具有共同的特点是复杂度高，而 TF-IDF 算法正因为原理简单易懂，复杂度低。因此不适合将 TextRank 与 LDA 放在前面，先进行运算，这样会导致算法复杂度过高。</p>
+</li>
+<li><p>先使用 TF-IDF 选出更加精确的候选关键词，再进行其他算法会有助于精简</p>
+</li>
+<li><p>方案一：先 TF-IDF算法再 TextRank 算法</p>
+<ul>
+<li>输入：文本 j<br>输出：文本 j 的前 k 个关键词 <ol>
+<li><p>对文本 j 做分词，得到词语集 t </p>
+</li>
+<li><p>去停用词，得到新的词语集 T </p>
+</li>
+<li><p>计算 TF-IDF 值 </p>
+</li>
+<li><p>根据 TF-IDF 值进行排序，筛选词语集 M </p>
+</li>
+<li><p>判断词语集 M 是否大于 50，若是，继续下一步，不然返回上一步 </p>
+</li>
+<li><p>将词语集 M 作为输入，输入到 TextRank 算法中，进行运算。 </p>
+</li>
+<li><p>提取出关键词</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>方案二：先先 TF-IDF 算法再 LDA 主题模型算法</p>
+<ul>
+<li>输入：文本 j<br>输出：文本 j 的前 k 个关键词 <ol>
+<li>对文本 j 做分词，得到词语集 t </li>
+<li>去停用词，得到新的词语集 T </li>
+<li>计算 TF-IDF 值 </li>
+<li>根据 TF-IDF 值进行排序，筛选词语集 M </li>
+<li>判断词语集 M 是否大于 50，若是，继续下一步，不然返回上一步 </li>
+<li>将词语集 M 作为输入，输入到 LDA 主题模型算法中，进行运算。 </li>
+<li>提取出关键词</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="三、-并行组合融合实验设计"><a href="#三、-并行组合融合实验设计" class="headerlink" title="三、 并行组合融合实验设计"></a>三、 并行组合融合实验设计</h5><ul>
+<li><p>并行组合融合与上文的瀑布融合的区别在于不需要关注算法组合的前后顺序，因<br>此两两组合后有三种方案： </p>
+</li>
+<li><p>方案一：TF-IDF 算法与 TextRank 算法并行组合（不考虑先后顺序） </p>
+<ul>
+<li>输入：文本 j<br>输出：文本 j 的前 k 个关键词 <ol>
+<li><p>对文本 j 做分词，得到词语集 t </p>
+</li>
+<li><p>去停用词，得到新的词语集 T </p>
+</li>
+<li><p>词语集 T 输入到 TF-IDF 算法，得到结果 S1 </p>
+</li>
+<li><p>词语集 T 输入到 TextRank 算法，得到结果 S2 </p>
+</li>
+<li><p>将结果 S1,S2 并行投票 </p>
+</li>
+<li><p>提取出关键词</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>方案二：TF-IDF 算法与 LDA 主题算法并行组合（不考虑先后顺序）</p>
+<ul>
+<li>输入：文本 j<br>输出：文本 j 的前 k 个关键词 <ol>
+<li>对文本 j 做分词，得到词语集 t </li>
+<li>去停用词，得到新的词语集 T </li>
+<li>词语集 T 输入到 TF-IDF 算法，得到结果 S1 </li>
+<li>词语集 T 输入到 LDA 算法，得到结果 S2 </li>
+<li>将结果 S1,S2 并行投票 </li>
+<li>提取出关键词</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>方案三：LDA 主题模型算法与 TextRank 算法并行组合（不考虑先后顺序）</p>
+<ul>
+<li>输入：文本 j<br>输出：文本 j 的前 k 个关键词 <ol>
+<li>对文本 j 做分词，得到词语集 t </li>
+<li>去停用词，得到新的词语集 T </li>
+<li>词语集 T 输入到 TextRank 算法，得到结果 S1 </li>
+<li>词语集 T 输入到 LDA 算法，得到结果 S2 </li>
+<li>将结果 S1,S2 并行投票 </li>
+<li>提取出关键词</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="第三节-实验分析"><a href="#第三节-实验分析" class="headerlink" title="第三节  实验分析"></a>第三节  实验分析</h4><h5 id="一、-瀑布融合实验分析"><a href="#一、-瀑布融合实验分析" class="headerlink" title="一、 瀑布融合实验分析"></a>一、 瀑布融合实验分析</h5><ul>
+<li><p><strong>金标准</strong>。对比可以发现方案一相对于方案二更加接近金标准，关键词提取性能更佳。</p>
+</li>
+<li><p><strong>时间效率</strong>。实验结果表明方案一时间效率优于方案二。 </p>
+</li>
+<li><p><strong>召回率</strong>和<strong>准确率</strong>。方案一的性能优于方案二。</p>
+</li>
+</ul>
+<h5 id="二、-并行组合融合实验分析"><a href="#二、-并行组合融合实验分析" class="headerlink" title="二、 并行组合融合实验分析"></a>二、 并行组合融合实验分析</h5><p>实验结果将从下列三个方面进行分析： </p>
+<ul>
+<li><p>第一方面：直观对比分析：实验结果与金标准对比分析 </p>
+<ul>
+<li>三种方案接近</li>
+</ul>
+</li>
+<li><p>第二方面：时间对比分析：三种方案提取关键词时间对比分析 </p>
+<ul>
+<li>方案一时间效率优于其他方案</li>
+</ul>
+</li>
+<li><p>第三方面：质量对比分析：将计算三种方案的准确率与召回率并对其进行分析</p>
+<ul>
+<li>方案一的性能优于方案二、方案二</li>
+</ul>
+</li>
+<li><p>本章总结</p>
+</li>
+</ul>
+<h3 id="第四章-新闻关键词提取系统"><a href="#第四章-新闻关键词提取系统" class="headerlink" title="第四章  新闻关键词提取系统"></a>第四章  新闻关键词提取系统</h3><h4 id="第一节-开发环境及相关技术"><a href="#第一节-开发环境及相关技术" class="headerlink" title="第一节  开发环境及相关技术"></a>第一节  开发环境及相关技术</h4><ul>
+<li>Django 框架。MVT 模式。框架的流程模式图。</li>
+</ul>
+<h4 id="第二节-需求分析"><a href="#第二节-需求分析" class="headerlink" title="第二节  需求分析"></a>第二节  需求分析</h4><ul>
+<li><p>新闻关键词提取系统是一款专业的新闻文本关键词提取工具，针对新闻文本，将文本分词去停用词等步骤后得到候选关键词，进而利用词频，逆文档频率，词图，共现关系等来进行提取关键词</p>
+</li>
+<li><p>集成多种关键词提取算法，有常用的 TFIDF 算法，TextRank 算法，还有第二、三章最优的关键词提取算法。同时它可用于关键词提取，新闻文本分析，提取的结果对比分析等用途。</p>
+</li>
+</ul>
+<h4 id="第三节-系统框架设计"><a href="#第三节-系统框架设计" class="headerlink" title="第三节  系统框架设计"></a>第三节  系统框架设计</h4><ul>
+<li><p>系统流程设计</p>
+</li>
+<li><p>系统功能设计 </p>
+</li>
+<li><p>页面设计</p>
+</li>
+</ul>
+<h4 id="第四节-系统测试及演示"><a href="#第四节-系统测试及演示" class="headerlink" title="第四节  系统测试及演示"></a>第四节  系统测试及演示</h4><ul>
+<li><p>系统测试 </p>
+<ul>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>系统测试</li>
+<li>验收测试</li>
+</ul>
+</li>
+<li><p>系统演示</p>
+</li>
+<li><p>本章总结</p>
+</li>
+</ul>
+<h3 id="第五章-总结与展望"><a href="#第五章-总结与展望" class="headerlink" title="第五章  总结与展望"></a>第五章  总结与展望</h3><ul>
+<li>目录顺序概括全文</li>
+<li>语料库需要完善，停用词表需要完善</li>
+<li>加上投票机制</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%AF%95%E8%AE%BE/">#毕设</a>
+      
+        <a href="/tags/%E6%96%87%E7%8C%AE/">#文献</a>
+      
+        <a href="/tags/%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8F%90%E5%8F%96/">#关键词提取</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>文献阅读01-新闻文本关键词提取算法研究与实现</div>
+      <div>https://zhangtuo.online/archives/b7cabb8d.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年4月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/3b21f69.html" title="文献阅读02-TFIDF算法研究综述">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文献阅读02-TFIDF算法研究综述</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/15e5e176.html" title="【考研】2020年北化计算机考研复试面试题目汇总">
+                        <span class="hidden-mobile">【考研】2020年北化计算机考研复试面试题目汇总</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

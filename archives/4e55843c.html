@@ -1,0 +1,1040 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="HTTP">
+  
+    <meta name="description" content="《图解HTTP》笔记。主要内容：TCP&#x2F;IP 协议族；TCP三次握手、四次挥手；HTTP 状态码；HTTP首部；Cookies；HTTPS。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【图解HTTP】HTTP">
+<meta property="og:url" content="https://zhangtuo.online/archives/4e55843c.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="《图解HTTP》笔记。主要内容：TCP&#x2F;IP 协议族；TCP三次握手、四次挥手；HTTP 状态码；HTTP首部；Cookies；HTTPS。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E5%9B%BE%E8%A7%A3HTTP.png">
+<meta property="article:published_time" content="2023-03-25T04:03:27.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.927Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="HTTP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E5%9B%BE%E8%A7%A3HTTP.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【图解HTTP】HTTP - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【图解HTTP】HTTP"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-25 12:03" pubdate>
+          2023年3月25日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          75 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【图解HTTP】HTTP</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-网络基础"><a href="#1-网络基础" class="headerlink" title="1. 网络基础"></a>1. 网络基础</h1><h2 id="1-1-TCP-x2F-IP-协议族"><a href="#1-1-TCP-x2F-IP-协议族" class="headerlink" title="1.1 TCP&#x2F;IP 协议族"></a>1.1 TCP&#x2F;IP 协议族</h2><p>TCP&#x2F;IP 协议族是与互联网相关的<strong>协议</strong>的集合。按照层次可以分为以下4层：应用层、传输层、网络层和数据链路层。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230322175412496.png" srcset="/img/loading.gif" lazyload alt="image-20230322175412496"></p>
+<h3 id="1-1-1-应用层"><a href="#1-1-1-应用层" class="headerlink" title="1.1.1 应用层"></a>1.1.1 应用层</h3><p>eg：FTP &#x2F; DNS &#x2F; HTTP</p>
+<h3 id="1-1-2-传输层"><a href="#1-1-2-传输层" class="headerlink" title="1.1.2 传输层"></a>1.1.2 传输层</h3><p>传输层对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。</p>
+<p>eg：TCP &#x2F; UDP</p>
+<h3 id="1-1-3-网络层"><a href="#1-1-3-网络层" class="headerlink" title="1.1.3 网络层"></a>1.1.3 网络层</h3><p>网络层用来处理在网络上流动的数据包。该层规定了通过怎样的路径（所谓的传输路线）到达对方计算机，并把数据包传送给对方。</p>
+<p>eg：IP</p>
+<h3 id="1-1-4-数据链路层"><a href="#1-1-4-数据链路层" class="headerlink" title="1.1.4 数据链路层"></a>1.1.4 数据链路层</h3><p>用来处理网络连接的硬件部分。</p>
+<p>eg：操作系统、驱动、网卡和光纤等。</p>
+<h2 id="1-2-IP-协议"><a href="#1-2-IP-协议" class="headerlink" title="1.2 IP 协议"></a>1.2 IP 协议</h2><p>IP 协议（Internet Protocol，网际协议）位于网络层，作用是把各种数据包传送给对方。要保证确实传送到目标地址，两个重要的条件是 IP 地址和 MAC 地址。</p>
+<p>IP 地址表明了网络节点被分配到的地址，MAC 地址指的是网卡所属的固定地址。IP 地址可以和 MAC 地址进行配对。IP 地址可以改变，MAC 地址基本不会改变。</p>
+<h3 id="1-2-1-ARP-协议"><a href="#1-2-1-ARP-协议" class="headerlink" title="1.2.1 ARP 协议"></a>1.2.1 ARP 协议</h3><p>IP 之间的通信依赖 MAC 地址。网络上，通信的双方通常需要经过多台网络设备的中转才能联系到对方。进行中转时，会用到利用下一站网络设备的 MAC 地址来搜索下一个中转目标。此时采用的是 ARP 协议（Address Resolution Protocol，地址解析协议），根据通信方的 IP 地址来反查对应的 MAC 地址。</p>
+<h2 id="1-3-TCP-协议"><a href="#1-3-TCP-协议" class="headerlink" title="1.3 TCP 协议"></a>1.3 TCP 协议</h2><p>TCP 协议（Transmission Control Protocol，传输控制协议）位于传输层。为了方便数据传输，网络会将大块的数据分割成以报文段为单位的数据包进行管理。TCP 可以可靠地将数据传送给目标。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230531163636203.png" srcset="/img/loading.gif" lazyload alt="image-20230531163636203"></p>
+<h3 id="1-3-1-三次握手策略"><a href="#1-3-1-三次握手策略" class="headerlink" title="1.3.1 三次握手策略"></a>1.3.1 三次握手策略</h3><p>为了可靠地传输数据，TCP 采用了三次握手的策略。握手过程中会使用 SYN（synchronize）和 ACK（acknowledgement）这两个标志。</p>
+<p>首先，发送端会发送一个带有 SYN 标志的数据包。然后，接收端收到后会回传一个 带有 SYN&#x2F;ACK 标志的数据包，以表示确认收到信息。最后，发送端会再传一个带有 ACK 标志的数据包代表“握手”结束。</p>
+<p>如果在握手的某个过程中断，会再次以相同的顺序发送相同的数据包。</p>
+<h3 id="1-3-2-四次挥手策略"><a href="#1-3-2-四次挥手策略" class="headerlink" title="1.3.2 四次挥手策略"></a>1.3.2 四次挥手策略</h3><p>首先，发送端发送一个 FIN，表明不会再发送数据。然后接收端收到 FIN 后发送一个 ACK 表示确认。接收端再发送一个 FIN 表示不会再发送数据。最后发送端收到 FIN 后发送一个 ACK 给服务端。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230531170144010.png" srcset="/img/loading.gif" lazyload alt="image-20230531170144010"></p>
+<h2 id="1-4-DNS"><a href="#1-4-DNS" class="headerlink" title="1.4 DNS"></a>1.4 DNS</h2><p>DNS 协议（Domain Name System，域名系统）位于应用层，提供域名到 IP 地址之间的解析服务。DNS 协议提供通过域名查找 IP 地址，或逆向从 IP 地址反查域名的服务。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230322175649686.png" srcset="/img/loading.gif" lazyload alt="image-20230322175649686"></p>
+<h2 id="1-5-HTTP"><a href="#1-5-HTTP" class="headerlink" title="1.5 HTTP"></a>1.5 HTTP</h2><img src="../images/【图解HTTP】HTTP笔记/image-20230322175939734.png" srcset="/img/loading.gif" lazyload alt="image-20230322175939734" style="zoom:150%;" />
+
+<h2 id="1-6-URL-和-URI"><a href="#1-6-URL-和-URI" class="headerlink" title="1.6 URL 和 URI"></a>1.6 URL 和 URI</h2><h3 id="1-6-1-URL-统一资源定位符"><a href="#1-6-1-URL-统一资源定位符" class="headerlink" title="1.6.1 URL 统一资源定位符"></a>1.6.1 URL 统一资源定位符</h3><p>URL（Uniform Resource Locator，统一资源定位符），用来表示资源在互联网上所处的位置。</p>
+<h3 id="1-6-2-URI-统一资源标识符"><a href="#1-6-2-URI-统一资源标识符" class="headerlink" title="1.6.2 URI 统一资源标识符"></a>1.6.2 URI 统一资源标识符</h3><p>URI（Uniform Resource Identifier，统一资源标识符），用字符串来标识某个互联网资源。</p>
+<h1 id="2-HTTP-协议"><a href="#2-HTTP-协议" class="headerlink" title="2. HTTP 协议"></a>2. HTTP 协议</h1><h2 id="2-1-请求报文和响应报文"><a href="#2-1-请求报文和响应报文" class="headerlink" title="2.1 请求报文和响应报文"></a>2.1 请求报文和响应报文</h2><p>HTTP 协议规定，请求从客户端发出，服务端响应该请求并返回。</p>
+<p>请求报文由请求方法，请求 URI，协议版本、可选的请求首部字段和内容实体构成。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230323102923961.png" srcset="/img/loading.gif" lazyload alt="image-20230323102923961"></p>
+<blockquote>
+<p>请求 URI 可以放在请求行中，也可以放在请求首部的 Host 中。</p>
+<p>如果不是访问特定资源而是对服务器本身发起请求，可以用一个 * 来代替请求 URI。</p>
+<p>eg：<code>OPTIONS * HTTP/1.1</code></p>
+</blockquote>
+<p>响应报文由协议版本、状态码、状态码的原因短语、可选的响应首部字段以及实体主体构成。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230323103048675.png" srcset="/img/loading.gif" lazyload alt="image-20230323103048675"></p>
+<h2 id="2-2-无状态"><a href="#2-2-无状态" class="headerlink" title="2.2 无状态"></a>2.2 无状态</h2><p>HTTP 是一种不保存状态，即无状态（stateless）协议。HTTP 协议自身不对请求和响应之间的通信状态进行保存。HTTP&#x2F;1.1 虽然是无状态协议，但为了实现期望的保持状态功能， 于是引入了 Cookie 技术。有了 Cookie 再用 HTTP 协议通信，就可以管理状态了。</p>
+<h2 id="2-3-HTTP-方法"><a href="#2-3-HTTP-方法" class="headerlink" title="2.3 HTTP 方法"></a>2.3 HTTP 方法</h2><p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230323110505024.png" srcset="/img/loading.gif" lazyload alt="image-20230323110505024"></p>
+<h2 id="2-4-持久连接和管线化"><a href="#2-4-持久连接和管线化" class="headerlink" title="2.4 持久连接和管线化"></a>2.4 持久连接和管线化</h2><p>使用浏览器浏览一个包含多张图片的 HTML 页面时，在发送请求访问 HTML 页面资源的同时，也会请求该 HTML 页面里包含的其他资源。因此，每次的请求都会造成无谓的 TCP 连接建立和断开， 增加通信量的开销。</p>
+<p>为解决上述 TCP 连接的问题，HTTP&#x2F;1.1 使用了<strong>持久连接</strong>的方法。持久连接的特点是，只要任意一端没有明确提出断开连接，则保持 TCP 连接状态。</p>
+<p>持久连接使得多数请求以<strong>管线化</strong>（pipelining）方式发送成为可能。 从前发送请求后需等待并收到响应，才能发送下一个请求。管线化技术出现后，不用等待响应亦可直接发送下一个请求。 这样就能够做到同时并行发送多个请求，而不需要一个接一个地等待响应了。</p>
+<h2 id="2-5-Cookie"><a href="#2-5-Cookie" class="headerlink" title="2.5 Cookie"></a>2.5 Cookie</h2><p>Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。 Cookie 会根据从服务器端发送的响应报文内的一个叫做 Set-Cookie 的首部字段信息，通知客户端保存 Cookie。当下次客户端再往该服务器发送请求时，客户端会<strong>自动</strong>在请求报文中加入 Cookie 值后发送出去。</p>
+<h1 id="3-HTTP-报文"><a href="#3-HTTP-报文" class="headerlink" title="3. HTTP 报文"></a>3. HTTP 报文</h1><h2 id="3-1-请求报文和响应报文"><a href="#3-1-请求报文和响应报文" class="headerlink" title="3.1 请求报文和响应报文"></a>3.1 请求报文和响应报文</h2><p>HTTP 报文可以分为报文首部和报文主体两块，并不一定需要报文主体。</p>
+<p>请求报文和响应报文的结构：</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230323150057271.png" srcset="/img/loading.gif" lazyload alt="image-20230323150057271"></p>
+<p>请求报文和响应报文的实例：</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230323150310727.png" srcset="/img/loading.gif" lazyload alt="image-20230323150310727"></p>
+<p>其中，请求报文中的请求行包括请求的方法、请求 URI 和 HTTP 版本。响应报文中的状态行包括响应结果的状态码，原因短语和 HTTP 版本。首部字段中包含请求和响应的各种条件和属性的各类首部，包括通用首部、请求首部、响应首部和实体首部，也可能包括不在 RFC 中定义的首部。</p>
+<h2 id="3-2-编码提升传输效率"><a href="#3-2-编码提升传输效率" class="headerlink" title="3.2 编码提升传输效率"></a>3.2 编码提升传输效率</h2><h3 id="3-2-1-报文主体和实体主体"><a href="#3-2-1-报文主体和实体主体" class="headerlink" title="3.2.1 报文主体和实体主体"></a>3.2.1 报文主体和实体主体</h3><p>报文（message）指的是 HTTP 通信中的基本单位，由 8 位字节流组成。实体（entity）指的是请求和相应的有效载荷数据，由实体首部和实体主体组成。</p>
+<p>HTTP 报文的主体用于传输请求或者响应的实体主体。通常，报文主体等于实体主体。只有当传输中进行编码操作时，实体主体的内容发生变化，才导致它和报文主体产生差异。</p>
+<h3 id="3-2-2-压缩传输的内容编码"><a href="#3-2-2-压缩传输的内容编码" class="headerlink" title="3.2.2 压缩传输的内容编码"></a>3.2.2 压缩传输的内容编码</h3><p>HTTP 协议中的内容编码功能可以将实体进行压缩后传输。常用的内容编码有：gzip、compress 等</p>
+<h3 id="3-2-3-分割发送的分块传输编码"><a href="#3-2-3-分割发送的分块传输编码" class="headerlink" title="3.2.3 分割发送的分块传输编码"></a>3.2.3 分割发送的分块传输编码</h3><p>分块传输编码（Chunked Transfer Coding）会将实体主体分成多个块（chunk）。每一块都会用十六进制来标记块的大小，而实体主体的最后一块会使用“0(CR+LF)” 来标记。 使用分块传输编码的实体主体会由接收的客户端负责解码，恢复到编码前的实体主体。</p>
+<h2 id="3-3-发送多种数据的多部分对象集合-multipart"><a href="#3-3-发送多种数据的多部分对象集合-multipart" class="headerlink" title="3.3 发送多种数据的多部分对象集合 multipart"></a>3.3 发送多种数据的多部分对象集合 multipart</h2><p>HTTP 协议可以发送一份报文主体中含有多种类型的实体（文本、图片、视频等）这是因为采用了多部分对象集合（Multipart）的方法，来容纳不同类型的数据。</p>
+<p>在 HTTP 报文中使用多部分对象集合时，需要在首部字段里加上 Content-Type。</p>
+<p>例如，<code>multipart/form-data</code>在 web 表单文件上传时使用。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230323154126462.png" srcset="/img/loading.gif" lazyload alt="image-20230323154126462"></p>
+<p>使用 boundary 字符串来划分多部分对象集合指明的各类实体。在 boundary 字符串指定的各个实体的起始行之前插入“–”标记（例如： –AaB03x），而在多部分对象集合对应的字符串的最后插入“–”标记（例如：–AaB03x–）作为结束。</p>
+<h2 id="3-4-获取部分内容的范围请求-Range"><a href="#3-4-获取部分内容的范围请求-Range" class="headerlink" title="3.4 获取部分内容的范围请求 Range"></a>3.4 获取部分内容的范围请求 Range</h2><p>在以前，如果在下载过程中遇到网络中断的情况，那么必须从头开始。HTTP 实现了恢复机制，可以从之前下载中断处恢复下载。</p>
+<p>要实现该功能需要指定下载的实体范围。像这样，指定范围发送的请求叫做范围请求（Range Request）。 对一份 10 000 字节大小的资源，如果使用范围请求，可以只请求 5001~10 000 字节内的资源。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230323155239266.png" srcset="/img/loading.gif" lazyload alt="image-20230323155239266"></p>
+<p>执行范围请求时，会用到首部字段 Range 来指定资源的 byte 范围。 byte 范围的指定形式如下：</p>
+<ol>
+<li><p>5001 - 10 000 字节：</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Range</span>: bytes=<span class="hljs-number">5001</span>-<span class="hljs-number">10000</span></code></pre></div>
+</li>
+<li><p>5001 字节之后的：</p>
+<div class="code-wrapper"><pre><code class="hljs routeros">Range: <span class="hljs-attribute">bytes</span>=5001-</code></pre></div>
+</li>
+<li><p>从开始到 3000 字节和 5000 - 7000 字节：</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Range</span>: bytes=-<span class="hljs-number">3000</span>, <span class="hljs-number">5000</span>-<span class="hljs-number">7000</span></code></pre></div></li>
+</ol>
+<p>针对范围请求，响应会返回状态码为 206 Partial Content 的响应报文。另外，对于多重范围的范围请求，响应会在首部字段 Content-Type 标明 multipart&#x2F;byteranges 后返回响应报文。 </p>
+<p>如果服务器端无法响应范围请求，则会返回状态码 200 OK 和完整的实体内容。</p>
+<h2 id="3-5-内容协商返回最合适的内容"><a href="#3-5-内容协商返回最合适的内容" class="headerlink" title="3.5 内容协商返回最合适的内容"></a>3.5 内容协商返回最合适的内容</h2><p>内容协商机制是指客户端和服务器端就响应的资源内容进行交涉， 然后提供给客户端最为适合的资源。内容协商会以响应资源的语言、字符集、编码方式等作为判断的基准。</p>
+<ul>
+<li>Accept</li>
+<li>Accept-Charset</li>
+<li>Accept-Encoding</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+</ul>
+<h1 id="4-HTTP-状态码"><a href="#4-HTTP-状态码" class="headerlink" title="4. HTTP 状态码"></a>4. HTTP 状态码</h1><h2 id="4-1-状态码"><a href="#4-1-状态码" class="headerlink" title="4.1 状态码"></a>4.1 状态码</h2><p>状态码的职责是当客户端向服务器端发送请求时，描述返回的请求结果。状态码如 200 OK，以 3 位数字和原因短语组成。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230323161526712.png" srcset="/img/loading.gif" lazyload alt="image-20230323161526712"></p>
+<p>常用的状态码有14种</p>
+<h2 id="4-2-2XX-成功"><a href="#4-2-2XX-成功" class="headerlink" title="4.2 2XX 成功"></a>4.2 2XX 成功</h2><ol>
+<li>200 OK，表示从客户端发来的请求在服务器端被正常处理了。</li>
+<li>204 No Content，表示请求已被成功处理，但是返回的响应报文不含实体主体。</li>
+<li>206 Partial Content，表示服务器成功执行了客户端的范围请求。</li>
+</ol>
+<h2 id="4-3-3XX-重定向"><a href="#4-3-3XX-重定向" class="headerlink" title="4.3 3XX 重定向"></a>4.3 3XX 重定向</h2><ol>
+<li><p>301 Moved Permanently，永久性重定向。表示请求的资源已经被分配了新的 URI，以后应该使用资源新的 URI。</p>
+</li>
+<li><p>302 Found，临时性重定向。表示请求的资源已经被分配了新的 URI，本次应该使用资源新的 URI。</p>
+</li>
+<li><p>303 See Other，表示由于请求对应的资源存在着另一个 URI，应使用 GET 方法定向获取请求的资源。</p>
+</li>
+<li><p>304 Not Modified，表示客户端发送附带条件的请求时，服务器端允许请求 访问资源，但未满足条件的情况。</p>
+</li>
+<li><p>307 Temporary Redirect，临时性重定向。与 302 有着相同的含义。</p>
+</li>
+</ol>
+<h2 id="4-4-4XX-客户端错误"><a href="#4-4-4XX-客户端错误" class="headerlink" title="4.4 4XX 客户端错误"></a>4.4 4XX 客户端错误</h2><ol>
+<li>400 Bad Request，表示请求报文中存在语法错误。</li>
+<li>401 Unauthorized，表示发送的请求需要认证消息。</li>
+<li>403 Forbidden，表示请求资源的访问被服务器拒绝了。可能是权限不够。</li>
+<li>404 Not Found，表示服务器上无法找到请求的资源。</li>
+</ol>
+<h2 id="4-5-5XX-服务器错误"><a href="#4-5-5XX-服务器错误" class="headerlink" title="4.5 5XX 服务器错误"></a>4.5 5XX 服务器错误</h2><ol>
+<li>500 Internal Server Error，表示服务器在执行请求是发生了错误。</li>
+<li>503 Service Unavailable，表示服务器暂时处于超负载或者正在停机维护。</li>
+</ol>
+<h1 id="5-Web-服务器"><a href="#5-Web-服务器" class="headerlink" title="5. Web 服务器"></a>5. Web 服务器</h1><h2 id="5-1-代理、网关、隧道"><a href="#5-1-代理、网关、隧道" class="headerlink" title="5.1 代理、网关、隧道"></a>5.1 代理、网关、隧道</h2><p>HTTP 通信时，除客户端和服务器以外，还有一些用于通信数据转 发的应用程序，例如代理、网关和隧道。它们可以配合服务器工作。</p>
+<h3 id="5-1-1-代理"><a href="#5-1-1-代理" class="headerlink" title="5.1.1 代理"></a>5.1.1 代理</h3><p>代理服务器接收客户端发送的请求后转发给其他服务器，代理不改变请求 URI，会直接发送给源服务器。源服务器返回的响应经过代理服务器后再传给客户端。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327205302767.png" srcset="/img/loading.gif" lazyload alt="image-20230327205302767"></p>
+<h3 id="5-1-2-网关"><a href="#5-1-2-网关" class="headerlink" title="5.1.2 网关"></a>5.1.2 网关</h3><p>网关和代理相似。不过，网关可以使线路上的服务器提供非 HTTP 服务。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327205834955.png" srcset="/img/loading.gif" lazyload alt="image-20230327205834955"></p>
+<h3 id="5-1-3-隧道"><a href="#5-1-3-隧道" class="headerlink" title="5.1.3 隧道"></a>5.1.3 隧道</h3><p>隧道可以建立起一条与其他服务器的通信线路。利用 SSL 等加密手段可以确保客户端和服务器之家进行安全通信。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327210037007.png" srcset="/img/loading.gif" lazyload alt="image-20230327210037007"></p>
+<h2 id="5-2-缓存"><a href="#5-2-缓存" class="headerlink" title="5.2 缓存"></a>5.2 缓存</h2><p>缓存是指代理服务器或客户端本地磁盘内保存的资源副本。利用缓存可减少对源服务器的访问，因此也就节省了通信流量和通信时间。</p>
+<p>当代理转发从服务器返回的响应时，代理服务器将会保存一份资源的副本。</p>
+<h3 id="5-2-1-有效期限"><a href="#5-2-1-有效期限" class="headerlink" title="5.2.1 有效期限"></a>5.2.1 有效期限</h3><p>即使存在缓存，也会因为客户端的要求、缓存的有效期等因素，向源服务器确认资源的有效性。若判断缓存失效，缓存服务器将会再次从 源服务器上获取新资源。</p>
+<h3 id="5-2-2-客户端缓存"><a href="#5-2-2-客户端缓存" class="headerlink" title="5.2.2 客户端缓存"></a>5.2.2 客户端缓存</h3><p>缓存不仅存在在缓存服务器中，还可以存在客户端浏览器中。当判定缓存过期后，会向源服务器确认资源的有效性。若判断浏览器缓存失效，浏览器会再次请求新资源。</p>
+<h1 id="6-HTTP-首部"><a href="#6-HTTP-首部" class="headerlink" title="6. HTTP 首部"></a>6. HTTP 首部</h1><h2 id="6-1-HTTP-报文首部"><a href="#6-1-HTTP-报文首部" class="headerlink" title="6.1 HTTP 报文首部"></a>6.1 HTTP 报文首部</h2><p>请求报文：</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327222346012.png" srcset="/img/loading.gif" lazyload alt="image-20230327222346012"></p>
+<p>响应报文：</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327222359983.png" srcset="/img/loading.gif" lazyload alt="image-20230327222359983"></p>
+<h2 id="6-2-HTTP-首部字段"><a href="#6-2-HTTP-首部字段" class="headerlink" title="6.2 HTTP 首部字段"></a>6.2 HTTP 首部字段</h2><p>HTTP 首部字段由字段名和字段值构成，中间用冒号分隔：</p>
+<div class="code-wrapper"><pre><code class="hljs pgsql">Content-<span class="hljs-keyword">Type</span>: <span class="hljs-type">text</span>/html</code></pre></div>
+
+<p>单个 HTTP 首部字段可以有多个值：</p>
+<div class="code-wrapper"><pre><code class="hljs routeros">Keep-Alive: <span class="hljs-attribute">timeout</span>=15, <span class="hljs-attribute">max</span>=100</code></pre></div>
+
+<p>根据实际用途，HTTP 首部字段可以分为：通用首部字段、请求首部字段、响应首部字段、实体首部字段。</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327224152837.png" srcset="/img/loading.gif" lazyload alt="image-20230327224152837"></p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327224200871.png" srcset="/img/loading.gif" lazyload alt="image-20230327224200871"></p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327224207003.png" srcset="/img/loading.gif" lazyload alt="image-20230327224207003"></p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327224226210.png" srcset="/img/loading.gif" lazyload alt="image-20230327224226210"></p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230327224231816.png" srcset="/img/loading.gif" lazyload alt="image-20230327224231816"></p>
+<h2 id="6-3-通用首部字段"><a href="#6-3-通用首部字段" class="headerlink" title="6.3 通用首部字段"></a>6.3 通用首部字段</h2><p>通用首部字段指的是请求报文和响应报文双方都会使用的首部。</p>
+<ul>
+<li><p>Cache-Control：操作缓存工作机制；指令参数可选，多个指令之间用逗号分隔。</p>
+<div class="code-wrapper"><pre><code class="hljs lasso"><span class="hljs-keyword">Cache</span><span class="hljs-params">-Control</span>: <span class="hljs-keyword">private</span>, <span class="hljs-keyword">max</span><span class="hljs-params">-age</span>=<span class="hljs-number">0</span>, no<span class="hljs-params">-cache</span>
+<span class="hljs-keyword">Cache</span><span class="hljs-params">-Control</span>: no<span class="hljs-params">-store</span>
+<span class="hljs-keyword">Cache</span><span class="hljs-params">-Control</span>: <span class="hljs-keyword">max</span><span class="hljs-params">-age</span>=<span class="hljs-number">604800</span></code></pre></div>
+
+<ul>
+<li>public：响应：可向任意方提供响应的缓存。</li>
+<li>private：响应：仅向特定用户返回响应。</li>
+<li>no-cache：请求：客户端不接收缓存资源：响应：缓存服务器不对资源进行缓存。</li>
+<li>no-store：不应对请求或者响应进行缓存。</li>
+<li>max-age：单位秒。请求：只接受比该时间少的缓存；响应：资源保存为缓存的最长时间。</li>
+</ul>
+</li>
+<li><p>Connection：控制不再转发给代理的首部字段；管理持久连接</p>
+<ul>
+<li>首部字段名：不再转发的首部字段名。代理服务器转发时会删除该首部。</li>
+<li>Keep-Alive：持久连接。HTTP 1.1 中默认连接就是持久连接</li>
+<li>Close：关闭持久连接</li>
+</ul>
+</li>
+<li><p>Date：表明创建 HTTP 报文的日期和时间</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Date</span>: Tue, <span class="hljs-number">03</span> Jul <span class="hljs-number">2012</span> <span class="hljs-number">04</span>:<span class="hljs-number">40</span>:<span class="hljs-number">59</span> GMT</code></pre></div>
+</li>
+<li><p>Upgrade：检测是否可以使用更高的版本进行通信。产生的作用仅限于客户端和邻接服务器之间。因此使用 Upgrade 时，还需要额外指定 <code>Connection: Upgrade</code></p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Upgrade</span>: TLS/<span class="hljs-number">1</span>.<span class="hljs-number">0</span>
+<span class="hljs-attribute">Connection</span>: Upgrade</code></pre></div>
+</li>
+<li><p>Via：追踪客户端和服务器之间的请求和响应报文的传输路径。经常和 TRACE 方法一同使用。</p>
+<img src="../images/【图解HTTP】HTTP笔记/image-20230329203431710.png" srcset="/img/loading.gif" lazyload alt="image-20230329203431710" style="zoom: 80%;" /></li>
+</ul>
+<h2 id="6-4-请求首部字段"><a href="#6-4-请求首部字段" class="headerlink" title="6.4 请求首部字段"></a>6.4 请求首部字段</h2><p>请求首部字段是客户端发送给服务端的请求中的字段。</p>
+<ul>
+<li><p>Accepct：通知服务器用户代理可以处理的媒体类型和相对优先级。可以使用 type&#x2F;subtype 这种形式，一次性指定多种媒体。</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Accept</span>: text/html,application/xhtml+xml,application/xml;q=<span class="hljs-number">0</span>.<span class="hljs-number">9</span>,*/*;q=<span class="hljs-number">0</span>.<span class="hljs-number">8</span></code></pre></div>
+
+<ul>
+<li>文本：text&#x2F;html, text&#x2F;plain, text&#x2F;css, application&#x2F;xhtml+xml, application&#x2F;xml</li>
+<li>图片：image&#x2F;jpeg, image&#x2F;gif, image&#x2F;png</li>
+<li>视频：video&#x2F;mpeg, video&#x2F;quicktime</li>
+<li>应用程序使用的二进制文件：application&#x2F;octet-stream, application&#x2F;zip</li>
+</ul>
+<p>可以使用 q&#x3D; 来额外表示权重值，权重值 q 的范围是 0-1，1最大。默认权重 q&#x3D;1.0。</p>
+</li>
+<li><p>Accept-Charset：通知服务器用户代理支持的字符集和相对优先级。也可以使用 q&#x3D; 来表示优先级。</p>
+</li>
+<li><p>Accept-Encoding：通知服务器用户代理支持的内容编码和优先级。</p>
+<ul>
+<li>gzip，compress，deflate，identity</li>
+</ul>
+</li>
+<li><p>Accept-Language：通知服务器用户代理能够处理的语言集和相对优先级。</p>
+</li>
+<li><p>Authorization：告知服务器用户代理的认证信息。</p>
+</li>
+<li><p>Host：必要。告知服务器<strong>请求的资源</strong>所处的互联网主机名和端口号。</p>
+</li>
+<li><p>Referer：告知服务器请求的原始资源的 URI。</p>
+</li>
+<li><p>User-Agent：告知服务器浏览器和用户代理的名称。</p>
+</li>
+<li><p>Range：范围请求。服务器会在处理请求后返回状态码为 206 Partial Content 的响应。无法处理该范围请求时，会返回状态码为 200 OK 的响应和全部资源。</p>
+</li>
+</ul>
+<h2 id="6-5-响应首部字段"><a href="#6-5-响应首部字段" class="headerlink" title="6.5 响应首部字段"></a>6.5 响应首部字段</h2><p>响应首部字段是服务端发送给客户端的响应报文中的字段。</p>
+<ul>
+<li><p>Accept-Ranges：告知客户端服务器是否能够处理范围请求。可处理范围请求时值为 bytes，反之为 none。</p>
+</li>
+<li><p>Age：告知客户端源服务器在多久前创建了响应。单位秒。</p>
+</li>
+<li><p>Location：将响应的接收方引导至另一个位置的资源。配合 3xx: Redirection 的响应，提供重定向的 URI。</p>
+</li>
+<li><p>Retry-After：告知客户端应该在多久之后再次发送请求。配合 503  Service Unavailable 或者 3xx Redirect 响应一起使用。</p>
+</li>
+<li><p>Server：告知客户端当前服务器上安装的 HTTP 服务器应用程序信息。</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Server</span>: Apache/<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">17</span> (Unix)</code></pre></div>
+</li>
+<li><p>WWW-Authenticate：用于 HTTP 的访问认证，告知客户端适用于请求 URI 的认证方案。</p>
+</li>
+</ul>
+<h2 id="6-6-实体首部字段"><a href="#6-6-实体首部字段" class="headerlink" title="6.6 实体首部字段"></a>6.6 实体首部字段</h2><p>实体首部字段是包含在请求报文和响应报文中的实体部分所使用的首部，用于补充内容的更新时间等与实体相关的信息。</p>
+<ul>
+<li><p>Allow：通知客户端能够支持该请求 URI 指定资源的所有 HTTP 方法。</p>
+<p>当服务器收到不支持的 HTTP 方法时，会以 405 Method Not Allowed 作为响应来返回。同时返回把所有能支持的 HTTP 方法写入 Allow 字段后返回。</p>
+<div class="code-wrapper"><pre><code class="hljs vbnet"><span class="hljs-symbol">Allow:</span> <span class="hljs-keyword">GET</span>, HEAD</code></pre></div>
+</li>
+<li><p>Content-Encoding：告知客户端实体的主体选用的内容编码方式。</p>
+<ul>
+<li>gzip,compress,deflate,identity</li>
+</ul>
+</li>
+<li><p>Content-Language：告知客户端实体的主体使用的自然语言。</p>
+</li>
+<li><p>Content-Length：表明了实体主体部分的大小（单位是字节）。</p>
+</li>
+<li><p>Content-Range：告知客户端作为响应返回的实体的哪个部分符合范围请求。</p>
+</li>
+<li><p>Content-Type：说明实体主体内对象的媒体类型。和首部 字段 Accept 一样，字段值用 type&#x2F;subtype 形式赋值。</p>
+</li>
+<li><p>Expires：将资源失效的日期告知客户端。缓存服务器在 接收到含有首部字段 Expires 的响应后，会以缓存来应答请求，在 Expires 字段值指定的时间之前，响应的副本会一直被保存。当超过指定的时间后，缓存服务器在请求发送过来时，会转向源服务器请求资源。</p>
+<p>源服务器不希望缓存服务器对资源缓存时，最好在 Expires 字段内写入与首部字段 Date 相同的时间值。 但是，当首部字段 Cache-Control 有指定 max-age 指令时，比起首部字段 Expires，会优先处理 max-age 指令。</p>
+</li>
+<li><p>Last-Modified：指明资源最终的修改时间。</p>
+</li>
+</ul>
+<h2 id="6-7-Cookie-相关首部字段"><a href="#6-7-Cookie-相关首部字段" class="headerlink" title="6.7 Cookie 相关首部字段"></a>6.7 Cookie 相关首部字段</h2><ul>
+<li><p>Set-Cookie：响应首部字段中，开始状态管理所使用的 Cookie 信息</p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230329224109626.png" srcset="/img/loading.gif" lazyload alt="image-20230329224109626"></p>
+<p><img src="/../images/%E3%80%90%E5%9B%BE%E8%A7%A3HTTP%E3%80%91HTTP%E7%AC%94%E8%AE%B0/image-20230329224117869.png" srcset="/img/loading.gif" lazyload alt="image-20230329224117869"></p>
+</li>
+<li><p>Cookie：请求首部字段中，服务器收到的 Cookie 信息。</p>
+<p>首部字段 Cookie 会告知服务器，当客户端想获得 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie。接收到多个 Cookie 时，同样可以以多个 Cookie 形式发送。</p>
+</li>
+</ul>
+<h1 id="7-HTTPS"><a href="#7-HTTPS" class="headerlink" title="7. HTTPS"></a>7. HTTPS</h1><p>HTTP 缺点：</p>
+<ol>
+<li>通信使用明文（不加密），内容可能会被窃听</li>
+<li>不验证通信方的身份，因此有可能遭遇伪装</li>
+<li>无法证明报文的完整性，所以有可能已遭篡改</li>
+</ol>
+<p>HTTP 加上<strong>加密处理</strong>和<strong>认证</strong>以及<strong>完整性保护</strong>后即是 HTTPS。HTTPS 不是一种新的协议，只是 HTTP 通信接口部分使用 SSL（Secure Socket Layer，安全套接层） 和 TLS （Transport Layer Security，传输层安全）协议代替而已。通常，HTTP 直接和 TCP 通信。当使用 SSL 时，则演变成先和 SSL 通信，再由 SSL 和 TCP 通信了。简言之，所谓 HTTPS，其实就是 身披 SSL 协议这层外壳的 HTTP。</p>
+<h2 id="7-1-SSL"><a href="#7-1-SSL" class="headerlink" title="7.1 SSL"></a>7.1 SSL</h2><p><strong>共享</strong>密钥加密：加密和解密同用一个密钥，加密时把密钥也发送给对方（<strong>对称</strong>加密）。</p>
+<p><strong>公开</strong>密钥加密：使用一对<strong>非对称</strong>的密钥，一把叫私钥，一把叫做公钥。私钥不能让任何人知道，公钥可以发送给任何人。发送密文的时候使用对方的公钥，接收密文之后使用自己的私钥进行解密。</p>
+<p><strong>混合</strong>加密机制：HTTPS 使用的是共享密钥加密和公开密钥加密两种模式混合的加密机制。因为公开密钥加密比共享密钥加密相比速度更慢，为了保证效率，可能使用公开密钥加密传输<strong>密钥</strong>，保证该密钥的安全，随后使用共享密钥加密交换报文。</p>
+<h2 id="7-2-证书"><a href="#7-2-证书" class="headerlink" title="7.2 证书"></a>7.2 证书</h2><p>CA 证书：保证公钥的传输不被破攻击。</p>
+<p>公开密钥加密方式还是存在一定的问题，那就是没有办法保证传输公开密钥的过程中不被攻击。为了解决上述问题，可以使用证书认证机构（CA）所颁发的证书来解决。</p>
+<p>服务器先向证书认证机构申请公开密钥的证书。机构在判明服务器身份之后，对申请的公开密钥做数字签名，并将公开密钥加入到公钥证书中。随后，服务器将公钥证书发送给客户端。客户端使用数字证书认证机构的公开密钥对证书上的签名进行认证。认证机构的公开密钥一般都会内置在浏览器中。</p>
+<h2 id="7-3-TSL"><a href="#7-3-TSL" class="headerlink" title="7.3 TSL"></a>7.3 TSL</h2><p>TSL 是以 SSL 为原型开发的协议，有时会统一称该协议为 SSL。当前主流的版本是 SSL3.0 和 TLS1.0。</p>
+<p>HTTPS 使用 SSL 时会变慢：</p>
+<ol>
+<li>通信量增加</li>
+<li>加密处理需要消耗更多的硬件资源</li>
+</ol>
+<h1 id="8-认证"><a href="#8-认证" class="headerlink" title="8. 认证"></a>8. 认证</h1><p>HTTP&#x2F;1.1 使用的认证方式有：</p>
+<ul>
+<li><p>BASIC 认证（基本认证） </p>
+</li>
+<li><p>DIGEST 认证（摘要认证）</p>
+</li>
+<li><p>SSL 客户端认证</p>
+</li>
+<li><p>FormBase 认证（基于表单认证）</p>
+</li>
+</ul>
+<h1 id="9-基于-HTTP-的追加协议"><a href="#9-基于-HTTP-的追加协议" class="headerlink" title="9. 基于 HTTP 的追加协议"></a>9. 基于 HTTP 的追加协议</h1><h2 id="9-1-WebSocket"><a href="#9-1-WebSocket" class="headerlink" title="9.1 WebSocket"></a>9.1 WebSocket</h2><p>Web 浏览器和 Web 服务器之间<strong>全双工</strong>通信标准。主要特点：</p>
+<ul>
+<li>推送功能：服务器可以直接发送数据，不必等待客户端进行请求。</li>
+<li>减少通信量：建立起 ws 连接之后，一直保持连接。相比 HTTP 开销少。</li>
+</ul>
+<h2 id="9-2-HTTP-x2F-2-0"><a href="#9-2-HTTP-x2F-2-0" class="headerlink" title="9.2 HTTP&#x2F;2.0"></a>9.2 HTTP&#x2F;2.0</h2><p>7 项技术：</p>
+<ul>
+<li>压缩</li>
+<li>多路复用</li>
+<li>TLS 义务化</li>
+<li>协商</li>
+<li>客户端拉曳和服务端推送</li>
+<li>流量控制</li>
+<li>WebSocket</li>
+</ul>
+<h2 id="9-3-WebDAV"><a href="#9-3-WebDAV" class="headerlink" title="9.3 WebDAV"></a>9.3 WebDAV</h2><p>WebDAV（Web-based Distributed Authoring and Versioning，基于万维网的分布式创作和版本控制）是一个分布式文件系统。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HTTP/">#HTTP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【图解HTTP】HTTP</div>
+      <div>https://zhangtuo.online/archives/4e55843c.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/abde3393.html" title="【TypeScript编程】1.类型全解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【TypeScript编程】1.类型全解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/f3126934.html" title="【Node】Node基础笔记">
+                        <span class="hidden-mobile">【Node】Node基础笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

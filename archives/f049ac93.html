@@ -1,0 +1,1294 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="JavaScript">
+  
+    <meta name="description" content="《JavaScript高级程序设计（第4版）》第24章：网络请求与远程资源。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JavaScript红宝书】24.网络请求与远程资源">
+<meta property="og:url" content="https://zhangtuo.online/archives/f049ac93.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="《JavaScript高级程序设计（第4版）》第24章：网络请求与远程资源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+<meta property="article:published_time" content="2022-08-14T03:53:13.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.921Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【JavaScript红宝书】24.网络请求与远程资源 - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【JavaScript红宝书】24.网络请求与远程资源"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-14 11:53" pubdate>
+          2022年8月14日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          20k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          168 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【JavaScript红宝书】24.网络请求与远程资源</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="网络请求与远程资源"><a href="#网络请求与远程资源" class="headerlink" title="网络请求与远程资源"></a>网络请求与远程资源</h1><h2 id="1-XMLHttpRequest-对象"><a href="#1-XMLHttpRequest-对象" class="headerlink" title="1 XMLHttpRequest 对象"></a>1 XMLHttpRequest 对象</h2><p>所有现代浏览器都通过 XMLHttpRequest 构造函数原生支持 XHR 对象：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();</code></pre></div>
+
+<h3 id="1-1-open-send-和abort"><a href="#1-1-open-send-和abort" class="headerlink" title="1.1 open() send()和abort()"></a>1.1 open() send()和abort()</h3><h4 id="1-1-1-open-准备请求"><a href="#1-1-1-open-准备请求" class="headerlink" title="1.1.1 open() 准备请求"></a>1.1.1 open() 准备请求</h4><p>使用 XHR 对象首先要调用 open() 方法，这个方法接收 3 个参数：请求类型（”get”、”post”等）、请求URL，以及表示请求是否<strong>异步</strong>（是否阻塞代码执行）的布尔值。下面是一个例子：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript">xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;example.php&quot;</span>, <span class="hljs-literal">false</span>);</code></pre></div>
+
+<p>这行代码就可以向 example.php 发送一个同步的 GET 请求。关于这行代码需要说明几点。首先，这里的 URL 是相对于代码所在页面的，当然也可以使用绝对 URL。其次，调用 open() 不会实际发送请求，只是为发送请求做好准备。</p>
+<blockquote>
+<p>注意：只能访问<strong>同源</strong> URL，也就是域名相同、端口相同、协议相同。如果请求的 URL 与发送请求的页面在任何方面有所不同，则会抛出安全错误。</p>
+</blockquote>
+<h4 id="1-1-2-send-发送请求"><a href="#1-1-2-send-发送请求" class="headerlink" title="1.1.2 send() 发送请求"></a>1.1.2 send() 发送请求</h4><p>要发送定义好的请求，必须像下面这样调用 send() 方法：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript">xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;example.txt&quot;</span>, <span class="hljs-literal">false</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);</code></pre></div>
+
+<p>send() 方法接收一个参数，是作为<strong>请求体</strong>发送的数据。如果不需要发送请求体，则必须传 null，因为这个参数在某些浏览器中是必需的。调用 send() 之后，请求就会发送到服务器。</p>
+<p>因为这个请求是<strong>同步</strong>的，所以 JavaScript 代码会等待服务器响应之后再继续执行。收到响应后，XHR 对象的以下属性会被填充上数据。</p>
+<ul>
+<li>responseText：作为响应体返回的文本。</li>
+<li>responseXML：如果响应的内容类型是”text&#x2F;xml”或”application&#x2F;xml”，那就是包含响应数据的 XML DOM 文档。</li>
+<li>status：响应的 HTTP 状态。</li>
+<li>statusText：响应的 HTTP 状态描述。</li>
+</ul>
+<img src="../images/【JavaScript】24_网络请求与远程资源/image-20221229102420941.png" srcset="/img/loading.gif" lazyload alt="image-20221229102420941" style="zoom:33%;" />
+
+<h4 id="1-1-3-status状态码-responseText响应体-readyState阶段码-onreadystatechange阶段码变化事件"><a href="#1-1-3-status状态码-responseText响应体-readyState阶段码-onreadystatechange阶段码变化事件" class="headerlink" title="1.1.3 status状态码 responseText响应体 readyState阶段码 onreadystatechange阶段码变化事件"></a>1.1.3 status状态码 responseText响应体 readyState阶段码 onreadystatechange阶段码变化事件</h4><p>收到响应后，第一步要检查 status 属性以确保响应成功返回。一般来说，HTTP 状态码为 2xx 表示成功。此时，responseText 或 responseXML（如果内容类型正确）属性中会有内容。如果 HTTP 状态码是 304，则表示资源未修改过，是从浏览器缓存中直接拿取的。当然这也意味着响应有效。为确保收到正确的响应，应该检查这些状态码，如下所示：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript">xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;example.txt&quot;</span>, <span class="hljs-literal">false</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);
+<span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+    <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+&#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+&#125;</code></pre></div>
+
+<p>以上代码可能显示服务器返回的内容，也可能显示错误消息，取决于 HTTP 响应的状态码。为确定下一步该执行什么操作，最好检查 status 而不是 statusText 属性，因为后者已经被证明在跨浏览器的情况下不可靠。无论是什么响应内容类型，responseText 属性始终会保存响应体，而 responseXML 则对于非 XML 数据是 null。</p>
+<p>虽然可以像前面的例子一样发送同步请求，但多数情况下最好使用<strong>异步</strong>请求，这样可以不阻塞 JavaScript 代码继续执行。XHR 对象有一个 readyState 属性，表示当前处在请求&#x2F;响应过程的哪个阶段。这个属性有如下可能的值：</p>
+<ul>
+<li>0：未初始化（Uninitialized）。尚未调用 open() 方法。</li>
+<li>1：已打开（Open）。已调用 open() 方法，尚未调用 send() 方法。</li>
+<li>2：已发送（Sent）。已调用 send() 方法，尚未收到响应。</li>
+<li>3：接收中（Receiving）。已经收到部分响应。</li>
+<li>4：完成（Complete）。已经收到所有响应，可以使用了。</li>
+</ul>
+<p><strong>每次 readyState 从一个值变成另一个值，都会触发 onreadystatechange 事件</strong>。可以借此机会检查 readyState 的值。一般来说，我们唯一关心的 readyState 值是 4，表示数据已就绪。为保证跨浏览器兼容，onreadystatechange 事件处理程序应该在调用 open() 之前赋值。来看下面的例子：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">readyState</span> == <span class="hljs-number">4</span>) &#123;
+        <span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+            <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+        &#125;
+    &#125;
+&#125;;
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;example.txt&quot;</span>, <span class="hljs-literal">true</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);</code></pre></div>
+
+<p>以上代码使用 DOM Level 0 风格为 XHR 对象添加了事件处理程序，因为并不是所有浏览器都支持 DOM Level 2 风格。与其他事件处理程序不同，onreadystatechange 事件处理程序不会收到 event 对象。在事件处理程序中，必须使用 XHR 对象本身来确定接下来该做什么。 </p>
+<h4 id="1-1-4-abort-取消请求"><a href="#1-1-4-abort-取消请求" class="headerlink" title="1.1.4 abort() 取消请求"></a>1.1.4 abort() 取消请求</h4><p>在收到响应之前如果想取消异步请求，可以调用 abort() 方法：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript">xhr.<span class="hljs-title function_">abort</span>();</code></pre></div>
+
+<p>调用这个方法后，XHR 对象会停止触发事件，并阻止访问这个对象上任何与响应相关的属性。中断请求后，应该取消对 XHR 对象的引用。由于内存问题，不推荐重用 XHR 对象。</p>
+<h3 id="1-2-HTTP-头部"><a href="#1-2-HTTP-头部" class="headerlink" title="1.2 HTTP 头部"></a>1.2 HTTP 头部</h3><p>每个 HTTP 请求和响应都会携带一些头部字段，这些字段可能对开发者有用。XHR 对象会通过一些方法暴露与请求和响应相关的头部字段。<br>默认情况下，XHR 请求会发送以下头部字段：</p>
+<ul>
+<li>Accept：浏览器可以处理的内容类型。</li>
+<li>Accept-Charset：浏览器可以显示的字符集。</li>
+<li>Accept-Encoding：浏览器可以处理的压缩编码类型。</li>
+<li>Accept-Language：浏览器使用的语言。</li>
+<li>Connection：浏览器与服务器的连接类型。</li>
+<li>Cookie：页面中设置的Cookie。</li>
+<li>Host：发送请求的页面所在的域。</li>
+<li>Referer：发送请求的页面的URI。注意，这个字段在 HTTP 规范中就拼错了，所以考虑到兼容<br>性也必须将错就错。（正确的拼写应该是Referrer）</li>
+<li>User-Agent：浏览器的用户代理字符串。</li>
+</ul>
+<p>虽然不同浏览器发送的确切头部字段可能各不相同，但这些通常都是会发送的。</p>
+<h4 id="1-2-1-setRequestHeader-设置请求头部"><a href="#1-2-1-setRequestHeader-设置请求头部" class="headerlink" title="1.2.1 setRequestHeader() 设置请求头部"></a>1.2.1 setRequestHeader() 设置请求头部</h4><p>如果需要发送额外的请求头部，可以使用 setRequestHeader()方法。这个方法接收两个参数：头部字段的名称和值。为保证请求头部被发送，必须在open() 之后、send() 之前调用 setRequestHeader()，如下面的例子所示：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">readyState</span> == <span class="hljs-number">4</span>) &#123;
+        <span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+            <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+        &#125;
+    &#125;
+&#125;;
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;example.php&quot;</span>, <span class="hljs-literal">true</span>);
+xhr.<span class="hljs-title function_">setRequestHeader</span>(<span class="hljs-string">&quot;MyHeader&quot;</span>, <span class="hljs-string">&quot;MyValue&quot;</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);</code></pre></div>
+
+<p>服务器通过读取自定义头部可以确定适当的操作。自定义头部一定要区别于浏览器正常发送的头部，否则可能影响服务器正常响应。有些浏览器允许重写默认头部，有些浏览器则不允许。</p>
+<h4 id="1-2-2-getResponseHeader-获取响应头部"><a href="#1-2-2-getResponseHeader-获取响应头部" class="headerlink" title="1.2.2 getResponseHeader() 获取响应头部"></a>1.2.2 getResponseHeader() 获取响应头部</h4><p>服务器可以使用头部向浏览器传递额外的结构化数据。</p>
+<p>可以使用 getResponseHeader() 方法从 XHR 对象获取响应头部，只要传入要获取头部的名称即可。如果想取得所有响应头部，可以使用 getAllResponseHeaders() 方法，这个方法会返回包含所有响应头部的<strong>字符串</strong>（而不是对象）。下面是调用这两个方法的例子：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> myHeader = xhr.<span class="hljs-title function_">getResponseHeader</span>(<span class="hljs-string">&quot;content-length&quot;</span>); 
+<span class="hljs-keyword">let</span> allHeaders = xhr.<span class="hljs-title function_">getAllResponseHeaders</span>();</code></pre></div>
+
+<p>getAllResponseHeaders() 方法通常返回类似如下的字符串：</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Date</span>: Sun, <span class="hljs-number">14</span> Nov <span class="hljs-number">2004</span> <span class="hljs-number">18</span>:<span class="hljs-number">04</span>:<span class="hljs-number">03</span> GMT
+<span class="hljs-attribute">Server</span>: Apache/<span class="hljs-number">1</span>.<span class="hljs-number">3</span>.<span class="hljs-number">29</span> (Unix)
+<span class="hljs-attribute">Vary</span>: Accept
+<span class="hljs-attribute">X</span>-Powered-By: PHP/<span class="hljs-number">4</span>.<span class="hljs-number">3</span>.<span class="hljs-number">8</span>
+<span class="hljs-attribute">Connection</span>: close
+<span class="hljs-attribute">Content</span>-Type: text/html; charset=iso-<span class="hljs-number">8859</span>-<span class="hljs-number">1</span></code></pre></div>
+
+<p>通过解析以上头部字段的输出，就可以知道服务器发送的所有头部，而不需要单独去检查了。</p>
+<h3 id="1-3-GET-请求"><a href="#1-3-GET-请求" class="headerlink" title="1.3 GET 请求"></a>1.3 GET 请求</h3><p>最常用的请求方法是 GET 请求，用于向服务器查询某些信息。必要时，需要在 GET 请求的 URL 后面添加查询字符串参数。对 XHR 而言，查询字符串必须正确<strong>编码</strong>后添加到 URL 后面，然后再传给 open() 方法。</p>
+<p>发送 GET 请求最常见的一个错误是查询字符串格式不对。查询字符串中的每个名和值都必须使用encodeURIComponent() 编码，所有名&#x2F;值对必须以和号（&amp;）分隔，如下面的例子所示：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript">xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;example.php?name1=value1&amp;name2=value2&quot;</span>, <span class="hljs-literal">true</span>);</code></pre></div>
+
+<p>可以使用以下函数将查询字符串参数添加到现有的 URL 末尾：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">addURLParam</span>(<span class="hljs-params">url, name, value</span>) &#123;
+    url += (url.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;?&quot;</span>) == -<span class="hljs-number">1</span> ? <span class="hljs-string">&quot;?&quot;</span> : <span class="hljs-string">&quot;&amp;&quot;</span>);
+    url += <span class="hljs-built_in">encodeURIComponent</span>(name) + <span class="hljs-string">&quot;=&quot;</span> + <span class="hljs-built_in">encodeURIComponent</span>(value);
+    <span class="hljs-keyword">return</span> url;
+&#125;</code></pre></div>
+
+<p>这里定义了一个 addURLParam() 函数，它接收 3 个参数：要添加查询字符串的 URL、查询参数和参数值。首先，这个函数会检查 URL 中是否已经包含问号（以确定是否已经存在其他参数）。如果没有，则加上一个问号；否则就加上一个和号。然后，分别对参数名和参数值进行编码，并添加到 URL 末尾。</p>
+<p>最后一步是返回更新后的 URL。</p>
+<p>可以使用这个函数构建请求 URL，如下面的例子所示：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> url = <span class="hljs-string">&quot;example.php&quot;</span>;
+<span class="hljs-comment">// 添加参数</span>
+url = <span class="hljs-title function_">addURLParam</span>(url, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;Nicholas&quot;</span>);
+url = <span class="hljs-title function_">addURLParam</span>(url, <span class="hljs-string">&quot;book&quot;</span>, <span class="hljs-string">&quot;Professional JavaScript&quot;</span>);
+<span class="hljs-comment">// 初始化请求</span>
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, url, <span class="hljs-literal">false</span>);</code></pre></div>
+
+<p>这里使用 addURLParam() 函数可以保证通过 XHR 发送请求的 URL 格式正确。</p>
+<h3 id="1-4-POST-请求"><a href="#1-4-POST-请求" class="headerlink" title="1.4 POST 请求"></a>1.4 POST 请求</h3><p>第二个最常用的请求是 POST 请求，用于向服务器发送应该保存的数据。每个 POST 请求都应该在请求体中携带提交的数据，而 GET 请求则不然。POST 请求的请求体可以包含非常多的数据，而且数据可以是任意格式。要初始化 POST 请求，open() 方法的第一个参数要传”post”，比如：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript">xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;post&quot;</span>, <span class="hljs-string">&quot;example.php&quot;</span>, <span class="hljs-literal">true</span>);</code></pre></div>
+
+<p>接下来就是要给 send() 方法传入要发送的数据。因为 XHR 最初主要设计用于发送 XML，所以可以传入序列化之后的 XML DOM 文档作为请求体。当然，也可以传入任意字符串。</p>
+<p>默认情况下，对服务器而言，POST 请求与提交表单是不一样的。服务器逻辑需要读取原始 POST 数据才能取得浏览器发送的数据。不过，可以使用 XHR 模拟表单提交。为此：</p>
+<ol>
+<li>第一步需要把 Content-Type 头部设置为<code>application/x-www-formurlencoded</code>，这是提交表单时使用的内容类型。</li>
+<li>第二步是创建对应格式的字符串。POST 数据此时使用与查询字符串相同的格式。如果网页中确实有一个表单需要序列化并通过 XHR 发送到服务器，则可以使用 serialize() 函数来创建相应的字符串，如下所示：</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">submitData</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+    xhr.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+        <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">readyState</span> == <span class="hljs-number">4</span>) &#123;
+            <span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+                <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+            &#125;
+        &#125;
+    &#125;;
+    xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;post&quot;</span>, <span class="hljs-string">&quot;postexample.php&quot;</span>, <span class="hljs-literal">true</span>);
+    xhr.<span class="hljs-title function_">setRequestHeader</span>(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;application/x-www-form-urlencoded&quot;</span>);
+    <span class="hljs-keyword">let</span> form = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;user-info&quot;</span>);
+    xhr.<span class="hljs-title function_">send</span>(<span class="hljs-title function_">serialize</span>(form));
+&#125;</code></pre></div>
+
+<h3 id="1-5-XMLHttpRequest-Level-2"><a href="#1-5-XMLHttpRequest-Level-2" class="headerlink" title="1.5 XMLHttpRequest Level 2"></a>1.5 XMLHttpRequest Level 2</h3><p>XHR 对象作为事实标准的迅速流行，也促使W3C 为规范这一行为而制定了正式标准。</p>
+<p>XMLHttpRequest Level 1 只是把已经存在的 XHR 对象的实现细节明确了一下。XMLHttpRequest Level 2 又进一步发展了 XHR 对象。并非所有浏览器都实现了 XMLHttpRequest Level 2 的所有部分，但所有浏览器都实现了其中部分功能。</p>
+<h4 id="1-5-1-FormData-类型"><a href="#1-5-1-FormData-类型" class="headerlink" title="1.5.1 FormData 类型"></a>1.5.1 FormData 类型</h4><p>现代 Web 应用程序中经常需要对表单数据进行序列化，因此 XMLHttpRequest Level 2 新增了 FormData 类型。FormData 类型便于表单序列化，也便于创建与表单类似格式的数据然后通过 XHR 发送。下面的代码创建了一个 FormData 对象，并填充了一些数据：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>();
+data.<span class="hljs-title function_">append</span>(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;Nicholas&quot;</span>);</code></pre></div>
+
+<p>append() 方法接收两个参数：键和值，相当于表单字段名称和该字段的值。可以像这样添加任意多个键&#x2F;值对数据。此外，通过直接给 FormData 构造函数传入一个表单元素，也可以将表单中的数据作为键&#x2F;值对填充进去：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">forms</span>[<span class="hljs-number">0</span>]);</code></pre></div>
+
+<p>有了 FormData 实例，可以像下面这样直接传给 XHR 对象的 send() 方法：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">readyState</span> == <span class="hljs-number">4</span>) &#123;
+        <span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+            <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+        &#125;
+    &#125;
+&#125;;
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;post&quot;</span>, <span class="hljs-string">&quot;postexample.php&quot;</span>, <span class="hljs-literal">true</span>);
+<span class="hljs-keyword">let</span> form = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;user-info&quot;</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>(form));</code></pre></div>
+
+<p>使用 FormData 的另一个方便之处是不再需要给 XHR 对象显式设置任何请求头部了。XHR 对象能够识别作为 FormData 实例传入的数据类型并自动配置相应的头部。</p>
+<h4 id="1-5-2-timeout-超时"><a href="#1-5-2-timeout-超时" class="headerlink" title="1.5.2 timeout 超时"></a>1.5.2 timeout 超时</h4><p>IE8 给 XHR 对象增加了一个 timeout 属性，用于表示发送请求后等待多少毫秒，如果响应不成功就中断请求。之后所有浏览器都在自己的 XHR 实现中增加了这个属性。在给 timeout 属性设置了一个时间且在该时间过后没有收到响应时，XHR 对象就会触发 timeout 事件，调用 ontimeout 事件处理程序。这个特性后来也被添加到了XMLHttpRequest Level 2 规范。下面看一个例子：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">readyState</span> == <span class="hljs-number">4</span>) &#123;
+        <span class="hljs-keyword">try</span> &#123;
+            <span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+                <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+            &#125;
+        &#125; <span class="hljs-keyword">catch</span> (ex) &#123;
+            <span class="hljs-comment">// 假设由ontimeout 处理</span>
+        &#125;
+    &#125;
+&#125;;
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;timeout.php&quot;</span>, <span class="hljs-literal">true</span>);
+xhr.<span class="hljs-property">timeout</span> = <span class="hljs-number">1000</span>; <span class="hljs-comment">// 设置1 秒超时</span>
+xhr.<span class="hljs-property">ontimeout</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request did not return in a second.&quot;</span>);
+&#125;;
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);</code></pre></div>
+
+<p>这个例子演示了使用 timeout 设置超时。给 timeout 设置 1000 毫秒意味着，如果请求没有在1秒钟内返回则会中断。此时则会触发 ontimeout 事件处理程序，readyState 仍然会变成4，因此也会调用 onreadystatechange 事件处理程序。不过，如果在超时之后访问 status 属性则会发生错误。为做好防护，可以把检查 status 属性的代码封装在 try&#x2F;catch 语句中。</p>
+<h4 id="1-5-3-overrideMimeType-方法"><a href="#1-5-3-overrideMimeType-方法" class="headerlink" title="1.5.3 overrideMimeType()方法"></a>1.5.3 overrideMimeType()方法</h4><p>Firefox 首先引入了 overrideMimeType() 方法用于重写 XHR 响应的 MIME 类型。这个特性后来也被添加到了XMLHttpRequest Level 2。因为响应返回的 MIME 类型决定了XHR 对象如何处理响应，所以如果有办法覆盖服务器返回的类型，那么是有帮助的。</p>
+<p>假设服务器实际发送了 XML 数据，但响应头设置的 MIME 类型是 text&#x2F;plain。结果就会导致虽然数据是 XML，但 responseXML 属性值是 null。此时调用 overrideMimeType() 可以保证将响应当成 XML 而不是纯文本来处理：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;text.php&quot;</span>, <span class="hljs-literal">true</span>);
+xhr.<span class="hljs-title function_">overrideMimeType</span>(<span class="hljs-string">&quot;text/xml&quot;</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);</code></pre></div>
+
+<p>这个例子强制让 XHR 把响应当成  XML 而不是纯文本来处理。为了正确覆盖响应的 MIME 类型，必须在调用 send()之前调用 overrideMimeType()。</p>
+<h2 id="2-Progress-Events-进度事件"><a href="#2-Progress-Events-进度事件" class="headerlink" title="2 Progress Events 进度事件"></a>2 Progress Events 进度事件</h2><p>Progress Events 是 W3C 的工作草案，定义了客户端-服务器端通信。这些事件最初只针对 XHR，现在也推广到了其他类似的 API。有以下 6 个进度相关的事件。</p>
+<ul>
+<li>loadstart：在接收到响应的第一个字节时触发。</li>
+<li>progress：在接收响应期间反复触发。</li>
+<li>error：在请求出错时触发。</li>
+<li>abort：在调用 abort() 终止连接时触发。</li>
+<li>load：在成功接收完响应时触发。</li>
+<li>loadend：在通信完成时，且在 error、abort 或 load 之后触发。</li>
+</ul>
+<p>每次请求都会首先触发 loadstart 事件，之后是一个或多个 progress 事件，接着是 error、abort 或 load 中的一个，最后以 loadend 事件结束。这些事件大部分都很好理解，但其中有两个需要说明一下。</p>
+<h3 id="2-1-load-事件"><a href="#2-1-load-事件" class="headerlink" title="2.1 load 事件"></a>2.1 load 事件</h3><p>Firefox 最初在实现 XHR 的时候，曾致力于简化交互模式。最终，增加了一个 load 事件用于<strong>替代 readystatechange 事件</strong>。load 事件在响应接收完成后立即触发，这样就不用检查 readyState 属性了。</p>
+<p>onload 事件处理程序会收到一个 event 对象，其 target 属性设置为 XHR 实例，在这个实例上可以访问所有XHR 对象属性和方法。不过，并不是所有浏览器都实现了这个事件的 event 对象。考虑到跨浏览器兼容，还是需要像下面这样使用XHR 对象变量：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+        <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+    &#125;
+&#125;;
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;altevents.php&quot;</span>, <span class="hljs-literal">true</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);</code></pre></div>
+
+<p>只要是从服务器收到响应，无论状态码是什么，都会触发 load 事件。这意味着还需要检查 status 属性才能确定数据是否有效。Firefox、Opera、Chrome 和 Safari 都支持 load 事件。</p>
+<h3 id="2-2-progress-事件"><a href="#2-2-progress-事件" class="headerlink" title="2.2 progress 事件"></a>2.2 progress 事件</h3><p>Mozilla 在 XHR 对象上另一个创新是 progress 事件，在浏览器接收数据期间，这个事件会反复触发。每次触发时，onprogress 事件处理程序都会收到 event 对象，其 target 属性是XHR 对象，且包含3 个额外属性：lengthComputable、position 和 totalSize。其中：</p>
+<ul>
+<li>lengthComputable 是一个布尔值，表示进度信息是否可用；</li>
+<li>position 是接收到的字节数；</li>
+<li>totalSize 是响应的Content-Length 头部定义的总字节数。</li>
+</ul>
+<p>有了这些信息，就可以给用户提供进度条了。以下代码演示了如何向用户展示进度：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) &#123;
+    <span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+        <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+    &#125;
+&#125;;
+xhr.<span class="hljs-property">onprogress</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) &#123;
+    <span class="hljs-keyword">let</span> divStatus = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;status&quot;</span>);
+    <span class="hljs-keyword">if</span> (event.<span class="hljs-property">lengthComputable</span>) &#123;
+        divStatus.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;Received &quot;</span> + event.<span class="hljs-property">position</span> + <span class="hljs-string">&quot; of &quot;</span> +
+            event.<span class="hljs-property">totalSize</span> +
+            <span class="hljs-string">&quot; bytes&quot;</span>;
+    &#125;
+&#125;;
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;altevents.php&quot;</span>, <span class="hljs-literal">true</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);</code></pre></div>
+
+<p>为了保证正确执行，必须在调用 open() 之前添加 onprogress 事件处理程序。在前面的例子中，每次触发 progress 事件都会更新 HTML 元素中的信息。假设响应有 Content-Length 头部，就可以利用这些信息计算出已经收到响应的百分比。</p>
+<h2 id="3-跨源资源共享"><a href="#3-跨源资源共享" class="headerlink" title="3 跨源资源共享"></a>3 跨源资源共享</h2><p>通过 XHR 进行Ajax 通信的一个主要限制是跨源安全策略。默认情况下，XHR 只能访问与发起请求的页面在同一个域内的资源。这个安全限制可以防止某些恶意行为。不过，浏览器也需要支持合法跨源访问的能力。跨源资源共享（CORS，Cross-Origin Resource Sharing）定义了浏览器与服务器如何实现跨源通信。</p>
+<p>CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和服务器相互了解，以确实请求或响应应该成功还是失败。对于简单的请求，比如 GET 或 POST 请求，没有自定义头部，而且请求体是 text&#x2F;plain 类型，这样的请求在发送时会有一个额外的头部叫 Origin。Origin 头部包含发送请求的页面的源（协议、域名和端口），以便服务器确定是否为其提供响应。下面是 Origin 头部的一个示例：</p>
+<div class="code-wrapper"><pre><code class="hljs awk">Origin: http:<span class="hljs-regexp">//</span>www.nczonline.net</code></pre></div>
+
+<p>如果服务器决定响应请求，那么应该发送 Access-Control-Allow-Origin 头部，包含相同的源；或者如果资源是公开的，那么就包含”*”。比如：</p>
+<div class="code-wrapper"><pre><code class="hljs awk">Access-Control-Allow-Origin: http:<span class="hljs-regexp">//</span>www.nczonline.net</code></pre></div>
+
+<p>如果没有这个头部，或者有但源不匹配，则表明不会响应浏览器请求。否则，服务器就会处理这个请求。注意，无论请求还是响应都不会包含 cookie 信息。现代浏览器通过 XMLHttpRequest 对象原生支持 CORS。在尝试访问不同源的资源时，这个行为会被自动触发。要向不同域的源发送请求，可以使用标准 XHR 对象并给 open() 方法传入一个绝对 URL，比如：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">readyState</span> == <span class="hljs-number">4</span>) &#123;
+        <span class="hljs-keyword">if</span> ((xhr.<span class="hljs-property">status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.<span class="hljs-property">status</span> &lt; <span class="hljs-number">300</span>) || xhr.<span class="hljs-property">status</span> == <span class="hljs-number">304</span>) &#123;
+            <span class="hljs-title function_">alert</span>(xhr.<span class="hljs-property">responseText</span>);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Request was unsuccessful: &quot;</span> + xhr.<span class="hljs-property">status</span>);
+        &#125;
+    &#125;
+&#125;;
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&quot;get&quot;</span>, <span class="hljs-string">&quot;http://www.somewhere-else.com/page/&quot;</span>, <span class="hljs-literal">true</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);</code></pre></div>
+
+<p>跨域 XHR 对象允许访问 status 和 statusText 属性，也允许同步请求。出于安全考虑，跨域 XHR 对象也施加了一些额外限制。</p>
+<ul>
+<li>不能使用 setRequestHeader() 设置自定义头部。</li>
+<li>不能发送和接收 cookie。</li>
+<li>getAllResponseHeaders() 方法始终返回空字符串。</li>
+</ul>
+<p>因为无论同域还是跨域请求都使用同一个接口，所以最好在访问本地资源时使用相对 URL，在访问远程资源时使用绝对 URL。这样可以更明确地区分使用场景，同时避免出现访问本地资源时出现头部或 cookie 信息访问受限的问题。</p>
+<h3 id="3-1-预检请求"><a href="#3-1-预检请求" class="headerlink" title="3.1 预检请求"></a>3.1 预检请求</h3><p>CORS 通过一种叫预检请求（preflighted request）的服务器验证机制，允许使用自定义头部、除GET和POST 之外的方法，以及不同请求体内容类型。在要发送涉及上述某种高级选项的请求时，会先向服务器发送一个“预检”请求。这个请求使用 OPTIONS 方法发送并包含以下头部。</p>
+<ul>
+<li>Origin：与简单请求相同。</li>
+<li>Access-Control-Request-Method：请求希望使用的方法。</li>
+<li>Access-Control-Request-Headers：（可选）要使用的逗号分隔的自定义头部列表。</li>
+</ul>
+<p>下面是一个假设的POST 请求，包含自定义的 NCZ 头部：</p>
+<div class="code-wrapper"><pre><code class="hljs oxygene">Origin: http:<span class="hljs-comment">//www.nczonline.net</span>
+Access-Control-Request-<span class="hljs-keyword">Method</span>: POST
+Access-Control-Request-Headers: NCZ</code></pre></div>
+
+<p>在这个请求发送后，服务器可以确定是否允许这种类型的请求。服务器会通过在响应中发送如下头部与浏览器沟通这些信息。</p>
+<ul>
+<li><p>Access-Control-Allow-Origin：与简单请求相同。</p>
+</li>
+<li><p>Access-Control-Allow-Methods：允许的方法（逗号分隔的列表）。</p>
+</li>
+<li><p>Access-Control-Allow-Headers：服务器允许的头部（逗号分隔的列表）。</p>
+</li>
+<li><p>Access-Control-Max-Age：缓存预检请求的秒数。</p>
+</li>
+</ul>
+<p>例如：</p>
+<div class="code-wrapper"><pre><code class="hljs fortran"><span class="hljs-keyword">Access</span>-Control-Allow-Origin: http://www.nczonline.net
+<span class="hljs-keyword">Access</span>-Control-Allow-Methods: POST, GET
+<span class="hljs-keyword">Access</span>-Control-Allow-Headers: NCZ
+<span class="hljs-keyword">Access</span>-Control-<span class="hljs-built_in">Max</span>-Age: <span class="hljs-number">1728000</span></code></pre></div>
+
+<p>预检请求返回后，结果会按响应指定的时间缓存一段时间。换句话说，只有第一次发送这种类型的请求时才会多发送一次额外的 HTTP 请求。</p>
+<h3 id="3-2-凭据请求"><a href="#3-2-凭据请求" class="headerlink" title="3.2 凭据请求"></a>3.2 凭据请求</h3><p>默认情况下，跨源请求不提供凭据（cookie、HTTP 认证和客户端SSL 证书）。可以通过将 withCredentials 属性设置为true 来表明请求会发送凭据。如果服务器允许带凭据的请求，那么可以在响应中包含如下 HTTP 头部：</p>
+<div class="code-wrapper"><pre><code class="hljs ada"><span class="hljs-keyword">Access</span>-Control-Allow-Credentials: <span class="hljs-literal">true</span></code></pre></div>
+
+<p>如果发送了凭据请求而服务器返回的响应中没有这个头部，则浏览器不会把响应交给 JavaScript（responseText 是空字符串，status 是0，onerror()被调用）。注意，服务器也可以在预检请求的响应中发送这个HTTP 头部，以表明这个源允许发送凭据请求。</p>
+<h2 id="4-Fetch-API"><a href="#4-Fetch-API" class="headerlink" title="4 Fetch API"></a>4 Fetch API</h2><p>Fetch API 能够执行 XHR 能执行的所有任务，更加易用，接口更佳现代化。</p>
+<h3 id="4-1-基本用法"><a href="#4-1-基本用法" class="headerlink" title="4.1 基本用法"></a>4.1 基本用法</h3><p>fetch() 方法暴露在全局作用域中。调用 fetch() 方法即可发送请求。</p>
+<h4 id="4-1-1-发送请求"><a href="#4-1-1-发送请求" class="headerlink" title="4.1.1 发送请求"></a>4.1.1 发送请求</h4><p>fetch() 方法有一个必需的参数 input，可以是 URL 或者一个 Requset 实例。也可以传一个可选的参数 init，代表自定义请求配置。返回值是一个 Promise 对象。</p>
+<p><strong>GET 请求</strong></p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>)</code></pre></div>
+
+<p><strong>POST 请求</strong></p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>, &#123;
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+    <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(&#123;
+        <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;foo&#x27;</span>,
+        <span class="hljs-attr">author</span>: <span class="hljs-string">&#x27;bar&#x27;</span>
+    &#125;),
+    <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(&#123;
+        <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>
+    &#125;)
+&#125;)</code></pre></div>
+
+<p><strong><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/fetch#%E8%AF%AD%E6%B3%95">自定义请求配置</a></strong></p>
+<ul>
+<li><code>method</code>: 请求使用的方法，如 <code>GET</code>、<code>POST</code>。</li>
+<li><code>headers</code>: 请求的头信息，形式为 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Headers"><code>Headers</code></a> 的对象或包含 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String"><code>ByteString</code></a> 值的对象字面量。</li>
+<li><code>body</code>: 请求的 body 信息：可能是一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob"><code>Blob</code></a>、<code>BufferSource</code>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData"><code>FormData</code></a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams"><code>URLSearchParams</code></a> 或者 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String"><code>USVString</code></a> 对象。注意 GET 或 HEAD 方法的请求不能包含 body 信息。</li>
+<li><code>mode</code>: 请求的模式，如 <code>cors</code>、<code>no-cors</code> 或者 <code>same-origin</code>。</li>
+<li><code>credentials</code>: 请求的 credentials，如 <code>omit</code>、<code>same-origin</code> 或者 <code>include</code>。为了在当前域名内自动发送 cookie，必须提供这个选项，从 Chrome 50 开始，这个属性也可以接受 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/FederatedCredential"><code>FederatedCredential</code> (en-US)</a> 实例或是一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/PasswordCredential"><code>PasswordCredential</code> (en-US)</a> 实例。</li>
+<li><code>cache</code>: 请求的 cache 模式：<code>default</code>、 <code>no-store</code>、 <code>reload</code> 、 <code>no-cache</code>、 <code>force-cache</code> 或者 <code>only-if-cached</code>。</li>
+<li><code>redirect</code>: 可用的 redirect 模式：<code>follow</code> (自动重定向), <code>error</code> (如果产生重定向将自动终止并且抛出一个错误），或者 <code>manual</code> (手动处理重定向)。在 Chrome 中默认使用 <code>follow</code>（Chrome 47 之前的默认值是 <code>manual</code>）。</li>
+<li><code>referrer</code>: 一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String"><code>USVString</code></a> 可以是 <code>no-referrer</code>、<code>client</code> 或一个 URL。默认是 <code>client</code>。</li>
+<li><code>referrerPolicy</code>: 指定了 HTTP 头部 referer 字段的值。可能为以下值之一：<code>no-referrer</code>、 <code>no-referrer-when-downgrade</code>、<code>origin</code>、<code>origin-when-cross-origin</code>、 <code>unsafe-url</code>。</li>
+<li><code>integrity</code>: 包括请求的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Subresource_Integrity">subresource integrity</a> 值（例如： <code>sha256-BpfBw7ivV8q2jLiT13fxDYAe2tJllusRSZ273h2nFSE=</code>）。</li>
+</ul>
+<h4 id="4-1-2-获取响应"><a href="#4-1-2-获取响应" class="headerlink" title="4.1.2 获取响应"></a>4.1.2 获取响应</h4><p>请求完成、资源可用时，期约会解决为一个 Response 对象。这个对象是 API 的封装，可以通过它取得相应资源。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;response&#x27;</span>, response)
+    <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>()
+&#125;).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;data&#x27;</span>, data)
+&#125;)</code></pre></div>
+
+<img src="../images/【JavaScript】24_网络请求与远程资源/image-20230114194634842.png" srcset="/img/loading.gif" lazyload alt="image-20230114194634842" style="zoom:33%;" />
+
+<img src="../images/【JavaScript】24_网络请求与远程资源/image-20230114194706800.png" srcset="/img/loading.gif" lazyload alt="image-20230114194706800" style="zoom:33%;" />
+
+<h4 id="4-1-3-返回-Promise-对象"><a href="#4-1-3-返回-Promise-对象" class="headerlink" title="4.1.3 返回 Promise 对象"></a>4.1.3 返回 Promise 对象</h4><p>只要接收到了服务器返回的响应，就返回<strong>解决</strong>的 Promise 对象，解决值是一个 Response 实例；如果没收到服务器的响应，返回<strong>拒绝</strong>的 Promise 对象，拒绝原因是一个 TypeError 对象。</p>
+<ul>
+<li><p>请求成功（即状态码是200），会执行<strong>解决</strong>处理程序。即使请求失败（即状态码是404或500），也会执行<strong>解决</strong>处理程序。如果想区分这两种情况，应该判断 Response 实例的 ok 属性。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/bar&#x27;</span>)
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">status</span>); <span class="hljs-comment">// 200</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">ok</span>); <span class="hljs-comment">// true</span>
+&#125;);
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/does-not-exist&#x27;</span>)
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">status</span>); <span class="hljs-comment">// 404</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">ok</span>); <span class="hljs-comment">// false</span>
+&#125;);</code></pre></div>
+</li>
+<li><p>如果没有接收到服务器的响应（如请求超时、违反 CORS、无网络连接等），则会执行<strong>拒绝</strong>处理程序。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/no-response&#x27;</span>).<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;error&#x27;</span>, error)
+&#125;)</code></pre></div></li>
+</ul>
+<h3 id="4-2-请求模式"><a href="#4-2-请求模式" class="headerlink" title="4.2 请求模式"></a>4.2 请求模式</h3><p>使用 init 对象参数，可以配置 fetch() 在请求体中发送各种序列化的数据。</p>
+<h4 id="4-2-1-发送-JSON-数据"><a href="#4-2-1-发送-JSON-数据" class="headerlink" title="4.2.1 发送 JSON 数据"></a>4.2.1 发送 JSON 数据</h4><div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> payload = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(&#123;
+    <span class="hljs-attr">foo</span>: <span class="hljs-string">&#x27;bar&#x27;</span>
+&#125;);
+<span class="hljs-keyword">let</span> jsonHeaders = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(&#123;
+    <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>
+&#125;);
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>, &#123;
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>, <span class="hljs-comment">// 发送请求体时必须使用一种 HTTP 方法</span>
+    <span class="hljs-attr">body</span>: payload,
+    <span class="hljs-attr">headers</span>: jsonHeaders
+&#125;);</code></pre></div>
+
+<h4 id="4-2-2-发送请求参数"><a href="#4-2-2-发送请求参数" class="headerlink" title="4.2.2 发送请求参数"></a>4.2.2 发送请求参数</h4><div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> payload = <span class="hljs-string">&#x27;foo=bar&amp;baz=qux&#x27;</span>;
+<span class="hljs-keyword">let</span> paramHeaders = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(&#123;
+    <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/x-www-form-urlencoded; charset=UTF-8&#x27;</span>
+&#125;);
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/send-me-params&#x27;</span>, &#123;
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>, <span class="hljs-comment">// 发送请求体时必须使用一种 HTTP 方法</span>
+    <span class="hljs-attr">body</span>: payload,
+    <span class="hljs-attr">headers</span>: paramHeaders
+&#125;);</code></pre></div>
+
+<h4 id="4-2-3-发送文件"><a href="#4-2-3-发送文件" class="headerlink" title="4.2.3 发送文件"></a>4.2.3 发送文件</h4><div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> imageFormData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>();
+<span class="hljs-keyword">let</span> imageInput = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;input[type=&#x27;file&#x27;]&quot;</span>);
+imageFormData.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;image&#x27;</span>, imageInput.<span class="hljs-property">files</span>[<span class="hljs-number">0</span>]);
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/img-upload&#x27;</span>, &#123;
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+    <span class="hljs-attr">body</span>: imageFormData
+&#125;);</code></pre></div>
+
+<h3 id="4-3-中断请求"><a href="#4-3-中断请求" class="headerlink" title="4.3 中断请求"></a>4.3 中断请求</h3><p>支持通过 <code>AbortController/AbortSignal</code> 对中断请求。调用 AbortController. abort() 会中断所有网络传输，特别适合希望停止传输大型负载的情况。中断进行中的 fetch() 请求会导致包含错误的拒绝。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> abortController = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AbortController</span>();
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>, &#123; <span class="hljs-attr">signal</span>: abortController.<span class="hljs-property">signal</span> &#125;)
+    .<span class="hljs-title function_">catch</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;aborted!&#x27;</span>))
+
+<span class="hljs-comment">// 10 毫秒后中断请求</span>
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> abortController.<span class="hljs-title function_">abort</span>(), <span class="hljs-number">10</span>)</code></pre></div>
+
+<h3 id="4-4-Headers-对象"><a href="#4-4-Headers-对象" class="headerlink" title="4.4 Headers 对象"></a>4.4 Headers 对象</h3><p>Headers 对象是所有请求和响应头部的容器，存在于 Request 实例和 Response 实例中。Request 实例中的 Headers 对象可以通过 <code>Request.prototype.headers</code> 访问。Response 实例中的 Headers 对象可以通过 <code>Response.prototype.headers</code>访问。</p>
+<h4 id="4-4-1-实例方法"><a href="#4-4-1-实例方法" class="headerlink" title="4.4.1 实例方法"></a>4.4.1 实例方法</h4><p>Headers 有与 Map 类型相似的 get()、set()、has() 和 delete() 等实例方法。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>([[<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>], [<span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>]])
+headers.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(headers.<span class="hljs-title function_">has</span>(<span class="hljs-string">&#x27;foo&#x27;</span>))     <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(headers.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;foo&#x27;</span>))     <span class="hljs-comment">// bar</span>
+headers.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;foo&#x27;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(headers.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;foo&#x27;</span>))     <span class="hljs-comment">// undefined</span></code></pre></div>
+
+<p>不同于 Map，初始化 Headers 时可以传入一个对象。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(&#123; <span class="hljs-attr">foo</span>: <span class="hljs-string">&#x27;bar&#x27;</span> &#125;)</code></pre></div>
+
+<p>一个 HTTP 头部可以有多个值，Headers 对象通过 append() 方法支持添加多个值。Headers 实例中还不存在的头部上调用 append() 方法相当于调用 set()。后续调用会以逗号为分隔符拼接多个值。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>()
+
+headers.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;bar&#x27;</span>)
+headers.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-string">&#x27;baz&#x27;</span>)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(headers.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;foo&#x27;</span>))		<span class="hljs-comment">// bar, baz</span></code></pre></div>
+
+<h3 id="4-5-Request-对象"><a href="#4-5-Request-对象" class="headerlink" title="4.5 Request 对象"></a>4.5 Request 对象</h3><p>Request 对象是获取资源请求的接口。这个接口暴露了请求的相关信息，也暴露了使用请求体的不同方式，即 json() 方法、text() 方法等。</p>
+<h4 id="4-5-1-创建"><a href="#4-5-1-创建" class="headerlink" title="4.5.1 创建"></a>4.5.1 创建</h4><p>可以通过构造函数初始化 Request 对象。为此需要传入一个 input 参数，一般是 URL。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> request = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Resquest</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>)</code></pre></div>
+
+<p>Request 构造函数也接收第二个参数——一个 init 对象。这个 init 对象与前面介绍的 fetch() 的 init 对象一样。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> request = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts/2&#x27;</span>,&#123;<span class="hljs-attr">method</span>:<span class="hljs-string">&#x27;DELETE&#x27;</span>&#125;)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(request)</code></pre></div>
+
+<img src="../images/【JavaScript】24_网络请求与远程资源/image-20230114225647962.png" srcset="/img/loading.gif" lazyload alt="image-20230114225647962" style="zoom:33%;" />
+
+<h4 id="4-5-2-克隆"><a href="#4-5-2-克隆" class="headerlink" title="4.5.2 克隆"></a>4.5.2 克隆</h4><p>有两种不同的方式来创建 Request 对象的副本：使用 Request 构造函数和使用实例的 clone() 方法。</p>
+<p>注：只有 bodyUsed 属性为 false 的 Request 对象才能被克隆。不然会抛出 TypeError 异常。</p>
+<h5 id="使用-Request-构造函数"><a href="#使用-Request-构造函数" class="headerlink" title="使用 Request 构造函数"></a><strong>使用 Request 构造函数</strong></h5><p>把已有的 Request 对象作为参数传入构造函数：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> request1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>)
+<span class="hljs-keyword">const</span> request2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(request1)</code></pre></div>
+
+<p>也可以再传入一个 init 对象，来代替已有的配置：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> request1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts/2&#x27;</span>)
+<span class="hljs-keyword">const</span> request2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(request1, &#123; <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;DELETE&#x27;</span> &#125;)</code></pre></div>
+
+<p>注，这种方式得到的不是一摸一样的副本：</p>
+<ul>
+<li>request1 的 bodyUsed 属性会被标记为 true。</li>
+<li>如果源对象与创建的新对象不同源，则 referrer 属性会被清除。</li>
+<li>如果源对象的 mode 为 navigate，则会被转换为 same-origin。</li>
+</ul>
+<h5 id="使用-clone-方法"><a href="#使用-clone-方法" class="headerlink" title="使用 clone() 方法"></a>使用 clone() 方法</h5><p>第二种克隆 Request 对象的方式是使用 clone()方法。这个方法会创建一模一样的副本，任何值都不会被覆盖， bodyUsed 属性也不会改变。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> request1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts/2&#x27;</span>)
+<span class="hljs-keyword">const</span> request2 = request1.<span class="hljs-title function_">clone</span>()</code></pre></div>
+
+<h4 id="4-5-3-用法"><a href="#4-5-3-用法" class="headerlink" title="4.5.3 用法"></a>4.5.3 用法</h4><p>调用 fetch() 方法时，可以直接传入 Request 对象，也可以再传入 init 对象来覆盖  Request 对象中的配置。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> req = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts/2&#x27;</span>)
+<span class="hljs-title function_">fetch</span>(req, &#123;<span class="hljs-attr">method</span>:<span class="hljs-string">&#x27;DELETE&#x27;</span>&#125;)</code></pre></div>
+
+<p>注意：fetch() 方法不能使用 bodyUsed 属性为 true 的 Request 对象。否则抛出 TypeError 异常。</p>
+<h3 id="4-6-Response-对象"><a href="#4-6-Response-对象" class="headerlink" title="4.6 Response 对象"></a>4.6 Response 对象</h3><p>Response 对象是获取资源响应的接口。这个接口暴露了响应的相关信息，也暴露了使 用响应体的不同方式。</p>
+<h4 id="4-6-1-获取"><a href="#4-6-1-获取" class="headerlink" title="4.6.1 获取"></a>4.6.1 获取</h4><p>fetch() 解决为一个成功的期约后，得到的值就是一个 Response 对象。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response)
+&#125;)</code></pre></div>
+
+<img src="../images/【JavaScript】24_网络请求与远程资源/image-20230114232638771.png" srcset="/img/loading.gif" lazyload alt="image-20230114232638771" style="zoom:33%;" />
+
+<h4 id="4-6-2-克隆"><a href="#4-6-2-克隆" class="headerlink" title="4.6.2 克隆"></a>4.6.2 克隆</h4><p>注：只有 bodyUsed 属性为 false 的 Response 对象才能被克隆。不然会抛出 TypeError 异常。</p>
+<p>使用 clone() 方法来克隆：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:3000/posts&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;
+    <span class="hljs-keyword">const</span> c = response.<span class="hljs-title function_">clone</span>()
+    &#125;)</code></pre></div>
+
+<h4 id="4-6-3-用法"><a href="#4-6-3-用法" class="headerlink" title="4.6.3 用法"></a>4.6.3 用法</h4><p>Response 对象包含一组只读属性：</p>
+<p><img src="/../images/%E3%80%90JavaScript%E3%80%9124_%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E4%B8%8E%E8%BF%9C%E7%A8%8B%E8%B5%84%E6%BA%90/image-20230114232809848.png" srcset="/img/loading.gif" lazyload alt="image-20230114232809848"></p>
+<p>注：有响应体的 Response 对象只能读取一次。（不包含响应体的 Response 对象不受此限制。）</p>
+<h3 id="4-7-Body-接口"><a href="#4-7-Body-接口" class="headerlink" title="4.7 Body 接口"></a>4.7 Body 接口</h3><p>Request 和 Response 都实现了 Body 接口。这个接口为两个类型提供了只读的 body 属性（实现为 ReadableStream）、只读的 bodyUsed 布尔值（表示 body 流是否已读）和一组方法，用于从流中读取内容并将结果转换为某种 JavaScript 对象类型。</p>
+<h4 id="4-7-1-对于-Request-对象"><a href="#4-7-1-对于-Request-对象" class="headerlink" title="4.7.1 对于 Request 对象"></a>4.7.1 对于 Request 对象</h4><p>可以使用以下方法：</p>
+<ul>
+<li><p><code>Body.arrayBuffer()</code> </p>
+<ul>
+<li>返回解决一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer"><code>ArrayBuffer</code></a>表示的请求主体的 promise.</li>
+</ul>
+</li>
+<li><p><code>Body.blob()</code> </p>
+<ul>
+<li>返回解决一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob"><code>Blob</code></a>表示的请求主体的 promise.</li>
+</ul>
+</li>
+<li><p><code>Body.formData()</code></p>
+<ul>
+<li>返回解决一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData"><code>FormData</code></a>表示的请求主体的 promise.</li>
+</ul>
+</li>
+<li><p><code>Body.json()</code> </p>
+<ul>
+<li>返回解决一个<code>JSON</code>表示的请求主体的 promise.</li>
+</ul>
+</li>
+<li><p><code>Body.text()</code> </p>
+<ul>
+<li>返回解决一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String"><code>USVString</code></a>(文本) 表示的请求主体的 promise.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-7-2-对于-Response-对象"><a href="#4-7-2-对于-Response-对象" class="headerlink" title="4.7.2 对于 Response 对象"></a>4.7.2 对于 Response 对象</h4><ul>
+<li><p><code>Body.arrayBuffer()</code> </p>
+<ul>
+<li>读取 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Response"><code>Response</code></a> 对象并且将它设置为已读（因为 Responses 对象被设置为了 stream 的方式，所以它们只能被读取一次），并返回一个被解析为 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer"><code>ArrayBuffer</code></a> 格式的 Promise 对象。</li>
+</ul>
+</li>
+<li><p><code>Body.blob()</code> </p>
+<ul>
+<li>读取 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Response"><code>Response</code></a> 对象并且将它设置为已读（因为 Responses 对象被设置为了 stream 的方式，所以它们只能被读取一次），并返回一个被解析为 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob"><code>Blob</code></a> 格式的 Promise 对象。</li>
+</ul>
+</li>
+<li><p><code>Body.formData()</code></p>
+<ul>
+<li>读取<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Response"><code>Response</code></a> 对象并且将它设置为已读（因为 Responses 对象被设置为了 stream 的方式，所以它们只能被读取一次），并返回一个被解析为 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData"><code>FormData</code></a> 格式的 Promise 对象。</li>
+</ul>
+</li>
+<li><p><code>Body.json()</code></p>
+<ul>
+<li>读取 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Response"><code>Response</code></a> 对象并且将它设置为已读（因为 Responses 对象被设置为了 stream 的方式，所以它们只能被读取一次），并返回一个被解析为 <code>JSON</code> 格式的 Promise 对象。</li>
+</ul>
+</li>
+<li><p><code>Body.text()</code></p>
+<ul>
+<li>读取 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Response"><code>Response</code></a> 对象并且将它设置为已读（因为 Responses 对象被设置为了 stream 的方式，所以它们只能被读取一次），并返回一个被解析为 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String"><code>USVString</code></a> 格式的 Promise 对象。</li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【JavaScript红宝书】24.网络请求与远程资源</div>
+      <div>https://zhangtuo.online/archives/f049ac93.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/87492e24.html" title="【代码随想录】1_数组_1_二分查找">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【代码随想录】1_数组_1_二分查找</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/a0f7377d.html" title="【JavaScript红宝书】23.JSON">
+                        <span class="hidden-mobile">【JavaScript红宝书】23.JSON</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

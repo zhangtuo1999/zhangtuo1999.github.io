@@ -1,0 +1,1186 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="JavaScript">
+  
+    <meta name="description" content="《JavaScript高级程序设计（第4版）》第5章：基本引用类型。主要内容：Date、RegExp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JavaScript红宝书】8.基本引用类型：Date、RegExp">
+<meta property="og:url" content="https://zhangtuo.online/archives/ba185f0c.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="《JavaScript高级程序设计（第4版）》第5章：基本引用类型。主要内容：Date、RegExp">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+<meta property="article:published_time" content="2022-05-02T12:41:53.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.916Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【JavaScript红宝书】8.基本引用类型：Date、RegExp - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【JavaScript红宝书】8.基本引用类型：Date、RegExp"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-02 20:41" pubdate>
+          2022年5月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          95 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【JavaScript红宝书】8.基本引用类型：Date、RegExp</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="基本引用类型"><a href="#基本引用类型" class="headerlink" title="基本引用类型"></a>基本引用类型</h1><p>对象被认为是某个特定引用类型的实例。新对象通过使用 new 操作符后跟上一个构造函数（constructor）来创建。比如：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> date = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()</code></pre></div>
+
+<p>这行代码创建了引用类型 Date 的一个新实例，并将其保存到变量 date 中。<code>Date()</code> 在这里就是构造函数，它负责创建一个只有默认属性和方法的简单对象。</p>
+<h1 id="1-Date"><a href="#1-Date" class="headerlink" title="1 Date"></a>1 Date</h1><p>创建一个 JavaScript <code>Date</code> 实例，该实例呈现时间中的某个时刻。<code>Date</code> 对象则基于 <a target="_blank" rel="noopener" href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Unix Time Stamp</a>，即自1970年1月1日（UTC）起经过的毫秒数。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E8%AF%AD%E6%B3%95">语法</a></h2><div class="code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-keyword">new</span> <span class="hljs-constructor">Date()</span>;
+<span class="hljs-keyword">new</span> <span class="hljs-constructor">Date(<span class="hljs-params">value</span>)</span>;
+<span class="hljs-keyword">new</span> <span class="hljs-constructor">Date(<span class="hljs-params">dateString</span>)</span>;
+<span class="hljs-keyword">new</span> <span class="hljs-constructor">Date(<span class="hljs-params">year</span>, <span class="hljs-params">monthIndex</span> [, <span class="hljs-params">day</span> [, <span class="hljs-params">hours</span> [, <span class="hljs-params">minutes</span> [, <span class="hljs-params">seconds</span> [, <span class="hljs-params">milliseconds</span>]]]]])</span>;</code></pre></div>
+
+<p><strong>备注：</strong>创建一个新<code>Date</code>对象的唯一方法是通过<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a> 操作符，例如：<code>let now = new Date();</code><br>若将它作为常规函数调用（即不加 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a> 操作符），将返回一个字符串，而非 <code>Date</code> 对象。 </p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E5%8F%82%E6%95%B0">参数</a></h3><p><code>Date()</code>构造函数有四种基本形式</p>
+<h4 id="没有参数"><a href="#没有参数" class="headerlink" title="没有参数"></a>没有参数</h4><p>如果没有提供参数，那么新创建的Date对象表示实例化时刻的日期和时间。</p>
+<h4 id="Unix时间戳"><a href="#Unix时间戳" class="headerlink" title="Unix时间戳"></a>Unix时间戳</h4><ul>
+<li><p><code>value</code></p>
+<p>一个 Unix 时间戳（<a target="_blank" rel="noopener" href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">Unix Time Stamp</a>），它是一个整数值，表示自1970年1月1日00:00:00 UTC（the Unix epoch）以来的毫秒数，忽略了闰秒。请注意大多数 Unix 时间戳功能仅精确到最接近的秒。</p>
+</li>
+<li><p>时间戳字符串 <code>dateString</code></p>
+<p>表示日期的字符串值。该字符串应该能被 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/parse"><code>Date.parse()</code></a> 正确方法识别（即符合 <a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc2822#page-14">IETF-compliant RFC 2822 timestamps</a> 或 <a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.15">version of ISO8601</a>）。<strong>备注：</strong>由于浏览器之间的差异与不一致性，强烈不推荐使用<code>Date</code>构造函数来解析日期字符串 (或使用与其等价的<code>Date.parse</code>)。对 RFC 2822 格式的日期仅有约定俗成的支持。 对 ISO 8601 格式的支持中，仅有日期的串 (例如 “1970-01-01”) 会被处理为 UTC 而不是本地时间，与其他格式的串的处理不同。</p>
+</li>
+</ul>
+<h4 id="分别提供日期与时间的每一个成员"><a href="#分别提供日期与时间的每一个成员" class="headerlink" title="分别提供日期与时间的每一个成员"></a>分别提供日期与时间的每一个成员</h4><p>当至少提供了年份与月份时，这一形式的 <code>Date() </code>返回的 <code>Date </code>对象中的每一个成员都来自下列参数。没有提供的成员将使用最小可能值（对日期为<code>1</code>，其他为<code>0</code>）。</p>
+<ul>
+<li><p><code>year</code></p>
+<p>表示年份的整数值。 0到99会被映射至1900年至1999年，其它值代表实际年份。参见 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%B0%86%E4%B8%A4%E4%BD%8D%E6%95%B0%E5%B9%B4%E4%BB%BD%E6%98%A0%E5%B0%84%E4%B8%BA_1900_-_1999_%E5%B9%B4">示例</a>。</p>
+</li>
+<li><p><code>monthIndex</code></p>
+<p>表示月份的整数值，从 0（1月）到 11（12月）。</p>
+</li>
+<li><p>date可选</p>
+<p>表示一个月中的第几天的整数值，从1开始。默认值为1。</p>
+</li>
+<li><p><code>hours</code> 可选</p>
+<p>表示一天中的小时数的整数值 (24小时制)。默认值为0（午夜）。</p>
+</li>
+<li><p><code>minutes</code> 可选</p>
+<p>表示一个完整时间（如 01:10:00）中的分钟部分的整数值。默认值为0。</p>
+</li>
+<li><p><code>seconds</code> 可选</p>
+<p>表示一个完整时间（如 01:10:00）中的秒部分的整数值。默认值为0。</p>
+</li>
+<li><p><code>milliseconds</code> 可选</p>
+<p>表示一个完整时间的毫秒部分的整数值。默认值为0。</p>
+</li>
+</ul>
+<h2 id="使用注释"><a href="#使用注释" class="headerlink" title="使用注释"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E4%BD%BF%E7%94%A8%E6%B3%A8%E9%87%8A">使用注释</a></h2><p><strong>备注：</strong>参数<code>monthIndex</code> 是从“0”开始计算的，这就意味着一月份为“0”，十二月份为“11”。</p>
+<p><strong>备注：</strong>当Date作为构造函数调用并传入多个参数时，如果数值大于合理范围时（如月份为 13 或者分钟数为 70），相邻的数值会被调整。比如 new Date(2013, 13, 1)等于new Date(2014, 1, 1)，它们都表示日期2014-02-01（注意月份是从0开始的）。其他数值也是类似，new Date(2013, 2, 1, 0, 70)等于new Date(2013, 2, 1, 1, 10)，都表示同一个时间：<code>2013-03-01T01:10:00</code>。</p>
+<p><strong>备注：</strong>当Date作为构造函数调用并传入多个参数时，所定义参数代表的是当地时间。如果需要使用世界协调时 UTC，使用 <code>new Date(Date.UTC(...))</code> 和相同参数。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E7%AE%80%E4%BB%8B">简介</a></h2><ul>
+<li>如果没有输入任何参数，则Date的构造器会依据系统设置的当前时间来创建一个Date对象。</li>
+<li>如果提供了至少两个参数，其余的参数均会默认设置为 1（如果没有指定 day 参数）或者 0（如果没有指定 day 以外的参数）。</li>
+<li>JavaScript的时间由世界标准时间（UTC）1970年1月1日开始，用毫秒计时，一天由 86,400,000 毫秒组成。<code>Date</code> 对象的范围是 -100,000,000 天至 100,000,000 天（等效的毫秒值）。</li>
+<li><code>Date</code> 对象为跨平台提供了统一的行为。时间属性可以在不同的系统中表示相同的时刻，而如果使用了本地时间对象，则反映当地的时间。</li>
+<li><code>Date</code> 对象支持多个处理 UTC 时间的方法，也相应地提供了应对当地时间的方法。UTC，也就是我们所说的格林威治时间，指的是time中的世界时间标准。而当地时间则是指执行JavaScript的客户端电脑所设置的时间。</li>
+<li>以一个函数的形式来调用 <code>Date</code> 对象（即不使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a> 操作符）会返回一个代表当前日期和时间的字符串。</li>
+</ul>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E5%B1%9E%E6%80%A7">属性</a></h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date.prototype</code> (en-US)</a></p>
+<p>允许为 <code>Date</code> 对象添加属性。</p>
+</li>
+<li><p><code>Date.length</code></p>
+<p><code>Date.length</code> 的值是 7。这是该构造函数可接受的参数个数。</p>
+</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E6%96%B9%E6%B3%95">方法</a></h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/now"><code>Date.now()</code></a></p>
+<p>返回自 1970-1-1 00:00:00  UTC（世界标准时间）至今所经过的毫秒数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/parse"><code>Date.parse()</code></a></p>
+<p>解析一个表示日期的字符串，并返回从 1970-1-1 00:00:00 所经过的毫秒数。<strong>备注：</strong> 由于浏览器差异和不一致，强烈建议不要使用<code>Date.parse</code>解析字符串。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/UTC"><code>Date.UTC()</code></a></p>
+<p>接受和构造函数最长形式的参数相同的参数（从2到7），并返回从 1970-01-01 00:00:00 UTC 开始所经过的毫秒数。</p>
+</li>
+</ul>
+<h2 id="JavaScript-Date-实例"><a href="#JavaScript-Date-实例" class="headerlink" title="JavaScript Date 实例"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#javascript_date_%E5%AE%9E%E4%BE%8B">JavaScript <code>Date</code> 实例</a></h2><p>所有的 <code>Date</code> 实例都继承自 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date.prototype</code> (en-US)</a>。修改 <code>Date </code>构造函数的原型对象会影响到所有的 <code>Date</code> 实例。</p>
+<h3 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7">实例属性</a></h3><ul>
+<li><p><code>Date.prototype.constructor</code></p>
+<p>返回创建了实例的构造函数，默认是 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 构造函数。</p>
+</li>
+</ul>
+<h3 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95">实例方法</a></h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getDate"><code>Date.prototype.getDate()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象为一个月中的哪一日（<code>1</code>-<code>31</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay"><code>Date.prototype.getDay()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象是在一周中的第几天（<code>0</code>-<code>6</code>），0 表示星期天。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear"><code>Date.prototype.getFullYear()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的完整年份（四位数年份）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getHours"><code>Date.prototype.getHours()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的小时（<code>0</code>–<code>23</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getMilliseconds"><code>Date.prototype.getMilliseconds()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的毫秒数（<code>0</code>–<code>999</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getMinutes"><code>Date.prototype.getMinutes()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的分钟数（<code>0</code>–<code>59</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getMonth"><code>Date.prototype.getMonth()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的月份（<code>0</code>–<code>11</code>），0 表示一年中的第一月。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getSeconds"><code>Date.prototype.getSeconds()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的秒数（<code>0</code>–<code>59</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime"><code>Date.prototype.getTime()</code></a></p>
+<p>返回一个数值，表示从 1970 年 1 月 1 日 0 时 0 分 0 秒（UTC，即协调世界时）距离该 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象所代表时间的毫秒数。（更早的时间会用负数表示）</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset"><code>Date.prototype.getTimezoneOffset()</code></a></p>
+<p>返回协调世界时（UTC）相对于当前时区的时间差值，单位为分钟。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCDate"><code>Date.prototype.getUTCDate()</code></a></p>
+<p>以协调世界时为标准，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象为一个月中的哪一日（<code>1</code>-<code>31</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCDay"><code>Date.prototype.getUTCDay()</code></a></p>
+<p>以协调世界时为标准，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象是在一周中的第几天（<code>0</code>-<code>6</code>），0 表示星期天。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCFullYear"><code>Date.prototype.getUTCFullYear()</code></a></p>
+<p>以协调世界时为标准，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的完整年份（四位数年份）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCHours"><code>Date.prototype.getUTCHours()</code></a></p>
+<p>以协调世界时为标准，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的小时（<code>0</code>–<code>23</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCMilliseconds"><code>Date.prototype.getUTCMilliseconds()</code></a></p>
+<p>以协调世界时为标准，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的毫秒数（<code>0</code>–<code>999</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCMinutes"><code>Date.prototype.getUTCMinutes()</code></a></p>
+<p>以协调世界时为标准，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的分钟数（<code>0</code>–<code>59</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCMonth"><code>Date.prototype.getUTCMonth()</code></a></p>
+<p>以协调世界时为标准，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的月份（<code>0</code>–<code>11</code>），0 表示一年中的第一月。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getUTCSeconds"><code>Date.prototype.getUTCSeconds()</code></a></p>
+<p>以协调世界时为标准，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的秒数（<code>0</code>–<code>59</code>）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear"><code>Date.prototype.getYear()</code></a></p>
+<p>根据本地时间，返回一个指定的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的相对年份（相对1900年，通常是 2 到 3 位数字）。请改用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear"><code>getFullYear</code></a> 。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate"><code>Date.prototype.setDate()</code></a></p>
+<p>根据本地时间，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象在所属月份中的天数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setFullYear"><code>Date.prototype.setFullYear()</code></a></p>
+<p>根据本地时间，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的完整年份（四位数年份）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setHours"><code>Date.prototype.setHours()</code></a></p>
+<p>根据本地时间，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的小时数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setMilliseconds"><code>Date.prototype.setMilliseconds()</code></a></p>
+<p>根据本地时间，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的豪秒数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setMinutes"><code>Date.prototype.setMinutes()</code></a></p>
+<p>根据本地时间，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的分钟数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth"><code>Date.prototype.setMonth()</code></a></p>
+<p>根据本地时间，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的月份。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setSeconds"><code>Date.prototype.setSeconds()</code></a></p>
+<p>根据本地时间，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的秒数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setTime"><code>Date.prototype.setTime()</code></a></p>
+<p>用一个从1970-1-1 00:00:00 UTC计时的毫秒数来为一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象设置时间。用负数来设置更早的时间。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setUTCDate"><code>Date.prototype.setUTCDate()</code></a></p>
+<p>以协调世界时为标准，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象在所属月份中的天数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setUTCFullYear"><code>Date.prototype.setUTCFullYear()</code></a></p>
+<p>以协调世界时为标准，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的完整年份（四位数年份）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setUTCHours"><code>Date.prototype.setUTCHours()</code></a></p>
+<p>以协调世界时为标准，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的小时数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setUTCMilliseconds"><code>Date.prototype.setUTCMilliseconds()</code></a></p>
+<p>以协调世界时为标准，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的豪秒数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setUTCMinutes"><code>Date.prototype.setUTCMinutes()</code></a></p>
+<p>以协调世界时为标准，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的分钟数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setUTCMonth"><code>Date.prototype.setUTCMonth()</code></a></p>
+<p>以协调世界时为标准，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的月份。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setUTCSeconds"><code>Date.prototype.setUTCSeconds()</code></a></p>
+<p>以协调世界时为标准，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的秒数。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setYear"><code>Date.prototype.setYear()</code></a></p>
+<p>根据本地时间，设置一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的相对年份（相对1900年，通常是 2 到 3 位数字）。请改用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setFullYear"><code>setFullYear</code></a> 。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toDateString"><code>Date.prototype.toDateString()</code></a></p>
+<p>以美式英语和人类易读的表述形式返回一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象日期部分的字符串。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString"><code>Date.prototype.toISOString()</code></a></p>
+<p>将指定 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象转换成 ISO 格式表述的字符串并返回。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toJSON"><code>Date.prototype.toJSON()</code></a></p>
+<p>返回指定 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象调用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString"><code>toISOString()</code></a> 方法的返回值。在 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a> 中使用。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toGMTString"><code>Date.prototype.toGMTString()</code></a></p>
+<p>基于 GMT (UTC) 时区来返回一个表述指定 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的字符串形式。请改用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toUTCString"><code>toUTCString()</code></a>。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString"><code>Date.prototype.toLocaleDateString()</code></a></p>
+<p>返回一个表述指定 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的日期部分字符串。该字符串格式因不同语言而不同。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString"><code>Date.prototype.toLocaleString()</code></a></p>
+<p>返回一个表述指定 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的字符串。该字符串格式因不同语言而不同。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString"><code>Date.prototype.toLocaleTimeString()</code></a></p>
+<p>返回一个表述指定 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象时间部分的的字符串。该字符串格式因不同语言而不同。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toString"><code>Date.prototype.toString()</code></a></p>
+<p>返回一个字符串，表示该 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象。覆盖了 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString"><code>Object.prototype.toString()</code></a> 方法。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toTimeString"><code>Date.prototype.toTimeString()</code></a></p>
+<p>以人类易读形式返回一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象时间部分的字符串，该字符串以美式英语格式化。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toUTCString"><code>Date.prototype.toUTCString()</code></a></p>
+<p>使用UTC时区，把一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象转换为一个字符串。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/valueOf"><code>Date.prototype.valueOf()</code></a></p>
+<p>返回一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的原始值。覆盖了 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf"><code>Object.prototype.valueOf()</code></a> 方法。</p>
+</li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E4%BE%8B%E5%AD%90">例子</a></h2><h3 id="例子：创建一个日期对象的几种方法"><a href="#例子：创建一个日期对象的几种方法" class="headerlink" title="例子：创建一个日期对象的几种方法"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%3E%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95">例子：创建一个日期对象的几种方法</a></h3><p>下例展示了用来创建一个日期对象的多种方法。</p>
+<p><strong>备注：</strong> 由于浏览器差异和不一致性，强烈建议不要使用<code>Date</code>构造函数（和<code>Date.parse</code>，它们是等效的）解析日期字符串。</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">var</span> today = new Date();
+<span class="hljs-attribute">var</span> birthday = new Date(&#x27;December <span class="hljs-number">17</span>, <span class="hljs-number">1995</span> <span class="hljs-number">03</span>:<span class="hljs-number">24</span>:<span class="hljs-number">00</span>&#x27;);
+<span class="hljs-attribute">var</span> birthday = new Date(&#x27;<span class="hljs-number">1995</span>-<span class="hljs-number">12</span>-<span class="hljs-number">17</span>T03:<span class="hljs-number">24</span>:<span class="hljs-number">00</span>&#x27;);
+<span class="hljs-attribute">var</span> birthday = new Date(<span class="hljs-number">1995</span>, <span class="hljs-number">11</span>, <span class="hljs-number">17</span>);
+<span class="hljs-attribute">var</span> birthday = new Date(<span class="hljs-number">1995</span>, <span class="hljs-number">11</span>, <span class="hljs-number">17</span>, <span class="hljs-number">3</span>, <span class="hljs-number">24</span>, <span class="hljs-number">0</span>);</code></pre></div>
+
+<p>Copy to Clipboard</p>
+<h3 id="例子：将两位数年份映射为-1900-1999-年"><a href="#例子：将两位数年份映射为-1900-1999-年" class="headerlink" title="例子：将两位数年份映射为 1900 - 1999 年"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%B0%86%E4%B8%A4%E4%BD%8D%E6%95%B0%E5%B9%B4%E4%BB%BD%E6%98%A0%E5%B0%84%E4%B8%BA_1900_-_1999_%E5%B9%B4">例子：将两位数年份映射为 1900 - 1999 年</a></h3><p>为了创建和获取 0 到 99 之间的年份，应使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setFullYear"><code>Date.prototype.setFullYear()</code></a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear"><code>Date.prototype.getFullYear()</code></a> 方法。</p>
+<div class="code-wrapper"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> <span class="hljs-built_in">date</span> = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">98</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// Sun Feb 01 1998 00:00:00 GMT+0000 (GMT)</span>
+
+<span class="hljs-comment">// 已弃用的方法, 同样将 98 映射为 1998</span>
+<span class="hljs-built_in">date</span>.setYear(<span class="hljs-number">98</span>);           <span class="hljs-comment">// Sun Feb 01 1998 00:00:00 GMT+0000 (GMT)</span>
+
+<span class="hljs-built_in">date</span>.setFullYear(<span class="hljs-number">98</span>);       <span class="hljs-comment">// Sat Feb 01 0098 00:00:00 GMT+0000 (BST)</span></code></pre></div>
+
+<p>Copy to Clipboard</p>
+<h3 id="例子：计算经过的时间"><a href="#例子：计算经过的时间" class="headerlink" title="例子：计算经过的时间"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E4%BE%8B%E5%AD%90%EF%BC%9A%E8%AE%A1%E7%AE%97%E7%BB%8F%E8%BF%87%E7%9A%84%E6%97%B6%E9%97%B4">例子：计算经过的时间</a></h3><p>下例展示了如何以毫秒精度计算两个日期对象的时间差：</p>
+<p>由于不同日期、月份、年份长度的不同（日期长度不同来自夏令时的切换），使用大于秒、分钟、小时的单位表示经过的时间会遇到很多问题，在使用前需要经过详尽的调研。</p>
+<div class="code-wrapper"><pre><code class="hljs arcade"><span class="hljs-comment">// 使用 Date 对象</span>
+<span class="hljs-keyword">var</span> start = <span class="hljs-built_in">Date</span>.<span class="hljs-built_in">now</span>();
+
+<span class="hljs-comment">// 调用一个消耗一定时间的方法：</span>
+doSomethingForALongTime();
+<span class="hljs-keyword">var</span> end = <span class="hljs-built_in">Date</span>.<span class="hljs-built_in">now</span>();
+<span class="hljs-keyword">var</span> elapsed = end - start; <span class="hljs-comment">// 以毫秒计的运行时长</span></code></pre></div>
+
+<p>Copy to Clipboard</p>
+<div class="code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-comment">// 使用内建的创建方法</span>
+var start = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Date()</span>;
+
+<span class="hljs-comment">// 调用一个消耗一定时间的方法：</span>
+<span class="hljs-keyword">do</span><span class="hljs-constructor">SomethingForALongTime()</span>;
+var <span class="hljs-keyword">end</span> = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Date()</span>;
+var elapsed = <span class="hljs-keyword">end</span>.get<span class="hljs-constructor">Time()</span> - start.get<span class="hljs-constructor">Time()</span>; <span class="hljs-comment">// 运行时间的毫秒值</span></code></pre></div>
+
+<p>Copy to Clipboard</p>
+<div class="code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-comment">// to test a function and get back its return</span>
+<span class="hljs-keyword">function</span> printElapsedTime (fTest) &#123;
+    var nStartTime = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Date</span>.</span></span>now<span class="hljs-literal">()</span>,
+        vReturn = f<span class="hljs-constructor">Test()</span>,
+        nEndTime = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Date</span>.</span></span>now<span class="hljs-literal">()</span>;
+    alert(<span class="hljs-string">&quot;Elapsed time: &quot;</span> + <span class="hljs-constructor">String(<span class="hljs-params">nEndTime</span> - <span class="hljs-params">nStartTime</span>)</span> + <span class="hljs-string">&quot; milliseconds&quot;</span>);
+    return vReturn;
+&#125;
+yourFunctionReturn = print<span class="hljs-constructor">ElapsedTime(<span class="hljs-params">yourFunction</span>)</span>;</code></pre></div>
+
+<p>Copy to Clipboard</p>
+<p><strong>备注：</strong>在支持 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/performance_property"><code>Web Performance API</code></a> 的高精细度（high-resolution）时间功能的浏览器中，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Performance/now"><code>Performance.now()</code></a> 提供的所经过的时间比 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/now"><code>Date.now()</code></a> 更加可靠、精确。</p>
+<h3 id="获取自-Unix-起始时间以来经过的秒数"><a href="#获取自-Unix-起始时间以来经过的秒数" class="headerlink" title="获取自 Unix 起始时间以来经过的秒数"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#%E8%8E%B7%E5%8F%96%E8%87%AA_unix_%E8%B5%B7%E5%A7%8B%E6%97%B6%E9%97%B4%E4%BB%A5%E6%9D%A5%E7%BB%8F%E8%BF%87%E7%9A%84%E7%A7%92%E6%95%B0">获取自 Unix 起始时间以来经过的秒数</a></h3><div class="code-wrapper"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> seconds = Math.<span class="hljs-built_in">floor</span>(<span class="hljs-built_in">Date</span>.<span class="hljs-built_in">now</span>() / <span class="hljs-number">1000</span>);</code></pre></div>
+
+<p>Copy to Clipboard</p>
+<p>注意此处需要返回一个整数 （仅做除法得到的不是整数），并且需要返回实际已经经过的秒数（所以这里使用了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/floor"><code>Math.floor()</code></a>而不是<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/round"><code>Math.round()</code></a>).</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date</a></p>
+<h1 id="2-RegExp-正则表达式"><a href="#2-RegExp-正则表达式" class="headerlink" title="2 RegExp(正则表达式)"></a>2 RegExp(正则表达式)</h1><p><strong><code>RegExp</code></strong> 对象用于将文本与一个模式匹配。</p>
+<p>有关正则表达式的介绍，请阅读 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/">JavaScript指南</a>中的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions">正则表达式章节</a>。</p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E6%8F%8F%E8%BF%B0">描述</a></h2><h3 id="字面量和构造函数"><a href="#字面量和构造函数" class="headerlink" title="字面量和构造函数"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E5%AD%97%E9%9D%A2%E9%87%8F%E5%92%8C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">字面量和构造函数</a></h3><p>有两种方法可以创建一个 <code>RegExp</code> 对象：一种是字面量，另一种是构造函数。</p>
+<ul>
+<li><p>字面量</p>
+<p>由斜杠(&#x2F;)包围而不是引号包围。</p>
+</li>
+<li><p>构造函数的字符串参数</p>
+<p>由引号而不是斜杠包围。</p>
+</li>
+</ul>
+<p>以下三种表达式都会创建相同的正则表达式：</p>
+<div class="code-wrapper"><pre><code class="hljs awk"><span class="hljs-regexp">/ab+c/i</span>; <span class="hljs-regexp">//</span>字面量形式
+new RegExp(<span class="hljs-string">&#x27;ab+c&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>); <span class="hljs-regexp">//</span> 首个参数为字符串模式的构造函数
+new RegExp(<span class="hljs-regexp">/ab+c/</span>, <span class="hljs-string">&#x27;i&#x27;</span>); <span class="hljs-regexp">//</span> 首个参数为常规字面量的构造函数</code></pre></div>
+
+<p>Copy to Clipboard</p>
+<p>当表达式被赋值时，字面量形式提供正则表达式的编译（compilation）状态，当正则表达式保持为常量时使用字面量。例如当你在循环中使用字面量构造一个正则表达式时，正则表达式不会在每一次迭代中都被重新编译（recompiled）。</p>
+<p>而正则表达式对象的构造函数，如 <code>new RegExp(&#39;ab+c&#39;)</code> 提供了正则表达式运行时编译（runtime compilation）。如果你知道正则表达式模式将会改变，或者你事先不知道什么模式，而是从另一个来源获取，如用户输入，这些情况都可以使用构造函数。</p>
+<h3 id="构造函数中的标志参数-flags"><a href="#构造函数中的标志参数-flags" class="headerlink" title="构造函数中的标志参数(flags)"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84%E6%A0%87%E5%BF%97%E5%8F%82%E6%95%B0flags">构造函数中的标志参数(flags)</a></h3><p>从 ECMAScript 6 开始，当第一个参数为正则表达式而第二个标志参数存在时，<code>new RegExp(/ab+c/, &#39;i&#39;)</code> 不再抛出 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/TypeError"><code>TypeError</code></a> （<code>&quot;从另一个RegExp构造一个RegExp时无法提供标志&quot;</code>）的异常，取而代之，将使用这些参数创建一个新的正则表达式。</p>
+<p>当使用构造函数创造正则对象时，需要常规的字符转义规则（在前面加反斜杠 <code>\</code>）。</p>
+<p>比如，以下是等价的：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> re = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(<span class="hljs-string">&quot;\\w+&quot;</span>);
+<span class="hljs-keyword">var</span> re = <span class="hljs-regexp">/\w+/</span>;</code></pre></div>
+
+<p>Copy to Clipboard</p>
+<h3 id="Perl-like-RegExp-属性"><a href="#Perl-like-RegExp-属性" class="headerlink" title="Perl-like RegExp 属性"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#perl-like_regexp_%E5%B1%9E%E6%80%A7">Perl-like RegExp 属性</a></h3><p>请注意，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp"><code>RegExp</code></a>属性有长名称和短名称（类似Perl）。两个名称总是引用同一个值。（Perl是JavaScript为其正则表达式建模的编程语言）。另请参见<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Deprecated_and_obsolete_features#regexp_properties">不推荐使用的RegExp属性。</a></p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">构造函数</a></h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/RegExp"><code>RegExp()</code></a></p>
+<p>创建一个新的 <code>RegExp</code> 对象。</p>
+</li>
+</ul>
+<h2 id="静态属性"><a href="#静态属性" class="headerlink" title="静态属性"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7">静态属性</a></h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/@@species"><code>get RegExp[@@species]</code></a></p>
+<p>该构造函数用于创建派生对象。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastIndex"><code>RegExp.lastIndex</code></a></p>
+<p>该索引表示从哪里开始下一个匹配</p>
+</li>
+</ul>
+<h2 id="实例属性-1"><a href="#实例属性-1" class="headerlink" title="实例属性"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7">实例属性</a></h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/flags"><code>RegExp.prototype.flags</code></a></p>
+<p>含有 <code>RegExp</code> 对象 flags 的字符串。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/dotAll"><code>RegExp.prototype.dotAll</code></a></p>
+<p><code>.</code> 是否要匹配新行（newlines）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/global"><code>RegExp.prototype.global</code></a></p>
+<p>针对字符串中所有可能的匹配项测试正则表达式，还是仅针对第一个匹配项。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/ignoreCase"><code>RegExp.prototype.ignoreCase</code></a></p>
+<p>匹配文本的时候是否忽略大小写。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/multiline"><code>RegExp.prototype.multiline</code></a></p>
+<p>是否进行多行搜索。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/source"><code>RegExp.prototype.source</code></a></p>
+<p>正则表达式的文本。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky"><code>RegExp.prototype.sticky</code></a></p>
+<p>搜索是否是 sticky。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode"><code>RegExp.prototype.unicode</code></a></p>
+<p>Unicode 功能是否开启。</p>
+</li>
+</ul>
+<h2 id="实例方法-1"><a href="#实例方法-1" class="headerlink" title="实例方法"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95">实例方法</a></h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/compile"><code>RegExp.prototype.compile()</code></a></p>
+<p>运行脚本的期间（重新）编译正则表达式。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec"><code>RegExp.prototype.exec()</code></a></p>
+<p>在该字符串中执行匹配项的搜索。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test"><code>RegExp.prototype.test()</code></a></p>
+<p>该正则在字符串里是否有匹配。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/@@match"><code>RegExp.prototype[@@match]()</code></a></p>
+<p>对给定字符串执行匹配并返回匹配结果。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/@@matchAll"><code>RegExp.prototype[@@matchAll]()</code></a></p>
+<p>对给定字符串执行匹配，返回所有匹配结果。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/@@replace"><code>RegExp.prototype[@@replace]()</code></a></p>
+<p>给定新的子串，替换所有匹配结果。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/@@search"><code>RegExp.prototype[@@search]()</code></a></p>
+<p>在给定字符串中搜索匹配项，并返回在字符串中找到字符索引。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/@@split"><code>RegExp.prototype[@@split]()</code></a></p>
+<p>通过将给定字符串拆分为子字符串，并返回字符串形成的数组。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/toString"><code>RegExp.prototype.toString()</code></a></p>
+<p>返回表示指定对象的字符串。重写<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString"><code>Object.prototype.toString()</code></a>方法。</p>
+</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#syntax">示例</a></h2><h3 id="使用正则改变数据结构"><a href="#使用正则改变数据结构" class="headerlink" title="使用正则改变数据结构"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#using_a_regular_expression_to_change_data_format">使用正则改变数据结构</a></h3><p>下例使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String"><code>String</code></a> 的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace"><code>replace()</code></a> 方法去匹配姓名 <em>first last</em> 输出新的格式 <em>last</em>, <em>first</em>。</p>
+<p>在替换的文本中，脚本中使用 <code>$1</code> 和 <code>$2</code> 指明括号里先前的匹配.</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> re = <span class="hljs-regexp">/(\w+)\s(\w+)/</span>;
+<span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;John Smith&quot;</span>;
+<span class="hljs-keyword">let</span> newstr = str.<span class="hljs-title function_">replace</span>(re, <span class="hljs-string">&quot;$2, $1&quot;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(newstr);</code></pre></div>
+
+<p>Copy to Clipboard</p>
+<p>这将显示 “Smith, John”.</p>
+<h3 id="使用正则来划分带有多种行结束符和换行符的文本"><a href="#使用正则来划分带有多种行结束符和换行符的文本" class="headerlink" title="使用正则来划分带有多种行结束符和换行符的文本"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E6%9D%A5%E5%88%92%E5%88%86%E5%B8%A6%E6%9C%89%E5%A4%9A%E7%A7%8D%E8%A1%8C%E7%BB%93%E6%9D%9F%E7%AC%A6%E5%92%8C%E6%8D%A2%E8%A1%8C%E7%AC%A6%E7%9A%84%E6%96%87%E6%9C%AC">使用正则来划分带有多种行结束符和换行符的文本</a></h3><p>对于不同的平台（Unix，Windows等等），其默认的行结束符是不一样的. 而下面的划分方式适用于所有平台。</p>
+<div class="code-wrapper"><pre><code class="hljs vhdl">let <span class="hljs-literal">text</span> = <span class="hljs-symbol">&#x27;Some</span> <span class="hljs-literal">text</span>\<span class="hljs-keyword">nAnd</span> some more\r\<span class="hljs-keyword">nAnd</span> yet\rThis <span class="hljs-keyword">is</span> the <span class="hljs-keyword">end</span>&#x27;
+let lines = <span class="hljs-literal">text</span>.split(/\r\n|\r|\n/)
+console.log(lines) // logs [ <span class="hljs-symbol">&#x27;Some</span> <span class="hljs-literal">text</span>&#x27;, <span class="hljs-symbol">&#x27;And</span> some more&#x27;, <span class="hljs-symbol">&#x27;And</span> yet&#x27;, <span class="hljs-symbol">&#x27;This</span> <span class="hljs-keyword">is</span> the <span class="hljs-keyword">end</span>&#x27; ]</code></pre></div>
+
+<p>注意：在正则表达式中，以竖线分割的子模式的顺序会影响匹配结果。</p>
+<h3 id="在多行文本中使用正则表达式"><a href="#在多行文本中使用正则表达式" class="headerlink" title="在多行文本中使用正则表达式"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E5%9C%A8%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">在多行文本中使用正则表达式</a></h3><div class="code-wrapper"><pre><code class="hljs awk">let s = <span class="hljs-string">&quot;Please yes\nmake my day!&quot;</span>;
+
+s.match(<span class="hljs-regexp">/yes.*day/</span>);
+<span class="hljs-regexp">//</span> Returns null
+
+s.match(<span class="hljs-regexp">/yes[^]*day/</span>);
+<span class="hljs-regexp">//</span> Returns <span class="hljs-string">&#x27;yes\nmake my day&#x27;</span></code></pre></div>
+
+<p>Copy to Clipboard</p>
+<h3 id="使用带有-sticky-标志的正则表达式"><a href="#使用带有-sticky-标志的正则表达式" class="headerlink" title="使用带有 sticky 标志的正则表达式"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#using_a_regular_expression_with_the_sticky_flag">使用带有 sticky 标志的正则表达式</a></h3><p>带有<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky"><code>sticky</code></a>标志的正则表达式将会从源字符串的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastIndex"><code>RegExp.prototype.lastIndex</code></a>位置开始匹配，也就是进行“粘性匹配”。</p>
+<div class="code-wrapper"><pre><code class="hljs stylus">let str = <span class="hljs-string">&#x27;#foo#&#x27;</span>
+let regex = /foo/y
+
+regex<span class="hljs-selector-class">.lastIndex</span> = <span class="hljs-number">1</span>
+regex<span class="hljs-selector-class">.test</span>(str)      <span class="hljs-comment">// true</span>
+regex<span class="hljs-selector-class">.lastIndex</span> = <span class="hljs-number">5</span>
+regex<span class="hljs-selector-class">.test</span>(str)      <span class="hljs-comment">// false (lastIndex is taken into account with sticky flag)</span>
+regex<span class="hljs-selector-class">.lastIndex</span>      <span class="hljs-comment">// 0 (reset after match failure)</span></code></pre></div>
+
+<p>Copy to Clipboard</p>
+<h3 id="sticky-标志和-global-标志的不同点"><a href="#sticky-标志和-global-标志的不同点" class="headerlink" title=" sticky 标志和 global 标志的不同点"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#sticky_%E6%A0%87%E5%BF%97%E5%92%8C_global_%E6%A0%87%E5%BF%97%E7%9A%84%E4%B8%8D%E5%90%8C%E7%82%B9"> sticky 标志和 global 标志的不同点</a></h3><p>如果正则表达式有粘性 <code>y</code> 标志，下一次匹配一定在 <code>lastIndex</code> 位置开始；如果正则表达式有全局 <code>g</code> 标志，下一次匹配可能在 <code>lastIndex</code> 位置开始，也可能在这个位置的后面开始。</p>
+<div class="code-wrapper"><pre><code class="hljs awk">re = <span class="hljs-regexp">/\d/y</span>;
+<span class="hljs-keyword">while</span> (r = re.exec(<span class="hljs-string">&quot;123 456&quot;</span>)) console.log(r, <span class="hljs-string">&quot;AND re.lastIndex&quot;</span>, re.lastIndex);
+
+<span class="hljs-regexp">//</span> [ <span class="hljs-string">&#x27;1&#x27;</span>, index: <span class="hljs-number">0</span>, input: <span class="hljs-string">&#x27;123 456&#x27;</span>, groups: undefined ] AND re.lastIndex <span class="hljs-number">1</span>
+<span class="hljs-regexp">//</span> [ <span class="hljs-string">&#x27;2&#x27;</span>, index: <span class="hljs-number">1</span>, input: <span class="hljs-string">&#x27;123 456&#x27;</span>, groups: undefined ] AND re.lastIndex <span class="hljs-number">2</span>
+<span class="hljs-regexp">//</span> [ <span class="hljs-string">&#x27;3&#x27;</span>, index: <span class="hljs-number">2</span>, input: <span class="hljs-string">&#x27;123 456&#x27;</span>, groups: undefined ] AND re.lastIndex <span class="hljs-number">3</span>
+<span class="hljs-regexp">//</span>   ... and no more match.</code></pre></div>
+
+<p>Copy to Clipboard</p>
+<p>如果使用带有全局标志<code>g</code>的正则表达式<code>re</code>，就会捕获字符串中的所有6个数字，而非3个</p>
+<h3 id="使用正则表达式和-Unicode-字符"><a href="#使用正则表达式和-Unicode-字符" class="headerlink" title="使用正则表达式和 Unicode 字符"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#browser_compatibility">使用正则表达式和 Unicode 字符</a></h3><p>正如上面表格提到的，<code>\w</code> 或 <code>\W</code> 只会匹配基本的 ASCII 字符；如 <code>a</code> 到 <code>z</code>、 <code>A</code> 到 <code>Z</code>、 <code>0</code> 到 <code>9</code> 及 <code>_</code>。</p>
+<p>为了匹配其他语言中的字符，如西里尔（Cyrillic）或 希伯来语（Hebrew），要使用 <code>\uhhhh</code>，<code>hhhh</code> 表示以十六进制表示的字符的 Unicode 值。</p>
+<p>下例展示了怎样从一个单词中分离出 Unicode 字符。</p>
+<div class="code-wrapper"><pre><code class="hljs arcade">let <span class="hljs-built_in">text</span> = <span class="hljs-string">&quot;Образец text на русском языке&quot;</span>;
+let regex = <span class="hljs-regexp">/[\u0400-\u04FF]+/g</span>;
+
+let match = regex.exec(<span class="hljs-built_in">text</span>);
+<span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(match[<span class="hljs-number">1</span>]);  <span class="hljs-comment">// prints &quot;Образец&quot;</span>
+<span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(regex.lastIndex);  <span class="hljs-comment">// prints &quot;7&quot;</span>
+
+let match2 = regex.exec(<span class="hljs-built_in">text</span>);
+<span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(match2[<span class="hljs-number">1</span>]);  <span class="hljs-comment">// prints &quot;на&quot; [did not print &quot;text&quot;]</span>
+<span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(regex.lastIndex);  <span class="hljs-comment">// prints &quot;15&quot;</span>
+
+<span class="hljs-comment">// and so on</span></code></pre></div>
+
+<p>Copy to Clipboard</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions/Unicode_Property_Escapes">Unicode属性转义特性</a>引入了一种解决方案，它允许使用像\p{scx&#x3D;Cyrl}这样简单的语句。这里有一个外部资源，用来获取 Unicode 中的不同区块范围：<a target="_blank" rel="noopener" href="http://kourge.net/projects/regexp-unicode-block">Regexp-unicode-block</a></p>
+<h3 id="从-URL-中提取子域名"><a href="#从-URL-中提取子域名" class="headerlink" title="从 URL 中提取子域名"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp#%E4%BB%8E_url_%E4%B8%AD%E6%8F%90%E5%8F%96%E5%AD%90%E5%9F%9F%E5%90%8D">从 URL 中提取子域名</a></h3><div class="code-wrapper"><pre><code class="hljs qml"><span class="hljs-keyword">var</span> <span class="hljs-built_in">url</span> = <span class="hljs-string">&quot;http://xxx.domain.com&quot;</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-regexp">/[^.]+/</span>.exec(<span class="hljs-built_in">url</span>)[<span class="hljs-number">0</span>].substr(<span class="hljs-number">7</span>)); <span class="hljs-comment">// logs &quot;xxx&quot;</span></code></pre></div>
+
+<p>Copy to Clipboard</p>
+<p><strong>备注：</strong>使用浏览器内建的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/URL_API">URL API</a>而非正则表达式来解析URL是更好的做法</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【JavaScript红宝书】8.基本引用类型：Date、RegExp</div>
+      <div>https://zhangtuo.online/archives/ba185f0c.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/9d23972e.html" title="【JavaScript红宝书】9.基本引用类型-Boolean、Number、String">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【JavaScript红宝书】9.基本引用类型-Boolean、Number、String</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/271687d2.html" title="【JavaScript红宝书】7.变量、作用域">
+                        <span class="hidden-mobile">【JavaScript红宝书】7.变量、作用域</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,1657 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="TypeScript">
+  
+    <meta name="description" content="TypeScript基础笔记。相关视频教程BV：BV1Xy4y1v7S2。主要内容：类型声明；基本类型；对象类型；类型断言；类型别名；tsc配置；webpack配置；类和接口；继承。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【TypeScript】基础笔记">
+<meta property="og:url" content="https://zhangtuo.online/archives/8a5a935d.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="TypeScript基础笔记。相关视频教程BV：BV1Xy4y1v7S2。主要内容：类型声明；基本类型；对象类型；类型断言；类型别名；tsc配置；webpack配置；类和接口；继承。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/typescript2.png">
+<meta property="article:published_time" content="2023-02-24T12:23:07.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.924Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/typescript2.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【TypeScript】基础笔记 - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【TypeScript】基础笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-24 20:23" pubdate>
+          2023年2月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          113 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【TypeScript】基础笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h1><h2 id="1-1-什么是-TypeScript"><a href="#1-1-什么是-TypeScript" class="headerlink" title="1.1 什么是 TypeScript"></a>1.1 什么是 TypeScript</h2><ul>
+<li><p>JavaScript 的超集，一门建立在 JavaScript 上的语言。</p>
+</li>
+<li><p>为 JavaScript 添加了新特性和优势。</p>
+</li>
+<li><p>无法在 JavaScript 环境中运行，但最终会编译成 JavaScript。</p>
+</li>
+</ul>
+<h2 id="1-2-为什么使用-TypeScript"><a href="#1-2-为什么使用-TypeScript" class="headerlink" title="1.2 为什么使用 TypeScript"></a>1.2 为什么使用 TypeScript</h2><ul>
+<li>JavaScript 中没有类型系统。因此，可能写出符合 JavaScript 语法，但是逻辑有错误的代码。</li>
+<li>使用 TypeScript 提供的类型系统，可以避免因为弱类型带来的错误。</li>
+</ul>
+<h2 id="1-3-搭建开发环境"><a href="#1-3-搭建开发环境" class="headerlink" title="1.3 搭建开发环境"></a>1.3 搭建开发环境</h2><ol>
+<li><p>安裝 node.js</p>
+</li>
+<li><p>全局安装 typescript </p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm i -g typescript</code></pre></div>
+</li>
+<li><p>检查是否安装成功</p>
+<div class="code-wrapper"><pre><code class="hljs shell">tsc -v</code></pre></div></li>
+</ol>
+<h2 id="1-4-Hello-World"><a href="#1-4-Hello-World" class="headerlink" title="1.4 Hello World"></a>1.4 Hello World</h2><ol>
+<li><p>编写 TypeScript 代码</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">// 在文件 hello-world.ts 中：</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>)</code></pre></div>
+</li>
+<li><p>编译 TypeScript 代码</p>
+<div class="code-wrapper"><pre><code class="hljs shell">tsc hello-world.ts</code></pre></div>
+
+<p>编译器会将 .ts 文件编译成 .js 文件。在目录下会生成文件：hello-world.js</p>
+</li>
+<li><p>执行 JavaScript 代码</p>
+<div class="code-wrapper"><pre><code class="hljs shell">node hello-world.js</code></pre></div></li>
+</ol>
+<h1 id="2-类型"><a href="#2-类型" class="headerlink" title="2 类型"></a>2 类型</h1><h2 id="2-1-类型声明"><a href="#2-1-类型声明" class="headerlink" title="2.1 类型声明"></a>2.1 类型声明</h2><h3 id="2-1-1-变量声明"><a href="#2-1-1-变量声明" class="headerlink" title="2.1.1 变量声明"></a>2.1.1 变量声明</h3><p>定义变量时，在变量名后声明变量的类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">// number</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">count</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>
+
+<span class="hljs-comment">// string</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">msg</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;hello world&#x27;</span>
+
+<span class="hljs-comment">// boolean</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">flag</span>: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span></code></pre></div>
+
+<p>定义变量并初始化时，即使不声明变量的类型，编译器也能被根据初始值判断出变量类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">// number</span>
+<span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>
+
+<span class="hljs-comment">// string</span>
+<span class="hljs-keyword">let</span> msg = <span class="hljs-string">&#x27;hello world&#x27;</span>
+
+<span class="hljs-comment">// boolean</span>
+<span class="hljs-keyword">let</span> flag = <span class="hljs-literal">true</span></code></pre></div>
+
+<h3 id="2-1-2-函数参数声明"><a href="#2-1-2-函数参数声明" class="headerlink" title="2.1.2 函数参数声明"></a>2.1.2 函数参数声明</h3><p>定义函数时，在形参的后面声明形参的类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sum</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>) &#123;
+    <span class="hljs-keyword">return</span> a + b
+&#125;</code></pre></div>
+
+<h3 id="2-1-3-函数返回值声明"><a href="#2-1-3-函数返回值声明" class="headerlink" title="2.1.3 函数返回值声明"></a>2.1.3 函数返回值声明</h3><p>定义函数时，在形参列表的后面声明函数返回值的类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getSumMsg</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">string</span> &#123;
+    <span class="hljs-keyword">return</span> (a + b).<span class="hljs-title function_">toString</span>()
+&#125;</code></pre></div>
+
+<h3 id="2-1-4-箭头函数声明"><a href="#2-1-4-箭头函数声明" class="headerlink" title="2.1.4 箭头函数声明"></a>2.1.4 箭头函数声明</h3><p>同时声明箭头函数的参数类型和返回值类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">sum</span>: <span class="hljs-function">(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>) =&gt;</span> <span class="hljs-built_in">number</span>
+
+<span class="hljs-comment">// 形参名不必和定义时保持一致，但是类型需要保持一致</span>
+sum = <span class="hljs-keyword">function</span> (<span class="hljs-params">x, y</span>) &#123;
+    <span class="hljs-keyword">return</span> x + y
+&#125;</code></pre></div>
+
+<h2 id="2-2-所有类型"><a href="#2-2-所有类型" class="headerlink" title="2.2 所有类型"></a>2.2 所有类型</h2><h3 id="2-2-1-基本类型"><a href="#2-2-1-基本类型" class="headerlink" title="2.2.1 基本类型"></a>2.2.1 基本类型</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>任意类型</td>
+<td>any</td>
+<td>声明为 any 的变量可以赋予任意类型的值。</td>
+</tr>
+<tr>
+<td>未知类型</td>
+<td>unknown</td>
+<td>未知类型的变量。</td>
+</tr>
+<tr>
+<td>void</td>
+<td>void</td>
+<td>用于标识方法返回值的类型，表示该方法没有返回值。</td>
+</tr>
+<tr>
+<td>never</td>
+<td>never</td>
+<td>never 是其它类型（包括 null 和 undefined）的子类型，代表从不会出现的值。</td>
+</tr>
+<tr>
+<td>数组</td>
+<td>无</td>
+<td>声明变量为数组。</td>
+</tr>
+<tr>
+<td>元组</td>
+<td>无</td>
+<td>元组类型用来表示已知元素数量和类型的数组，各元素的类型不必相同，对应位置的类型需要相同。</td>
+</tr>
+<tr>
+<td>枚举</td>
+<td>enum</td>
+<td>枚举类型用于定义数值集合。</td>
+</tr>
+<tr>
+<td>数字类型</td>
+<td>number</td>
+<td>同 JavaScript</td>
+</tr>
+<tr>
+<td>字符串类型</td>
+<td>string</td>
+<td>同 JavaScript</td>
+</tr>
+<tr>
+<td>布尔类型</td>
+<td>boolean</td>
+<td>同 JavaScript</td>
+</tr>
+<tr>
+<td>null</td>
+<td>null</td>
+<td>同 JavaScript</td>
+</tr>
+<tr>
+<td>undefined</td>
+<td>undefined</td>
+<td>同 JavaScript</td>
+</tr>
+</tbody></table>
+<h4 id="2-2-1-1-any-x2F-unknown"><a href="#2-2-1-1-any-x2F-unknown" class="headerlink" title="2.2.1.1 any &#x2F; unknown"></a>2.2.1.1 any &#x2F; unknown</h4><p>对变量声明为 any 类型，相当于对该变量关闭类型检测：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>: <span class="hljs-built_in">any</span>
+
+foo = <span class="hljs-number">10</span>
+foo = <span class="hljs-string">&#x27;bar&#x27;</span>
+foo = <span class="hljs-literal">true</span></code></pre></div>
+
+<p>不声明变量的类型，隐式为 any 类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> foo
+
+foo = <span class="hljs-number">10</span>
+foo = <span class="hljs-string">&#x27;bar&#x27;</span>
+foo = <span class="hljs-literal">true</span></code></pre></div>
+
+<p>any 类型的变量可以赋值给任何类型。这可能导致其他类型的变量与声明的类型不符：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">count</span>:<span class="hljs-built_in">number</span> = <span class="hljs-number">10</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>:<span class="hljs-built_in">any</span> = <span class="hljs-string">&#x27;bar&#x27;</span>
+
+<span class="hljs-comment">//将 any 类型数据赋值给count，导致count 与声明的类型不符</span>
+count = foo
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(count) <span class="hljs-comment">// &#x27;bar&#x27;</span></code></pre></div>
+
+<p>当不知道应该给变量声明为什么类型时，建议将其声明为 unknown：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>:<span class="hljs-built_in">unknown</span>
+
+foo = <span class="hljs-number">10</span>
+foo = <span class="hljs-string">&#x27;bar&#x27;</span>
+foo = <span class="hljs-literal">true</span></code></pre></div>
+
+<p>unknown 类型的变量不可以赋值给其他类型变量，但可以赋值给 同样为 unknown 类型的变量：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>:<span class="hljs-built_in">unknown</span> = <span class="hljs-number">10</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">bar</span>:<span class="hljs-built_in">unknown</span>
+
+bar = foo</code></pre></div>
+
+<h4 id="2-2-1-2-void"><a href="#2-2-1-2-void" class="headerlink" title="2.2.1.2 void"></a>2.2.1.2 void</h4><p>对函数返回值声明为 void，表示函数没有明确的返回值：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">printFn</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">void</span> &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;print...&#x27;</span>)
+&#125;</code></pre></div>
+
+<p>定义函数时，如果不声明函数返回值的类型，那么函数返回值隐式声明为 void：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">printFn</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;print...&#x27;</span>)
+&#125;</code></pre></div>
+
+<p>但是，如果函数有返回值，即使不声明函数返回值的类型，那么编译器也会自动推断函数返回值的类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">// 自动推断函数返回值的类型：10 | &#x27;foo&#x27;</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">x: <span class="hljs-built_in">number</span></span>) &#123;
+    <span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">5</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;foo&#x27;</span>
+    &#125;
+&#125;</code></pre></div>
+
+<p>如果对变量声明为 void，只能将其赋值为 null 或 undefined。</p>
+<h4 id="2-2-1-3-never"><a href="#2-2-1-3-never" class="headerlink" title="2.2.1.3 never"></a>2.2.1.3 never</h4><p>对函数返回值声明为 never，表示函数不会返回结果（比如：死循环、抛出错误）：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn1</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">never</span> &#123;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123; &#125;
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn2</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">never</span> &#123;
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>()
+&#125;</code></pre></div>
+
+<h4 id="2-2-1-4-number-x2F-string-x2F-boolean"><a href="#2-2-1-4-number-x2F-string-x2F-boolean" class="headerlink" title="2.2.1.4 number &#x2F; string &#x2F; boolean"></a>2.2.1.4 number &#x2F; string &#x2F; boolean</h4><div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">// number</span>
+<span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>
+
+<span class="hljs-comment">// string</span>
+<span class="hljs-keyword">let</span> msg = <span class="hljs-string">&#x27;hello world&#x27;</span>
+
+<span class="hljs-comment">// boolean</span>
+<span class="hljs-keyword">let</span> flag = <span class="hljs-literal">true</span></code></pre></div>
+
+<p>可以直接使用字面量进行类型声明。声明后不可以赋值为其他字面量（类似常量）：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">// 使用单个字面量进行类型声明</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">count</span>: <span class="hljs-number">10</span> = <span class="hljs-number">10</span>
+
+<span class="hljs-comment">// 使用多个字面量进行类型声明</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">msg</span>: <span class="hljs-string">&#x27;foo&#x27;</span> | <span class="hljs-string">&#x27;bar&#x27;</span> = <span class="hljs-string">&#x27;foo&#x27;</span>
+msg = <span class="hljs-string">&#x27;bar&#x27;</span></code></pre></div>
+
+<h3 id="2-2-2-对象类型"><a href="#2-2-2-对象类型" class="headerlink" title="2.2.2 对象类型"></a>2.2.2 对象类型</h3><h4 id="2-2-2-1-指定属性"><a href="#2-2-2-1-指定属性" class="headerlink" title="2.2.2.1 指定属性"></a>2.2.2.1 指定属性</h4><p>声明一个变量为对象类型的同时，还要指定这个对象应该存在的属性以及该属性的类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">obj</span>: &#123; <span class="hljs-attr">a</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> &#125;</code></pre></div>
+
+<p>变量的属性及其类型应该与定义时的规定保持一致。属性多了少了、类型错误都不行：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript">obj = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">b</span>: <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-attr">c</span>: <span class="hljs-literal">true</span> &#125; <span class="hljs-comment">// 报错</span>
+obj = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">10</span>&#125;	<span class="hljs-comment">// 报错</span>
+obj = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">20</span> &#125; <span class="hljs-comment">// 报错</span></code></pre></div>
+
+<h4 id="2-2-2-2-可选属性"><a href="#2-2-2-2-可选属性" class="headerlink" title="2.2.2.2 可选属性"></a>2.2.2.2 可选属性</h4><p>声明变量时，如果不确定某个属性是否一定存在，可以使用<code>?</code>来表示该属性可选：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">obj</span>: &#123; <span class="hljs-attr">a</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span>, c?: <span class="hljs-built_in">boolean</span> &#125;
+obj = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">b</span>: <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-attr">c</span>: <span class="hljs-literal">true</span> &#125; <span class="hljs-comment">// 正确</span>
+obj = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">b</span>: <span class="hljs-string">&#x27;foo&#x27;</span> &#125;	<span class="hljs-comment">// 正确</span></code></pre></div>
+
+<p>也可使用<code>[propName: string]</code>来表示任意属性名：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-comment">// 必须有一个number类型的a属性，其余属性类型不限制</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">obj</span>: &#123; <span class="hljs-attr">a</span>: <span class="hljs-built_in">number</span>, [<span class="hljs-attr">propName</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span> &#125;</code></pre></div>
+
+<h4 id="2-2-2-3-数组"><a href="#2-2-2-3-数组" class="headerlink" title="2.2.2.3 数组"></a>2.2.2.3 数组</h4><p>有两种方式将变量声明为数组：使用<code>Array</code>和<code>[]</code>。</p>
+<p>使用<code>Array</code>：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">arr1</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">string</span>&gt; = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>]
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">arr2</span>: <span class="hljs-title class_">Array</span>&lt;&#123; <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> &#125;&gt; = [
+    &#123; <span class="hljs-attr">a</span>: <span class="hljs-string">&#x27;foo&#x27;</span> &#125;, &#123; <span class="hljs-attr">a</span>: <span class="hljs-string">&#x27;bar&#x27;</span> &#125;
+]</code></pre></div>
+
+<p>在类型后加上<code>[]</code>：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">arr1</span>: <span class="hljs-built_in">string</span>[] = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>]
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">arr2</span>: &#123; <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> &#125;[] = [
+    &#123; <span class="hljs-attr">a</span>: <span class="hljs-string">&#x27;foo&#x27;</span> &#125;, &#123; <span class="hljs-attr">a</span>: <span class="hljs-string">&#x27;bar&#x27;</span> &#125;
+]</code></pre></div>
+
+<h4 id="2-2-2-4-元组"><a href="#2-2-2-4-元组" class="headerlink" title="2.2.2.4 元组"></a>2.2.2.4 元组</h4><p>元组可看作数量和对应位置元素类型固定的数组：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">tuple</span>: [<span class="hljs-built_in">number</span>, <span class="hljs-built_in">string</span>, <span class="hljs-built_in">boolean</span>] = [<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-literal">true</span>]</code></pre></div>
+
+<h4 id="2-2-2-5-枚举"><a href="#2-2-2-5-枚举" class="headerlink" title="2.2.2.5 枚举"></a>2.2.2.5 枚举</h4><div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Gender</span> &#123;<span class="hljs-title class_">Male</span>, <span class="hljs-title class_">Female</span>&#125;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">person</span>: &#123; <span class="hljs-attr">gender</span>: <span class="hljs-title class_">Gender</span> &#125; = &#123; <span class="hljs-attr">gender</span>: <span class="hljs-title class_">Gender</span>.<span class="hljs-property">Male</span> &#125;</code></pre></div>
+
+<h3 id="2-2-3-联合类型"><a href="#2-2-3-联合类型" class="headerlink" title="2.2.3 联合类型"></a>2.2.3 联合类型</h3><p>使用<code>|</code>来连接多种类型，表示多种类型满足其一即可：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>: <span class="hljs-built_in">number</span> | <span class="hljs-built_in">string</span> = <span class="hljs-number">10</span>
+
+foo = <span class="hljs-string">&#x27;bar&#x27;</span></code></pre></div>
+
+<p>使用<code>&amp;</code>来连接多种类型，表示多种类型要同时满足：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>: &#123; <span class="hljs-attr">a</span>: <span class="hljs-built_in">number</span> &#125; &amp; &#123; <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> &#125;
+
+foo =  = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">b</span>: <span class="hljs-string">&#x27;foo&#x27;</span> &#125;</code></pre></div>
+
+<h2 id="2-3-类型断言"><a href="#2-3-类型断言" class="headerlink" title="2.3 类型断言"></a>2.3 类型断言</h2><p>可以对变量的类型进行断言，来告诉编译器不知道类型的变量其实际类型。</p>
+<p>有两种方式对变量的类型进行断言：<code>as</code> 和 <code>&lt;&gt;</code>。</p>
+<p>使用 <code>as</code>：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;foo&#x27;</span>
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">bar</span>: <span class="hljs-built_in">unknown</span> = <span class="hljs-string">&#x27;bar&#x27;</span>
+
+foo = bar <span class="hljs-keyword">as</span> <span class="hljs-built_in">string</span></code></pre></div>
+
+<p>使用<code>&lt;&gt;</code>：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;foo&#x27;</span>
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">bar</span>: <span class="hljs-built_in">unknown</span> = <span class="hljs-string">&#x27;bar&#x27;</span>
+
+foo = &lt;<span class="hljs-built_in">string</span>&gt;bar</code></pre></div>
+
+<h2 id="2-4-类型别名"><a href="#2-4-类型别名" class="headerlink" title="2.4 类型别名"></a>2.4 类型别名</h2><p>使用 type 关键字可以给类型起一个别名：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> myType = &#123;
+    <span class="hljs-attr">a</span>: <span class="hljs-built_in">number</span>,
+    <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span>,
+    <span class="hljs-attr">c</span>: <span class="hljs-built_in">boolean</span>
+&#125;
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>: myType = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">b</span>: <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-attr">c</span>: <span class="hljs-literal">true</span> &#125;</code></pre></div>
+
+<h1 id="3-tsc-编译选项"><a href="#3-tsc-编译选项" class="headerlink" title="3 tsc 编译选项"></a>3 tsc 编译选项</h1><h2 id="3-1-w-监视文件变化"><a href="#3-1-w-监视文件变化" class="headerlink" title="3.1 -w 监视文件变化"></a>3.1 -w 监视文件变化</h2><p>使用 <code>-w</code> 选项来监视文件的变化，当文件发生变化时，自动将 .ts 文件编译成 .js 文件：</p>
+<div class="code-wrapper"><pre><code class="hljs shell">tsc &lt;文件名&gt;.ts -w</code></pre></div>
+
+<h2 id="3-2-生成-tsconfig-json"><a href="#3-2-生成-tsconfig-json" class="headerlink" title="3.2 生成 tsconfig.json"></a>3.2 生成 tsconfig.json</h2><p>tsconfig.json 中记录着 ts 编译器的配置。使用 <code>--init</code> 参数可以生成默认配置。</p>
+<div class="code-wrapper"><pre><code class="hljs shell">tsc --init</code></pre></div>
+
+<p>当前目录下存在 tsconfig.json 文件时，使用 tsc 命令即可编译当前目录下所有文件。加上 <code>-w</code> 参数即可监视所有文件。</p>
+<div class="code-wrapper"><pre><code class="hljs shell">tsc -w</code></pre></div>
+
+<h2 id="3-3-tsconfig-json-配置项"><a href="#3-3-tsconfig-json-配置项" class="headerlink" title="3.3 tsconfig.json 配置项"></a>3.3 tsconfig.json 配置项</h2><p>配置文档 <a target="_blank" rel="noopener" href="https://www.typescriptlang.org/zh/tsconfig">https://www.typescriptlang.org/zh/tsconfig</a></p>
+<h3 id="3-3-1-include-x2F-exclude-x2F-files"><a href="#3-3-1-include-x2F-exclude-x2F-files" class="headerlink" title="3.3.1 include &#x2F; exclude &#x2F; files"></a>3.3.1 include &#x2F; exclude &#x2F; files</h3><p>include 用来指定哪些 ts 文件需要被编译，。</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;include&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;./src/*&quot;</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<blockquote>
+<p>注：<code>**</code>匹配任意目录，<code>*</code>匹配任意文件，”.&#x2F;src&#x2F;**&#x2F;*”匹配当前目录下的 src 目录下的任意目录下的任意文件</p>
+</blockquote>
+<p>exclude 用来指定哪些 ts 文件不需要被编译。</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;include&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;./src/demo/*&quot;</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>files 用来指定哪些文件需要被编译，需要将文件路径。</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+  <span class="hljs-attr">&quot;files&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    &#x27;foo.ts&#x27;<span class="hljs-punctuation">,</span> &#x27;bar.ts&#x27;
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<h3 id="3-3-2-compilerOptions"><a href="#3-3-2-compilerOptions" class="headerlink" title="3.3.2 compilerOptions"></a>3.3.2 compilerOptions</h3><p>compilerOptions 编译器选项中常用子选项如下：</p>
+<ol>
+<li>target：指定 ts 被编译为 ES 的版本。</li>
+<li>module：指定编译后使用的模块化规范。</li>
+<li>lib：指定需要使用的库。</li>
+<li>outDir：指定编译生成的代码输出的目录。</li>
+<li>outFile：将所有编译后的代码合并为一个文件。</li>
+<li>allowJs：是否编译 js 文件。</li>
+<li>checkJs：是否检查 js 文件是否符合 ts 规范。</li>
+<li>removeComments：是否一处注释。</li>
+<li>noEmit：是否生成编译后的代码。</li>
+<li>noEmitOnError：编译出错时是否生成代码。</li>
+<li>strict：严格模式。</li>
+<li>alwaysStrict：是否开启严格模式。</li>
+<li>noImplicitAny：是否允许隐式 any 类型。</li>
+<li>noImplicitThis：是否允许不明确的 this。</li>
+<li>…</li>
+</ol>
+<h1 id="4-webpack-打包-ts-文件"><a href="#4-webpack-打包-ts-文件" class="headerlink" title="4 webpack 打包 ts 文件"></a>4 webpack 打包 ts 文件</h1><h2 id="4-1-准备工作"><a href="#4-1-准备工作" class="headerlink" title="4.1 准备工作"></a>4.1 准备工作</h2><ol>
+<li><p>初始化 node 项目，生成 package.json 文件</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm install -y</code></pre></div>
+</li>
+<li><p>安装 webpack、webpack-cli、typescript、ts-loader</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm install -D webpack webpack-cli typescript ts-loader</code></pre></div>
+
+<blockquote>
+<p>注：-D 参数表示安装的是开发依赖。</p>
+</blockquote>
+</li>
+<li><p>配置 webpack</p>
+<p>在根目录下新建 webpack.config.js 文件，然后配置如下信息：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 path 包</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)
+
+<span class="hljs-comment">// 配置信息都应该写在 module.exports 中</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+
+    <span class="hljs-comment">// 入口文件</span>
+    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/index.ts&#x27;</span>,
+
+    <span class="hljs-comment">// 打包后的文件</span>
+    <span class="hljs-attr">output</span>: &#123;
+        <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),
+        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>
+    &#125;,
+	
+    <span class="hljs-comment">// 设置 webpack 为开发模式</span>
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;development&#x27;</span>,
+    
+    <span class="hljs-comment">// webpack 打包时要使用的模块</span>
+    <span class="hljs-attr">module</span>: &#123;
+        <span class="hljs-comment">// 指定加载规则</span>
+        <span class="hljs-attr">rules</span>: [
+            &#123;
+                <span class="hljs-comment">// test 指定规则生效的文件</span>
+                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.ts$/</span>,
+
+                <span class="hljs-comment">// 指定要使用的 loader</span>
+                <span class="hljs-attr">use</span>: <span class="hljs-string">&#x27;ts-loader&#x27;</span>,
+
+                <span class="hljs-comment">// 要排除的文件</span>
+                <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>
+            &#125;
+        ]
+    &#125;
+
+&#125;</code></pre></div>
+</li>
+<li><p>配置 ts</p>
+<p>根目录下执行：<code>tsc --init</code>，生成 tsconfig.json 文件。</p>
+</li>
+<li><p>在 package.json 中添加配置：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+    	<span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack&quot;</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+</li>
+<li><p>构建</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm run build</code></pre></div></li>
+</ol>
+<h2 id="4-2-进阶配置"><a href="#4-2-进阶配置" class="headerlink" title="4.2 进阶配置"></a>4.2 进阶配置</h2><h3 id="4-3-1-html-webpack-plugin"><a href="#4-3-1-html-webpack-plugin" class="headerlink" title="4.3.1 html-webpack-plugin"></a>4.3.1 html-webpack-plugin</h3><p>html-webpack-plugin 插件可以自动生成 index.html 并引入所 js需文件。</p>
+<ol>
+<li><p>安装插件</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm install -D html-webpack-plugin</code></pre></div>
+</li>
+<li><p>更新 webpack 配置</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 path 包</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)
+
+
+<span class="hljs-comment">// 引入 html 插件</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">HTMLWebpackPlugin</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>)
+
+
+<span class="hljs-comment">// 配置信息都应该写在 module.exports 中</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+
+    <span class="hljs-comment">// 入口文件</span>
+    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/index.ts&#x27;</span>,
+
+    <span class="hljs-comment">// 打包后的文件</span>
+    <span class="hljs-attr">output</span>: &#123;
+        <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),
+        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>
+    &#125;,
+	
+    <span class="hljs-comment">// 设置 webpack 为开发模式</span>
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;development&#x27;</span>,
+    
+    <span class="hljs-comment">// webpack 打包时要使用的模块</span>
+    <span class="hljs-attr">module</span>: &#123;
+        <span class="hljs-comment">// 指定加载规则</span>
+        <span class="hljs-attr">rules</span>: [
+            &#123;
+                <span class="hljs-comment">// test 指定规则生效的文件</span>
+                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.ts$/</span>,
+
+                <span class="hljs-comment">// 指定要使用的 loader</span>
+                <span class="hljs-attr">use</span>: <span class="hljs-string">&#x27;ts-loader&#x27;</span>,
+
+                <span class="hljs-comment">// 要排除的文件</span>
+                <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>
+            &#125;
+        ]
+    &#125;,
+
+    <span class="hljs-comment">// 配置插件：</span>
+    <span class="hljs-attr">plugins</span>:[
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTMLWebpackPlugin</span>()
+    ]
+
+&#125;</code></pre></div>
+</li>
+<li><p>构建</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm run build</code></pre></div>
+
+<p>可以看到 dist 输出目录下多了一个 index.html 文件。</p>
+</li>
+<li><p>（可选）实例化 html 插件时传入配置，实现自定义页面标题。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title class_">HTMLWebpackPlugin</span> = <span class="hljs-title function_">require</span>(<span class="hljs-params"><span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span></span>)
+
+&#123;
+    <span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+        <span class="hljs-attr">plugins</span>: [
+            <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTMLWebpackPlugin</span>(&#123;<span class="hljs-attr">title</span>:<span class="hljs-string">&quot;&quot;</span>&#125;)
+        ]
+    &#125;
+&#125;</code></pre></div></li>
+</ol>
+<h3 id="4-3-2-webpack-dev-server"><a href="#4-3-2-webpack-dev-server" class="headerlink" title="4.3.2 webpack-dev-server"></a>4.3.2 webpack-dev-server</h3><p>webpack-dev-server 插件能监视文件变化，并自动打包构建。</p>
+<ol>
+<li><p>安装插件</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm install -D webpack-dev-server</code></pre></div>
+</li>
+<li><p>在 package.json 中添加如下配置</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack serve --open index.html&quot;</span>
+  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+</li>
+<li><p>运行</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm run start</code></pre></div>
+
+<p>webpack-dev-server 插件会开启服务器，在浏览器中打开 html-webpack-plugin 插件生成的 index.html，监视其变化并自动打包构建。</p>
+</li>
+</ol>
+<h3 id="4-3-3-clean-webpack-plugin"><a href="#4-3-3-clean-webpack-plugin" class="headerlink" title="4.3.3 clean-webpack-plugin"></a>4.3.3 clean-webpack-plugin</h3><p>clean-webpack-plugin 插件可以在构建时先把 dist 文件夹下的旧文件清楚，然后再接着构建。</p>
+<ol>
+<li><p>安装插件</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm install -D clean-webpack-plugin</code></pre></div>
+</li>
+<li><p>更新 webpack 配置</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 path 包</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)
+
+
+<span class="hljs-comment">// 引入 html 插件</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">HTMLWebpackPlugin</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>)
+
+<span class="hljs-comment">// 引入 clean 插件</span>
+<span class="hljs-keyword">const</span> &#123;<span class="hljs-title class_">CleanWebpackPlugin</span>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;clean-webpack-plugin&#x27;</span>)
+
+
+<span class="hljs-comment">// 配置信息都应该写在 module.exports 中</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+
+    <span class="hljs-comment">// 入口文件</span>
+    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/index.ts&#x27;</span>,
+
+    <span class="hljs-comment">// 打包后的文件</span>
+    <span class="hljs-attr">output</span>: &#123;
+        <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),
+        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>
+    &#125;,
+
+    <span class="hljs-comment">// 设置 webpack 为开发模式</span>
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;development&#x27;</span>,
+
+    <span class="hljs-comment">// webpack 打包时要使用的模块</span>
+    <span class="hljs-attr">module</span>: &#123;
+        <span class="hljs-comment">// 指定加载规则</span>
+        <span class="hljs-attr">rules</span>: [
+            &#123;
+                <span class="hljs-comment">// test 指定规则生效的文件</span>
+                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.ts$/</span>,
+
+                <span class="hljs-comment">// 指定要使用的 loader</span>
+                <span class="hljs-attr">use</span>: <span class="hljs-string">&#x27;ts-loader&#x27;</span>,
+
+                <span class="hljs-comment">// 要排除的文件</span>
+                <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>
+            &#125;
+        ]
+    &#125;,
+
+    <span class="hljs-comment">// 配置插件：</span>
+    <span class="hljs-attr">plugins</span>: [
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWebpackPlugin</span>(),
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTMLWebpackPlugin</span>(&#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;ts-demo&#x27;</span> &#125;)
+    ]
+
+&#125;</code></pre></div></li>
+</ol>
+<h3 id="4-3-4-配置引用模块"><a href="#4-3-4-配置引用模块" class="headerlink" title="4.3.4 配置引用模块"></a>4.3.4 配置引用模块</h3><p>默认配置下，webpack 不知道哪些文件是否可以作为模块被引入。如果想要引入 ts、js 作为模块代码，需要配置 webpack.config.js 如下选项：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 path 包</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)
+
+
+<span class="hljs-comment">// 引入 html 插件</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">HTMLWebpackPlugin</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>)
+
+<span class="hljs-comment">// 引入 clean 插件</span>
+<span class="hljs-keyword">const</span> &#123;<span class="hljs-title class_">CleanWebpackPlugin</span>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;clean-webpack-plugin&#x27;</span>)
+
+
+<span class="hljs-comment">// 配置信息都应该写在 module.exports 中</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+
+    <span class="hljs-comment">// 入口文件</span>
+    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/index.ts&#x27;</span>,
+
+    <span class="hljs-comment">// 打包后的文件</span>
+    <span class="hljs-attr">output</span>: &#123;
+        <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),
+        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>
+    &#125;,
+
+    <span class="hljs-comment">// 设置 webpack 为开发模式</span>
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;development&#x27;</span>,
+
+    <span class="hljs-comment">// webpack 打包时要使用的模块</span>
+    <span class="hljs-attr">module</span>: &#123;
+        <span class="hljs-comment">// 指定加载规则</span>
+        <span class="hljs-attr">rules</span>: [
+            &#123;
+                <span class="hljs-comment">// test 指定规则生效的文件</span>
+                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.ts$/</span>,
+
+                <span class="hljs-comment">// 指定要使用的 loader</span>
+                <span class="hljs-attr">use</span>: <span class="hljs-string">&#x27;ts-loader&#x27;</span>,
+
+                <span class="hljs-comment">// 要排除的文件</span>
+                <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>
+            &#125;
+        ]
+    &#125;,
+
+    <span class="hljs-comment">// 配置插件：</span>
+    <span class="hljs-attr">plugins</span>: [
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWebpackPlugin</span>(),
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTMLWebpackPlugin</span>(&#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;ts-demo&#x27;</span> &#125;)
+    ],
+	
+    <span class="hljs-comment">// 配置引用模块</span>
+    <span class="hljs-attr">resolve</span>: &#123;
+        <span class="hljs-attr">extensions</span>: [<span class="hljs-string">&#x27;.ts&#x27;</span>, <span class="hljs-string">&#x27;.js&#x27;</span>]
+    &#125;
+
+&#125;</code></pre></div>
+
+<h3 id="4-3-5-babel"><a href="#4-3-5-babel" class="headerlink" title="4.3.5 babel"></a>4.3.5 babel</h3><p>为了让编译后的代码具备更好的兼容性，还需配置 babel 工具。</p>
+<ol>
+<li><p>安装依赖</p>
+<div class="code-wrapper"><pre><code class="hljs shell">npm i -D @babel/core @babel/preset-env babel-loader 
+core-js</code></pre></div>
+</li>
+<li><p>更新 webpack 配置</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入 path 包</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)
+
+
+<span class="hljs-comment">// 引入 html 插件</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">HTMLWebpackPlugin</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>)
+
+<span class="hljs-comment">// 引入 clean 插件</span>
+<span class="hljs-keyword">const</span> &#123; <span class="hljs-title class_">CleanWebpackPlugin</span> &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;clean-webpack-plugin&#x27;</span>)
+
+
+<span class="hljs-comment">// 配置信息都应该写在 module.exports 中</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+
+    <span class="hljs-comment">// 入口文件</span>
+    <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/index.ts&#x27;</span>,
+
+    <span class="hljs-comment">// 打包后的文件</span>
+    <span class="hljs-attr">output</span>: &#123;
+        <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),
+        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>,
+        <span class="hljs-attr">environment</span>: &#123;
+            <span class="hljs-attr">arrowFunction</span>: <span class="hljs-literal">false</span>
+        &#125;
+    &#125;,
+
+    <span class="hljs-comment">// 设置 webpack 为开发模式</span>
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;development&#x27;</span>,
+
+    <span class="hljs-comment">// webpack 打包时要使用的模块</span>
+    <span class="hljs-attr">module</span>: &#123;
+        <span class="hljs-comment">// 指定加载规则</span>
+        <span class="hljs-attr">rules</span>: [
+            &#123;
+                <span class="hljs-comment">// test 指定规则生效的文件</span>
+                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.ts$/</span>,
+
+                <span class="hljs-comment">// 指定要使用的 loader</span>
+                <span class="hljs-attr">use</span>: [
+                    <span class="hljs-comment">// 配置 babel</span>
+                    &#123;
+                        <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;babel-loader&#x27;</span>,
+                        <span class="hljs-attr">options</span>: &#123;
+                            <span class="hljs-comment">// 设置预定义环境</span>
+                            <span class="hljs-attr">presets</span>: [
+                                [
+                                    <span class="hljs-string">&#x27;@babel/preset-env&#x27;</span>,
+                                    &#123;
+                                        <span class="hljs-attr">targets</span>: &#123;
+                                            <span class="hljs-string">&quot;chrome&quot;</span>: <span class="hljs-string">&quot;100&quot;</span>,
+                                        &#125;,
+                                        <span class="hljs-attr">corejs</span>: <span class="hljs-string">&quot;3&quot;</span>,
+                                        <span class="hljs-comment">// 按需加载</span>
+                                        <span class="hljs-attr">useBuiltIns</span>: <span class="hljs-string">&quot;usage&quot;</span>,
+                                    &#125;
+                                ]
+                            ]
+                        &#125;
+                    &#125;,
+                    <span class="hljs-string">&#x27;ts-loader&#x27;</span>
+                ],
+
+                <span class="hljs-comment">// 要排除的文件</span>
+                <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>
+            &#125;
+        ]
+    &#125;,
+
+    <span class="hljs-comment">// 配置插件：</span>
+    <span class="hljs-attr">plugins</span>: [
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWebpackPlugin</span>(),
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTMLWebpackPlugin</span>(&#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;ts-demo&#x27;</span> &#125;)
+    ],
+
+
+    <span class="hljs-comment">// 配置引用模块</span>
+    <span class="hljs-attr">resolve</span>: &#123;
+        <span class="hljs-attr">extensions</span>: [<span class="hljs-string">&#x27;.ts&#x27;</span>, <span class="hljs-string">&#x27;.js&#x27;</span>]
+    &#125;
+
+&#125;</code></pre></div></li>
+</ol>
+<h2 id="5-面向对象"><a href="#5-面向对象" class="headerlink" title="5 面向对象"></a>5 面向对象</h2><h2 id="5-1-类"><a href="#5-1-类" class="headerlink" title="5.1 类"></a>5.1 类</h2><h3 id="5-1-1-属性声明"><a href="#5-1-1-属性声明" class="headerlink" title="5.1.1 属性声明"></a>5.1.1 属性声明</h3><p>跟 js 相比，不同点在于需要在类中先声明属性及其类型。</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;
+    
+    <span class="hljs-comment">// 声明属性</span>
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-attr">sum</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">8</span>
+
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">number</span></span>) &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age
+    &#125;
+
+    <span class="hljs-title function_">sayName</span>(): <span class="hljs-built_in">void</span> &#123;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;my name is &#x27;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)
+    &#125;
+
+    <span class="hljs-keyword">static</span> <span class="hljs-title function_">getNumber</span>(): <span class="hljs-built_in">number</span> &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Person</span>.<span class="hljs-property">sum</span>
+    &#125;
+&#125;
+
+
+<span class="hljs-keyword">const</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">10</span>)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">age</span>)     <span class="hljs-comment">// 10</span>
+person.<span class="hljs-title function_">sayName</span>()            <span class="hljs-comment">// my name is foo</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Person</span>.<span class="hljs-title function_">getNumber</span>()) <span class="hljs-comment">// 8</span></code></pre></div>
+
+<h3 id="5-1-2-属性修饰符"><a href="#5-1-2-属性修饰符" class="headerlink" title="5.1.2 属性修饰符"></a>5.1.2 属性修饰符</h3><p>ts 中可以给类中属性添加属性修饰符：public,private,protected</p>
+<ol>
+<li>public：公有属性。属性可以进行访问或修改。</li>
+<li>private：私有属性。属性只能在类的内部进行访问或修改。</li>
+<li>protected：保护属性。属性只能在类的内部或者子类的内部进行访问或修改。</li>
+</ol>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">number</span></span>) &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age
+    &#125;
+&#125;
+
+<span class="hljs-keyword">const</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">19</span>)</code></pre></div>
+
+<p>也可以直接将属性声明在构造函数的形参列表中，不必在构造函数中进行属性的初始化赋值，形成以下简写形式：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> name: <span class="hljs-built_in">string</span>, <span class="hljs-keyword">public</span> age: <span class="hljs-built_in">number</span></span>) &#123;&#125; 
+&#125;
+
+
+<span class="hljs-keyword">const</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">19</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person)</code></pre></div>
+
+<h2 id="5-2-继承"><a href="#5-2-继承" class="headerlink" title="5.2 继承"></a>5.2 继承</h2><p>与 js 无二异。</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;
+
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">number</span></span>) &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age
+    &#125;
+&#125;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Teacher</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Person</span> &#123;
+    <span class="hljs-attr">addr</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">number</span>, addr: <span class="hljs-built_in">string</span></span>) &#123;
+        <span class="hljs-variable language_">super</span>(name, age)
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">addr</span> = addr
+    &#125;
+&#125;
+
+<span class="hljs-comment">// Teacher &#123;name: &#x27;foo&#x27;, age: 30, addr: &#x27;bar&#x27;&#125;</span>
+<span class="hljs-keyword">const</span> teacher = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Teacher</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">30</span>, <span class="hljs-string">&#x27;bar&#x27;</span>)</code></pre></div>
+
+<h2 id="5-3-抽象类"><a href="#5-3-抽象类" class="headerlink" title="5.3 抽象类"></a>5.3 抽象类</h2><p>什么是抽象类：</p>
+<ul>
+<li>被 abstract 修饰，不能被实例化，只能用作继承。</li>
+<li>可以包含抽象方法，子类必须对抽象方法进行重写。</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">number</span></span>) &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age
+    &#125;
+
+    <span class="hljs-keyword">abstract</span> <span class="hljs-title function_">sayHello</span>(): <span class="hljs-built_in">void</span>
+&#125;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Teacher</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Person</span> &#123;
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">number</span></span>) &#123;
+        <span class="hljs-variable language_">super</span>(name, age)
+    &#125;
+    <span class="hljs-title function_">sayHello</span>(): <span class="hljs-built_in">void</span> &#123;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;hello, i am a teacher&#x27;</span>)
+    &#125;
+&#125;
+
+<span class="hljs-keyword">const</span> teacher = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Teacher</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">10</span>)
+
+teacher.<span class="hljs-title function_">sayHello</span>()</code></pre></div>
+
+<h2 id="5-4-接口"><a href="#5-4-接口" class="headerlink" title="5.4 接口"></a>5.4 接口</h2><h3 id="5-4-1-定义"><a href="#5-4-1-定义" class="headerlink" title="5.4.1 定义"></a>5.4.1 定义</h3><p>接口用来定义一个类的结构，包括应该存在的属性和方法。</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Person</span> &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+    <span class="hljs-title function_">sayHello</span>(): <span class="hljs-built_in">void</span>
+&#125;
+
+<span class="hljs-keyword">const</span> <span class="hljs-attr">person</span>: <span class="hljs-title class_">Person</span> = &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;foo&#x27;</span>,
+    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,
+    <span class="hljs-title function_">sayHello</span>(): <span class="hljs-built_in">void</span> &#123;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;hello&#x27;</span>)
+    &#125;
+&#125;</code></pre></div>
+
+<h3 id="5-4-2-实现"><a href="#5-4-2-实现" class="headerlink" title="5.4.2 实现"></a>5.4.2 实现</h3><p>定义在一个类实现一个接口，满足接口的要求。</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Person</span> &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+    <span class="hljs-title function_">sayHello</span>(): <span class="hljs-built_in">void</span>
+&#125;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Teacher</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Person</span> &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">number</span></span>) &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age
+    &#125;
+    <span class="hljs-title function_">sayHello</span>(): <span class="hljs-built_in">void</span> &#123;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;hello &#x27;</span>)
+    &#125;
+&#125;</code></pre></div>
+
+<h3 id="5-4-3-用于类型声明"><a href="#5-4-3-用于类型声明" class="headerlink" title="5.4.3 用于类型声明"></a>5.4.3 用于类型声明</h3><p>接口也可以用来类型声明。</p>
+<p>interface 和 type 进行类型声明的区别：</p>
+<p>interface 允许重复声明；type 不允许重复声明。</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">Foo</span> = &#123;
+    <span class="hljs-attr">bar</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">qux</span>: <span class="hljs-built_in">number</span>
+&#125;
+
+<span class="hljs-comment">// 重复声明，报错</span>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">Foo</span> = &#123;
+    <span class="hljs-attr">baz</span>: <span class="hljs-built_in">string</span>
+&#125;</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Foo</span> &#123;
+    <span class="hljs-attr">bar</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">qux</span>: <span class="hljs-built_in">number</span>
+&#125;
+
+<span class="hljs-comment">// 可以重复声明</span>
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Foo</span> &#123;
+    <span class="hljs-attr">baz</span>: <span class="hljs-built_in">string</span>
+&#125;
+
+<span class="hljs-comment">// 声明多个同名的 interface 时，这些同名的 interface 都要满足。</span>
+<span class="hljs-keyword">const</span> <span class="hljs-attr">foo</span>: <span class="hljs-title class_">Foo</span> = &#123;
+    <span class="hljs-attr">bar</span>: <span class="hljs-string">&#x27;bar&#x27;</span>,
+    <span class="hljs-attr">qux</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">baz</span>: <span class="hljs-string">&#x27;baz&#x27;</span>
+&#125;</code></pre></div>
+
+<h2 id="5-5-泛型"><a href="#5-5-泛型" class="headerlink" title="5.5 泛型"></a>5.5 泛型</h2><p>定义时不指定确切的类型，运行时根据实际情况来确定类型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> fn&lt;T&gt;(<span class="hljs-attr">x</span>: T):T &#123;
+    <span class="hljs-keyword">return</span> x
+&#125;
+
+fn&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-number">10</span>)
+fn&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&#x27;foo&#x27;</span>)
+
+<span class="hljs-comment">// 也可以让编译器进行类型推断：</span>
+<span class="hljs-title function_">fn</span>(<span class="hljs-number">10</span>)
+<span class="hljs-title function_">fn</span>(<span class="hljs-string">&#x27;foo&#x27;</span>)</code></pre></div>
+
+<p>多个泛型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> fn&lt;T, K&gt;(<span class="hljs-attr">x</span>: T, <span class="hljs-attr">y</span>: K): &#123; <span class="hljs-attr">x</span>: T, <span class="hljs-attr">y</span>: K &#125; &#123;
+    <span class="hljs-keyword">return</span> &#123; x, y &#125;
+&#125;
+
+<span class="hljs-title function_">fn</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">10</span>)</code></pre></div>
+
+<p>给泛型做出一些限制，比如限制实现某些接口的泛型：</p>
+<div class="code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Person</span> &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+&#125;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Teacher</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Person</span> &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>
+    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">number</span></span>) &#123;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age
+    &#125;
+&#125;
+
+<span class="hljs-keyword">function</span> fn&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Person</span>&gt;(<span class="hljs-attr">person</span>: T): <span class="hljs-built_in">number</span> &#123;
+    <span class="hljs-keyword">return</span> person.<span class="hljs-property">age</span>
+&#125;
+
+<span class="hljs-keyword">const</span> teacher = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Teacher</span>(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-number">18</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">fn</span>(teacher))</code></pre></div>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/TypeScript/">#TypeScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【TypeScript】基础笔记</div>
+      <div>https://zhangtuo.online/archives/8a5a935d.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/24ffa1ff.html" title="【CSS】flex布局">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【CSS】flex布局</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/f1b2b1fb.html" title="【JavaScript】浅拷贝和深拷贝">
+                        <span class="hidden-mobile">【JavaScript】浅拷贝和深拷贝</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

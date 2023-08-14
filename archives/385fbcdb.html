@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="《JavaScript高级程序设计（第4版）》笔记。原书第3章：语言基础。主要内容：操作符：一元操作符、位操作符、布尔操作符、加减乘除取余等等。语句：if、for、while、for-in、for-of、with等等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JavaScript红宝书】6.语言基础 - 操作符、语句">
+<meta property="og:url" content="https://zhangtuo.online/archives/385fbcdb.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="《JavaScript高级程序设计（第4版）》笔记。原书第3章：语言基础。主要内容：操作符：一元操作符、位操作符、布尔操作符、加减乘除取余等等。语句：if、for、while、for-in、for-of、with等等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+<meta property="article:published_time" content="2022-04-29T12:27:23.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.916Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【JavaScript红宝书】6.语言基础 - 操作符、语句 - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【JavaScript红宝书】6.语言基础 - 操作符、语句"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-29 20:27" pubdate>
+          2022年4月29日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          48 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【JavaScript红宝书】6.语言基础 - 操作符、语句</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h1><h2 id="1-一元操作符"><a href="#1-一元操作符" class="headerlink" title="1 一元操作符"></a>1 一元操作符</h2><p>只操作一个值的操作符叫一元操作符。</p>
+<h3 id="1-1-自增自减-、"><a href="#1-1-自增自减-、" class="headerlink" title="1.1 自增自减 ++ 、--"></a>1.1 自增自减 <code>++</code> 、<code>--</code></h3><p><code>++</code>和<code>--</code>用法照搬 C 语言。不仅可以用在数值类型上，用在其它类型上的规则如下：</p>
+<ol>
+<li>对于字符串，如果是有效的数值形式，则转换为数值后再应用改变。如果不是有效的形式，则将变量的值设置为 <code>NaN</code>。</li>
+<li>对于布尔值，如果是 <code>false</code>，则转换成<code>0</code>后再应用改变。如果是 <code>true</code>，则转换成<code>1</code>后再应用改变。</li>
+<li>如果是对象，则调用其 <code>valueOf()</code> 方法取得可以操作的值。接着应用上述的规则。如果是 <code>NaN</code>，则调用 <code>toString()</code> 并再次应用其它规则。</li>
+</ol>
+<p>注意：使用自增或者自减操作符后，<strong>变量的类型会转变成数值</strong>。</p>
+<h3 id="1-2-正负-、"><a href="#1-2-正负-、" class="headerlink" title="1.2 正负+、-"></a>1.2 正负<code>+</code>、<code>-</code></h3><p>在非数值类型的变量前使用<strong>加号</strong>，则会执行与使用 <code>Number()</code> 转型函数一样类型转换。</p>
+<p>在非数值类型的变量前使用<strong>减号</strong>，则先会执行与使用<code>Number()</code> 转型函数一样类型转换，再转成负数。</p>
+<h2 id="2-位操作符"><a href="#2-位操作符" class="headerlink" title="2 位操作符"></a>2 位操作符</h2><p>位操作符用来操作内存中表示数据的比特。</p>
+<h3 id="2-1-正数和负数在内存中的表示形式"><a href="#2-1-正数和负数在内存中的表示形式" class="headerlink" title="2.1 正数和负数在内存中的表示形式"></a>2.1 正数和负数在内存中的表示形式</h3><p>有符号整数使用 32 位的前 31 位表示整数值，第 32 位是符号位。比如 0 正 1 负。</p>
+<p>负数使用<strong>二补数</strong>进行存储，通过三个步骤得到二补数：<strong>绝对值</strong>，<strong>取反</strong>，<strong>加一</strong>。比如：</p>
+<div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-number">18</span><span class="hljs-string">：</span>
+<span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0001 </span><span class="hljs-number">0010</span>
+
+<span class="hljs-number">-18</span><span class="hljs-string">：</span>
+<span class="hljs-number">1</span><span class="hljs-string">.</span> <span class="hljs-string">绝对值</span>
+<span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0000 </span><span class="hljs-number">0001 </span><span class="hljs-number">0010</span>
+<span class="hljs-number">2</span><span class="hljs-string">.</span> <span class="hljs-string">取反</span>
+<span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1110 </span><span class="hljs-number">1101</span>
+<span class="hljs-number">3</span><span class="hljs-string">.</span> <span class="hljs-string">加一</span>
+<span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1111 </span><span class="hljs-number">1110 </span><span class="hljs-number">1110</span></code></pre></div>
+
+<p>使用 <code>toString()</code> 方法来输出负数的二进制表示：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = -<span class="hljs-number">18</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a.<span class="hljs-title function_">toString</span>(<span class="hljs-number">2</span>)); <span class="hljs-comment">// -10010</span></code></pre></div>
+
+<p>对非数值类型进行位操作，会先使用 <code>Number()</code> 方法将该值转换为数值，之后再进行位操作。</p>
+<h3 id="2-2-按位非"><a href="#2-2-按位非" class="headerlink" title="2.2 按位非 ~"></a>2.2 按位非 <code>~</code></h3><p>使用<code>~</code>对操作数的每个比特位进行取反。最终效果是对数值进行<strong>取反减一</strong>。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">15</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(~num);  <span class="hljs-comment">// -16</span></code></pre></div>
+
+<h3 id="2-3-按位与-amp"><a href="#2-3-按位与-amp" class="headerlink" title="2.3 按位与 &amp;"></a>2.3 按位与 <code>&amp;</code></h3><p>使用<code>&amp;</code>对两个操作数进行按位与。规则如下：两个比特位，如果都是1，则该位结果是1，否则是0。</p>
+<h3 id="2-4-按位或"><a href="#2-4-按位或" class="headerlink" title="2.4 按位或 |"></a>2.4 按位或 <code>|</code></h3><p>使用<code>|</code>对两个操作数进行按位或。规则如下：两个比特位，只要有一位是1，则该位结果是1，否则是0。</p>
+<h3 id="2-5-按位异或"><a href="#2-5-按位异或" class="headerlink" title="2.5 按位异或 ^"></a>2.5 按位异或 <code>^</code></h3><p>使用<code>^</code>对两个操作数按位异或。规则如下：两个比特位，有且仅有一位是1时，该位结果是1，否则是0。</p>
+<h3 id="2-6-左移-lt-lt"><a href="#2-6-左移-lt-lt" class="headerlink" title="2.6 左移 &lt;&lt;"></a>2.6 左移 <code>&lt;&lt;</code></h3><p>使用<code>&lt;&lt;</code>会对操作数的所有位向左移动。左移会<strong>保留符号</strong>。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">2</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num&lt;&lt;<span class="hljs-number">5</span>);  <span class="hljs-comment">// 64</span></code></pre></div>
+
+<h3 id="2-7-有符号右移-gt-gt"><a href="#2-7-有符号右移-gt-gt" class="headerlink" title="2.7 有符号右移 &gt;&gt;"></a>2.7 有符号右移 <code>&gt;&gt;</code></h3><p>使用<code>&gt;&gt;</code>会对操作数的所有位向右移动。有符号右移会<strong>保留符号</strong>。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = <span class="hljs-number">32</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num &gt;&gt; <span class="hljs-number">3</span>);  <span class="hljs-comment">// 4</span></code></pre></div>
+
+<h3 id="2-8-无符号右移-gt-gt-gt"><a href="#2-8-无符号右移-gt-gt-gt" class="headerlink" title="2.8 无符号右移&gt;&gt;&gt;"></a>2.8 无符号右移<code>&gt;&gt;&gt;</code></h3><p>使用<code>&gt;&gt;&gt;</code>会对操作数的所有位向右移动。对于<strong>正数</strong>，无符号右移和有符号右移结果相同。对于<strong>负数</strong>，无符号右移会将负数的二补数当作正数来处理，所以无符号右移之后结果变得会非常大。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = -<span class="hljs-number">32</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num &gt;&gt;&gt; <span class="hljs-number">3</span>); <span class="hljs-comment">// 536870908</span></code></pre></div>
+
+<h2 id="3-布尔操作符"><a href="#3-布尔操作符" class="headerlink" title="3 布尔操作符"></a>3 布尔操作符</h2><h3 id="3-1-逻辑非"><a href="#3-1-逻辑非" class="headerlink" title="3.1 逻辑非 !"></a>3.1 逻辑非 <code>!</code></h3><p>使用<code>!</code>会对操作数进行取反。</p>
+<p>如果应用到<strong>非布尔值</strong>，首先转换为布尔值，随后进行取反。使用<code>!!</code>，相当于对操作数使用<code>Boolean()</code>函数。</p>
+<h3 id="3-2-逻辑与-amp-amp"><a href="#3-2-逻辑与-amp-amp" class="headerlink" title="3.2 逻辑与 &amp;&amp;"></a>3.2 逻辑与 <code>&amp;&amp;</code></h3><p><code>&amp;&amp;</code> 有两个操作数。两个操作数中，只有都为 true，才返回 true，否则返回 false。</p>
+<p>如果应用到<strong>非布尔值</strong>，逻辑与不一定返回布尔值，规则如下：</p>
+<ol>
+<li>如果第一个数是对象，则返回第二个操作数。</li>
+<li>如果第二个操作数是对象，只有第一个操作数求值为 true 时，才会返回该对象。</li>
+<li>如果有一个操作数是 null，则返回 null。</li>
+<li>如果有一个操作数是 NaN，则返回 NaN。</li>
+<li>如果有一个操作数是 undefined，则返回 undefined。</li>
+<li>如果两个操作数是 null、NaN、undefined，则返回第一个操作数。</li>
+</ol>
+<p>逻辑与有<strong>短路特性</strong>：如果第一个操作符决定了结果，那么永远不会对第二个操作符求值。对于逻辑与，如果第一个操作符是 false，那么永远不会对第二个操作符进行求值。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-literal">false</span> &amp;&amp; b;		<span class="hljs-comment">// 即使 b 没有被定义也不会出错，因为不会执行 &amp;&amp; 后面</span></code></pre></div>
+
+<h3 id="3-3-逻辑或"><a href="#3-3-逻辑或" class="headerlink" title="3.3 逻辑或 ||"></a>3.3 逻辑或 <code>||</code></h3><p><code>||</code> 有两个操作数。两个操作数中，只要有一个为 true，就返回 true，否则返回 false。</p>
+<p>如果应用到<strong>非布尔值</strong>，逻辑或不一定返回布尔值，规则如下：</p>
+<ol>
+<li>如果第一个数是对象，则返回第一个操作数。</li>
+<li>如果第一个操作数求值是 false，则返回第二个操作数。</li>
+<li>如果两个操作数都是 null，则返回 null。</li>
+<li>如果两个操作数都是 NaN，则返回 NaN。</li>
+<li>如果两个操作数都是 undefined，则返回 undefined。</li>
+</ol>
+<p>逻辑或也有<strong>短路特性</strong>。对于逻辑或，如果第一个操作符是 true，那么永远不会对第二个操作符进行求值。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-literal">true</span> || b;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a);</code></pre></div>
+
+<p>特别的，利用这个特性，可以避免给变量赋值 null 或者 undefined：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = obj1 || obj2</code></pre></div>
+
+<p>如果 obj1 不是 null 或者 undefined，则 a 被赋值为 obj1，否则赋值为 obj2。</p>
+<h2 id="4-乘法-，除法-，取模-，指数"><a href="#4-乘法-，除法-，取模-，指数" class="headerlink" title="4 乘法 *，除法 /，取模 %，指数 **"></a>4 乘法 <code>*</code>，除法 <code>/</code>，取模 <code>%</code>，指数 <code>**</code></h2><h3 id="4-1-乘法"><a href="#4-1-乘法" class="headerlink" title="4.1 乘法"></a>4.1 乘法</h3><p>如果两个操作数中有非数值，则会先调用 Number() 转型函数转换为数值。特别的：</p>
+<ol>
+<li>Infinity 乘以0，则返回 NaN。</li>
+<li>Infinity 乘以非0有限数值，根据<strong>第二个操作数</strong>的符号返回 Infinity 或 -Infinity。</li>
+<li>Infinity 乘以 Infinity，则返回 Infinity。</li>
+</ol>
+<h3 id="4-2-除法"><a href="#4-2-除法" class="headerlink" title="4.2 除法"></a>4.2 除法</h3><p>如果两个操作数中有非数值，则会先调用 Number() 转型函数转换为数值。特别的：</p>
+<ol>
+<li>Infinity 除以 Infinity，则返回 NaN。</li>
+<li>0 除以 0，返回 NaN。</li>
+<li>非0有限数值除以0，根据<strong>第一个操作数</strong>的符号返回 Infinity 或 -Infinity。</li>
+<li>Infinity 除以任何数值，根据<strong>第二个操作数</strong>的符号返回 Infinity 或 -Infinity。</li>
+</ol>
+<h3 id="4-3-取模"><a href="#4-3-取模" class="headerlink" title="4.3 取模"></a>4.3 取模</h3><p>如果两个操作数中有非数值，则会先调用 Number() 转型函数转换为数值。特别的：</p>
+<ol>
+<li>被除数是无限值，除数是有限值，则返回NaN。</li>
+<li>被除数是有限值，除数是无限值，则返回被除数。</li>
+<li>被除数是有限值，除数是0，则返回NaN。</li>
+<li>Infinity 除以 Infinity，则返回 NaN。</li>
+<li>被除数是0，除数不是0，则返回0。</li>
+</ol>
+<p><strong>结果的符号和被除数相同</strong>：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">10</span> % <span class="hljs-number">6</span>);	<span class="hljs-comment">// 4</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">10</span> % -<span class="hljs-number">6</span>);	<span class="hljs-comment">// 4</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(-<span class="hljs-number">10</span> % <span class="hljs-number">6</span>);	<span class="hljs-comment">// -4</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(-<span class="hljs-number">10</span> % -<span class="hljs-number">6</span>);	<span class="hljs-comment">// -4</span></code></pre></div>
+
+<h3 id="4-4-指数操作符"><a href="#4-4-指数操作符" class="headerlink" title="4.4 指数操作符**"></a>4.4 指数操作符<code>**</code></h3><div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">pow</span>(<span class="hljs-number">3</span>,<span class="hljs-number">2</span>));		<span class="hljs-comment">// 9</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">3</span>**<span class="hljs-number">2</span>);				<span class="hljs-comment">// 9</span></code></pre></div>
+
+<h2 id="5-加法-、减法"><a href="#5-加法-、减法" class="headerlink" title="5 加法+、减法-"></a>5 加法<code>+</code>、减法<code>-</code></h2><h3 id="5-1-加法"><a href="#5-1-加法" class="headerlink" title="5.1 加法"></a>5.1 加法</h3><p>如果<strong>两个</strong>操作数都是<strong>数值</strong>，运算规则如下：</p>
+<ol>
+<li><p>任一操作数是 NaN，返回 NaN。</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>Infinity + Infinity &#x3D; Infinity<br>-Infinity + -Infinity &#x3D; -Infinity<br>-Infinity + Infinity &#x3D; NaN</p>
+<div class="code-wrapper"><pre><code class="hljs subunit">
+3. ```
+   <span class="hljs-string">+0</span> + (<span class="hljs-string">+0</span>) = <span class="hljs-string">+0</span>
+   <span class="hljs-string">-0</span> + (<span class="hljs-string">+0</span>) = <span class="hljs-string">+0</span>
+   <span class="hljs-string">-0</span> + (<span class="hljs-string">-0</span>) = <span class="hljs-string">-0</span></code></pre></div></li>
+</ol>
+<p>如果有<strong>一个</strong>操作数是<strong>字符串</strong>，运算规则如下：</p>
+<ol>
+<li>如果都是字符串，则将第二个字符串拼接到第一个字符串后面</li>
+<li>如果只有一个操作符是字符串，则将另一个操作符转为字符串，再将两个字符串拼接到一起。</li>
+</ol>
+<p>如果有任一操作数是<strong>对象</strong>、<strong>数值</strong>或<strong>布尔值</strong>，则调用<code>toString()</code>方法获取字符串，随后应用上述规则。</p>
+<p>如果是<code>undefined</code>或<code>null</code>则调用<code>String()</code>函数，结果值为”undefined”和”null”。</p>
+<h3 id="5-2-减法"><a href="#5-2-减法" class="headerlink" title="5.2 减法"></a>5.2 减法</h3><p>如果两个数字是数值，则执行运算并返回结果。其余规则：</p>
+<ol>
+<li><p>任一操作数是 NaN，返回 NaN。</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>Infinity - Infinity &#x3D; NaN<br>-Infinity - (-Infinity) &#x3D; NaN<br>Infinity - (-Infinity) &#x3D; Infinity<br>-Infinity - Infinity &#x3D; -Infinity</p>
+<div class="code-wrapper"><pre><code class="hljs subunit">
+3. ```
+   <span class="hljs-string">+0</span> - (<span class="hljs-string">+0</span>) = <span class="hljs-string">+0</span>
+   <span class="hljs-string">+0</span> - (<span class="hljs-string">-0</span>) = <span class="hljs-string">-0</span>
+   <span class="hljs-string">-0</span> - (<span class="hljs-string">-0</span>) = <span class="hljs-string">+0</span></code></pre></div></li>
+</ol>
+<p>如果有任一操作数是<strong>字符串</strong>、<strong>布尔值</strong>、<strong>null</strong> 或 <strong>undefined</strong>，先在后台使用 <code>Number()</code> 转为数值，随后执行以上规则。</p>
+<p>如果任意操作数是<strong>对象</strong>，则调用 <code>valueoOf()</code> 方法取得数值。如果对象没有 <code>valueOf()</code> 方法，则调用 <code>toString()</code> 方法，然后将得到的字符串转换为数值。</p>
+<h2 id="6-关系操作符-gt-lt"><a href="#6-关系操作符-gt-lt" class="headerlink" title="6 关系操作符 &gt;&lt;"></a>6 关系操作符 &gt;&lt;</h2><p>规则如下：</p>
+<ol>
+<li>如果两个操作数都是数值，执行数值比较。</li>
+<li>如果两个操作数都是字符串，则逐个比较字符串中对应的编码。（大写字符编码<strong>小于</strong>小写字符）</li>
+<li>如果有任一操作数是数值，则将另一个操作数转换为数值，再执行比较。</li>
+<li>任何涉及 NaN 的比较都返回 false。</li>
+<li>如果有任一操作数是对象，则调用其 valueOf() 方法，将取得的结果按上述规则比较。如果没有 valueOf() 方法，则调用 toString() 方法，将取得的结果按上述规则比较。</li>
+<li>如果有任一操作数是布尔值，则将其转为数值再比较。</li>
+</ol>
+<h2 id="7-相等操作符"><a href="#7-相等操作符" class="headerlink" title="7 相等操作符"></a>7 相等操作符</h2><p>有两组操作符，第一组是等于和不等于，它们在比较前执行转换。第二组是全等和不全等，它们在比较前不会发生转换。</p>
+<h3 id="7-1-等于和不等于"><a href="#7-1-等于和不等于" class="headerlink" title="7.1 等于和不等于"></a>7.1 等于和不等于</h3><p><code>==</code>和<code>!=</code>会先对操作数进行强制类型转换，再判断操作数是否相等。规则如下：</p>
+<ul>
+<li>如果两个操作数都是对象，则仅当两个操作数都引用同一个对象时才返回<code>true</code>。</li>
+<li>如果一个操作数是<code>null</code>，另一个操作数是<code>undefined</code>，则返回<code>true</code>。</li>
+<li>如果两个操作数是不同类型的，就会尝试在比较之前将它们转换为相同类型：<ul>
+<li>当数字与字符串进行比较时，会尝试将字符串转换为数字值。</li>
+<li>如果操作数之一是<code>Boolean</code>，则将布尔操作数转换为1或0。<ul>
+<li>如果是<code>true</code>，则转换为<code>1</code>。</li>
+<li>如果是 <code>false</code>，则转换为<code>0</code>。</li>
+</ul>
+</li>
+<li>如果操作数之一是对象，另一个是数字或字符串，会尝试使用对象的<code>valueOf()</code>和<code>toString()</code>方法将对象转换为原始值。</li>
+</ul>
+</li>
+<li>如果操作数具有相同的类型，则将它们进行如下比较：<ul>
+<li><code>String</code>：<code>true</code>仅当两个操作数具有相同顺序的相同字符时才返回。</li>
+<li><code>Number</code>：<code>true</code>仅当两个操作数具有相同的值时才返回。<code>+0</code>并被<code>-0</code>视为相同的值。如果任一操作数为<code>NaN</code>，则返回<code>false</code>。</li>
+<li><code>Boolean</code>：<code>true</code>仅当操作数为两个<code>true</code>或两个<code>false</code>时才返回<code>true</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-2-全等和不全等"><a href="#7-2-全等和不全等" class="headerlink" title="7.2 全等和不全等"></a>7.2 全等和不全等</h3><p><code>===</code>和<code>!==</code>不会对操作数进行强制类型转换。与相等运算符不同，全等运算符总是认为不同类型的操作数是不同的。规则如下：</p>
+<ul>
+<li>如果操作数的类型不同，则返回 <code>false</code>。</li>
+<li>如果两个操作数都是对象，只有当它们指向同一个对象时才返回 <code>true</code>。</li>
+<li>如果两个操作数都为 <code>null</code>，或者两个操作数都为 <code>undefined</code>，返回 <code>true</code>。</li>
+<li>如果两个操作数有任意一个为 <code>NaN</code>，返回 <code>false</code>。</li>
+<li>否则，比较两个操作数的值：<ul>
+<li>数字类型必须拥有相同的数值。<code>+0</code> 和 <code>-0</code> 会被认为是相同的值。</li>
+<li>字符串类型必须拥有相同顺序的相同字符。</li>
+<li>布尔类型必须同时为 <code>true</code> 或同时为 <code>false</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-三元操作符"><a href="#8-三元操作符" class="headerlink" title="8 三元操作符"></a>8 三元操作符</h2><div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num1 = <span class="hljs-number">10</span>
+<span class="hljs-keyword">let</span> num2 = <span class="hljs-number">5</span>
+<span class="hljs-keyword">let</span> max = num1 &gt; num2 ? num1 : num2</code></pre></div>
+
+<h2 id="9-赋值操作符"><a href="#9-赋值操作符" class="headerlink" title="9 赋值操作符 ="></a>9 赋值操作符 <code>=</code></h2><p>复合赋值操作符：<code>+=</code>、<code>-=</code>等等</p>
+<h2 id="10-逗号操作符"><a href="#10-逗号操作符" class="headerlink" title="10 逗号操作符 ,"></a>10 逗号操作符 <code>,</code></h2><ol>
+<li><p>一条语句中执行多个操作</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>,b = <span class="hljs-number">2</span>,c = <span class="hljs-number">3</span></code></pre></div>
+</li>
+<li><p>赋值时，使用逗号分隔值，最终会返回最后一个值</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> num = (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>) 	<span class="hljs-comment">// num = 5</span></code></pre></div></li>
+</ol>
+<h1 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h1><h2 id="1-if、do-while、while、for"><a href="#1-if、do-while、while、for" class="headerlink" title="1 if、do-while、while、for"></a>1 if、do-while、while、for</h2><p>略。</p>
+<h2 id="2-for-in"><a href="#2-for-in" class="headerlink" title="2 for-in"></a>2 for-in</h2><p>for-in 语句用来枚举对象中<strong>非符号属性</strong>，例如：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj = &#123;
+    <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">b</span>: <span class="hljs-number">2</span>,
+    [<span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;foo&quot;</span>)]: <span class="hljs-string">&#x27;foo&#x27;</span>,
+&#125;;
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> prop <span class="hljs-keyword">in</span> obj) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(prop, obj[prop]);	<span class="hljs-comment">// a 1   b 2 </span>
+&#125;</code></pre></div>
+
+<p>注意：</p>
+<ol>
+<li>ECMAScript 中对象的属性是<strong>无序</strong>的，因此 for-in 无法保证对象属性的顺序。</li>
+<li>如果要迭代的变量是 null 或 undefined，则不会执行循环体（不报错）。</li>
+</ol>
+<h2 id="3-for-of"><a href="#3-for-of" class="headerlink" title="3 for-of"></a>3 for-of</h2><p>for-of 用来遍历可迭代对象的元素，例如：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> nums) &#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item);		<span class="hljs-comment">// 1 2 3</span>
+&#125;</code></pre></div>
+
+<p>注意：如果尝试迭代的对象不支持迭代，for-of 会抛出错误。</p>
+<h2 id="4-标签语句配合-break-和-continue"><a href="#4-标签语句配合-break-和-continue" class="headerlink" title="4 标签语句配合 break 和 continue"></a>4 标签语句配合 break 和 continue</h2><h3 id="4-1-标签语句"><a href="#4-1-标签语句" class="headerlink" title="4.1 标签语句"></a>4.1 标签语句</h3><p>格式：<code>标签：语句</code>，例如：</p>
+<div class="code-wrapper"><pre><code class="hljs vbnet"><span class="hljs-symbol">flag:</span><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span></code></pre></div>
+
+<h3 id="4-2-配合-break-和-continue"><a href="#4-2-配合-break-和-continue" class="headerlink" title="4.2 配合 break 和 continue"></a>4.2 配合 break 和 continue</h3><div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-attr">flag</span>: <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">1</span>; j &lt; <span class="hljs-number">10</span>; j++) &#123;
+        <span class="hljs-keyword">if</span> (j % <span class="hljs-number">5</span> === <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span> flag;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i, j);
+    &#125;
+&#125;</code></pre></div>
+
+<p>执行到 break 和 continue 时，会跳转到指定的位置继续执行。</p>
+<h2 id="5-with-语句"><a href="#5-with-语句" class="headerlink" title="5 with 语句"></a>5 with 语句</h2><p>with 语句的用途是将代码的作用域设置为特定的对象，比如：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj =&#123;
+    <span class="hljs-attr">a</span>:<span class="hljs-number">1</span>,
+    <span class="hljs-attr">b</span>:<span class="hljs-number">2</span>,
+    <span class="hljs-attr">c</span>:<span class="hljs-number">3</span>,
+    <span class="hljs-attr">d</span>:<span class="hljs-number">4</span>
+&#125;
+<span class="hljs-title function_">with</span>(<span class="hljs-params">obj</span>)&#123;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a);		<span class="hljs-comment">// 1</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b);		<span class="hljs-comment">// 2</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(c);		<span class="hljs-comment">// 3</span>
+    <span class="hljs-keyword">let</span> d = <span class="hljs-number">400</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(d);		<span class="hljs-comment">// 400</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e); 	<span class="hljs-comment">//报错</span>
+&#125;</code></pre></div>
+
+<p>注意：</p>
+<ol>
+<li>在语句内部，每个变量会先被认为是局部变量。如果没有找到局部变量，就去 with 后面的对象身上去找。如果还找不到就报错。</li>
+<li>with 影响性能并且难以调试，因此不建议使用 with 语句。</li>
+</ol>
+<h2 id="6-switch-语句"><a href="#6-switch-语句" class="headerlink" title="6 switch 语句"></a>6 switch 语句</h2><p>注意：switch 语句在比较每个条件的值时，使用的是<strong>全等操作符</strong>。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【JavaScript红宝书】6.语言基础 - 操作符、语句</div>
+      <div>https://zhangtuo.online/archives/385fbcdb.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/271687d2.html" title="【JavaScript红宝书】7.变量、作用域">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【JavaScript红宝书】7.变量、作用域</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/52155ef2.html" title="【JavaScript红宝书】5.语言基础 - 数据类型">
+                        <span class="hidden-mobile">【JavaScript红宝书】5.语言基础 - 数据类型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

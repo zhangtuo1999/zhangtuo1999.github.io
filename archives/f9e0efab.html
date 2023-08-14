@@ -1,0 +1,865 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="NLP,NER">
+  
+    <meta name="description" content="NER论文源码中常见的几个工具库：argparse、logging、tqdm、seqeval">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【NLP】常用工具库">
+<meta property="og:url" content="https://zhangtuo.online/archives/f9e0efab.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="NER论文源码中常见的几个工具库：argparse、logging、tqdm、seqeval">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/py.png">
+<meta property="article:published_time" content="2023-01-13T01:14:56.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.923Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="NLP">
+<meta property="article:tag" content="NER">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/py.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【NLP】常用工具库 - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【NLP】常用工具库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-01-13 09:14" pubdate>
+          2023年1月13日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【NLP】常用工具库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>总结 NER 代码中常用的工具库如下：</p>
+<ol>
+<li>argparse 参数解析 <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/argparse.html">https://docs.python.org/3/library/argparse.html</a></li>
+<li>logging 日志记录 <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/logging.html">https://docs.python.org/3/library/logging.html</a></li>
+<li>tqdm 显示进度条 <a target="_blank" rel="noopener" href="https://tqdm.github.io/">https://tqdm.github.io/</a></li>
+<li>seqeval 序列标注评估 <a target="_blank" rel="noopener" href="https://github.com/chakki-works/seqeval">https://github.com/chakki-works/seqeval</a></li>
+</ol>
+<h2 id="1-argparse-参数解析"><a href="#1-argparse-参数解析" class="headerlink" title="1. argparse 参数解析"></a>1. argparse 参数解析</h2><blockquote>
+<p>argparse 模块使编写用户友好的命令行界面变得容易。程序定义了它需要的参数，argparse 将确定如何从sys.argv 中解析这些参数。argparse 模块还自动生成帮助和用法消息。当用户给程序提供无效参数时，模块也会发出错误。</p>
+</blockquote>
+<h3 id="1-1-使用场景"><a href="#1-1-使用场景" class="headerlink" title="1.1 使用场景"></a>1.1 使用场景</h3><p>常用 argparse 模块来定义 batch_size 和 lr 等超参数。这样就可以在不改变代码的前提下，通过 shell 命令来指定不同的超参数。</p>
+<h3 id="1-2-用法"><a href="#1-2-用法" class="headerlink" title="1.2 用法"></a>1.2 用法</h3><p>使用 argparse 的步骤：</p>
+<ol>
+<li>导包 —— <code>import argparse</code></li>
+<li>创建解析器对象 —— <code>parser = argparse.ArgumentParser()</code></li>
+<li>给解析器对象添加命令行参数 —— <code>parser.add_argument(&#39;--lr&#39;, type=float, default=1e-5)</code></li>
+<li>解析命令行中的参数 —— <code>args = parser.parse_args()</code></li>
+<li>调用参数 —— <code>lr = args.lr</code></li>
+</ol>
+<p>举例：</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> argparse
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument(<span class="hljs-string">&#x27;--batch_size&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">32</span>)
+parser.add_argument(<span class="hljs-string">&#x27;--lr&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>, default=<span class="hljs-number">1e-5</span>)
+
+parser.add_argument(<span class="hljs-string">&#x27;--use_crf&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)
+
+args = parser.parse_args()
+
+<span class="hljs-built_in">print</span>(args.batch_size)
+<span class="hljs-built_in">print</span>(args.lr)
+<span class="hljs-built_in">print</span>(args.use_crf)</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span>
+python demo1.py \
+    --batch_size 64 \
+    --lr 2e-5</code></pre></div>
+
+<h2 id="2-logging-日志记录"><a href="#2-logging-日志记录" class="headerlink" title="2. logging 日志记录"></a>2. logging 日志记录</h2><blockquote>
+<p>该模块定义了为应用程序和库实现灵活事件日志记录系统的函数和类。</p>
+</blockquote>
+<h3 id="2-1-使用场景"><a href="#2-1-使用场景" class="headerlink" title="2.1 使用场景"></a>2.1 使用场景</h3><p>需要将训练模型过程中的一些关键信息记录下来，同时输出到控制台和文件中。</p>
+<h3 id="2-2-用法"><a href="#2-2-用法" class="headerlink" title="2.2 用法"></a>2.2 用法</h3><p>使用 logging 的步骤：</p>
+<ol>
+<li>导包 —— <code>import logging</code></li>
+<li>创建日志对象，设置默认输出级别</li>
+<li>为日志对象添加控制台处理器和文件处理器</li>
+<li>打印日志</li>
+</ol>
+<p>举例：</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> logging 
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.propagate = <span class="hljs-literal">False</span>
+
+<span class="hljs-comment"># 日志输出格式</span>
+formatter = logging.Formatter(
+    fmt=<span class="hljs-string">&quot;%(asctime)s - %(levelname)s - %(name)s -   %(message)s&quot;</span>, 
+    datefmt=<span class="hljs-string">&#x27;%Y/%m/%d %H:%M:%S&#x27;</span>)
+
+<span class="hljs-comment"># 添加控制台日志处理器</span>
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
+
+<span class="hljs-comment"># 添加文件日志处理器</span>
+file_handler = logging.FileHandler(<span class="hljs-string">&#x27;./demo.log&#x27;</span>, mode=<span class="hljs-string">&quot;a&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>)
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
+<span class="hljs-comment"># 打印不同级别的日志</span>
+logger.info(<span class="hljs-string">&#x27;epoch 0, loss: 0.1&#x27;</span>)</code></pre></div>
+
+<h2 id="3-tqdm-显示进度条"><a href="#3-tqdm-显示进度条" class="headerlink" title="3. tqdm 显示进度条"></a>3. tqdm 显示进度条</h2><blockquote>
+<p>立即让循环显示智能进度表-只需用 tqdm(iterable) 包装任何可迭代的，就完成了！</p>
+</blockquote>
+<h3 id="3-1-使用场景"><a href="#3-1-使用场景" class="headerlink" title="3.1 使用场景"></a>3.1 使用场景</h3><p>训练模型时，显示训练进度。</p>
+<h3 id="3-2-用法"><a href="#3-2-用法" class="headerlink" title="3.2 用法"></a>3.2 用法</h3><ol>
+<li>安装 tqdm 库，并导包</li>
+<li>使用 <code>tqdm()</code> 包装迭代器</li>
+</ol>
+<p>举例：</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm, trange
+<span class="hljs-keyword">import</span> time
+
+epoch = <span class="hljs-number">50</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> tqdm(<span class="hljs-built_in">range</span>(epoch)):
+    time.sleep(<span class="hljs-number">0.25</span>)
+
+<span class="hljs-comment"># trange(x) 是 tqdm(range(x)) 的简写</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> trange(epoch):
+    time.sleep(<span class="hljs-number">0.25</span>)</code></pre></div>
+
+<h2 id="4-seqeval-序列标注评估"><a href="#4-seqeval-序列标注评估" class="headerlink" title="4. seqeval 序列标注评估"></a>4. seqeval 序列标注评估</h2><h3 id="4-1-使用场景"><a href="#4-1-使用场景" class="headerlink" title="4.1 使用场景"></a>4.1 使用场景</h3><p>评估模型的预测效果。</p>
+<h3 id="4-2-用法"><a href="#4-2-用法" class="headerlink" title="4.2 用法"></a>4.2 用法</h3><ol>
+<li>安装 seqeval 库，并导包</li>
+<li>传入真实标签和预测标签</li>
+</ol>
+<p>举例：</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> seqeval.metrics <span class="hljs-keyword">import</span> accuracy_score, precision_score, recall_score, f1_score
+<span class="hljs-keyword">from</span> seqeval.metrics <span class="hljs-keyword">import</span> classification_report
+
+
+y_true = [[<span class="hljs-string">&#x27;O&#x27;</span>, <span class="hljs-string">&#x27;O&#x27;</span>, <span class="hljs-string">&#x27;O&#x27;</span>, <span class="hljs-string">&#x27;B-MISC&#x27;</span>, <span class="hljs-string">&#x27;I-MISC&#x27;</span>, <span class="hljs-string">&#x27;I-MISC&#x27;</span>, <span class="hljs-string">&#x27;O&#x27;</span>], [<span class="hljs-string">&#x27;B-PER&#x27;</span>, <span class="hljs-string">&#x27;I-PER&#x27;</span>, <span class="hljs-string">&#x27;O&#x27;</span>]]
+y_pred = [[<span class="hljs-string">&#x27;O&#x27;</span>, <span class="hljs-string">&#x27;O&#x27;</span>, <span class="hljs-string">&#x27;B-MISC&#x27;</span>, <span class="hljs-string">&#x27;I-MISC&#x27;</span>, <span class="hljs-string">&#x27;I-MISC&#x27;</span>, <span class="hljs-string">&#x27;I-MISC&#x27;</span>, <span class="hljs-string">&#x27;O&#x27;</span>], [<span class="hljs-string">&#x27;B-PER&#x27;</span>, <span class="hljs-string">&#x27;I-PER&#x27;</span>, <span class="hljs-string">&#x27;O&#x27;</span>]]
+
+<span class="hljs-built_in">print</span>(accuracy_score(y_true, y_pred))
+<span class="hljs-built_in">print</span>(precision_score(y_true, y_pred))
+<span class="hljs-built_in">print</span>(recall_score(y_true, y_pred))
+<span class="hljs-built_in">print</span>(f1_score(y_true, y_pred))
+
+
+<span class="hljs-built_in">print</span>(classification_report(y_true, y_pred))</code></pre></div>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/NLP/">#NLP</a>
+      
+        <a href="/tags/NER/">#NER</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【NLP】常用工具库</div>
+      <div>https://zhangtuo.online/archives/f9e0efab.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年1月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/64622cda.html" title="【JavaScript红宝书】26.客户端存储">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【JavaScript红宝书】26.客户端存储</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/6e2d7dc.html" title="【JavaScript】Axios">
+                        <span class="hidden-mobile">【JavaScript】Axios</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

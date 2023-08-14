@@ -1,0 +1,932 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangTuo">
+  <meta name="keywords" content="JavaScript">
+  
+    <meta name="description" content="《JavaScript高级程序设计（第4版）》第23章：JSON。主要内容：JSON 对象，序列化和解析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JavaScript红宝书】23.JSON">
+<meta property="og:url" content="https://zhangtuo.online/archives/a0f7377d.html">
+<meta property="og:site_name" content="Tourry&#39;s Blog">
+<meta property="og:description" content="《JavaScript高级程序设计（第4版）》第23章：JSON。主要内容：JSON 对象，序列化和解析。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+<meta property="article:published_time" content="2022-08-14T02:39:55.000Z">
+<meta property="article:modified_time" content="2023-08-09T05:03:19.921Z">
+<meta property="article:author" content="ZhangTuo">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhangtuo.online/images/%E5%B0%81%E9%9D%A2%E5%9B%BE/%E7%BA%A2%E5%AE%9D%E4%B9%A6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【JavaScript红宝书】23.JSON - Tourry&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhangtuo.online","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"e8a90cadc58b0ccc27e335400184fb39","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?e8a90cadc58b0ccc27e335400184fb39";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Tourry&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【JavaScript红宝书】23.JSON"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-14 10:39" pubdate>
+          2022年8月14日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          53 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【JavaScript红宝书】23.JSON</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>JavaScript 对象简谱（JSON,JavaScript Object Notation）是 JavaScript 的严格子集。理解JSON 最关键的一点是要把它当成一种<strong>数据格式</strong>，而不是编程语言。JSON 属于JavaScript，它们只是拥有相同的语法而已。JSON 也不是只能在JavaScript 中使用，它是一种通用数据格式。很多语言都有解析和序列化 JSON 的内置能力。</p>
+<h2 id="1-语法"><a href="#1-语法" class="headerlink" title="1 语法"></a>1 语法</h2><p>JSON 语法支持表示3 种类型的值。 </p>
+<ul>
+<li>简单值：字符串、数值、布尔值和 null 可以在 JSON 中出现，就像在 JavaScript 中一样。特殊<br>值 undefined 不可以。</li>
+<li>对象：第一种复杂数据类型，对象表示有序键&#x2F;值对。每个值可以是简单值，也可以是复杂类型。</li>
+<li>数组：第二种复杂数据类型，数组表示可以通过数值索引访问的值的有序列表。数组的值可以<br>是任意类型，包括简单值、对象，甚至其他数组。</li>
+</ul>
+<p>JSON 没有变量、函数或对象实例的概念。JSON 的所有记号都只为表示结构化<strong>数据</strong>。</p>
+<h3 id="1-1-简单值"><a href="#1-1-简单值" class="headerlink" title="1.1 简单值"></a>1.1 简单值</h3><p>最简单的JSON 可以是一个数值。例如，下面这个数值是有效的JSON：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-number">5</span></code></pre></div>
+
+<p>下面这个字符串也是有效的JSON：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-string">&quot;Hello world!&quot;</span></code></pre></div>
+
+<p>JavaScript 字符串与JSON 字符串的主要区别是，JSON 字符串必须使用<strong>双引号</strong>（单引号会导致语法错误）。</p>
+<p>布尔值和 null 也是有效的 JSON 值：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-literal"><span class="hljs-keyword">true</span></span></code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-literal"><span class="hljs-keyword">null</span></span></code></pre></div>
+
+<h3 id="1-2-对象"><a href="#1-2-对象" class="headerlink" title="1.2 对象"></a>1.2 对象</h3><p>JSON 表示对象的语法是：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nicholas&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">29</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>与 JavaScript 对象字面量相比，JSON 主要有两处不同。首先，没有变量声明（JSON 中没有变量）。其次，最后没有分号（不需要，因为不是 JavaScript 语句）。同样，用引号将属性名包围起来才是有效的 JSON。属性的值可以是简单值或复杂数据类型值，后者可以在对象中再嵌入对象，比如：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Nicholas&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">29</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;school&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Merrimack College&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;location&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;North Andover, MA&quot;</span>
+    <span class="hljs-punctuation">&#125;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>与 JavaScript 不同，JSON 中的<strong>对象属性名</strong>必须始终带<strong>双引号</strong>。</p>
+<h3 id="1-3-数组"><a href="#1-3-数组" class="headerlink" title="1.3 数组"></a>1.3 数组</h3><p>JSON 的第二种复杂数据类型是数组。数组在 JSON 中使用 JavaScript 的数组字面量形式表示。</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><span class="hljs-number">25</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;hi&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">]</span></code></pre></div>
+
+<p>对象和数组通常会作为JSON 数组的顶级结构（尽管不是必需的），以便创建大型复杂数据结构。</p>
+<h2 id="2-序列化和反序列化"><a href="#2-序列化和反序列化" class="headerlink" title="2 序列化和反序列化"></a>2 序列化和反序列化</h2><h3 id="2-1-JSON-对象"><a href="#2-1-JSON-对象" class="headerlink" title="2.1 JSON 对象"></a>2.1 JSON 对象</h3><p>JSON 对象有两个方法：stringify() 和 parse()。在简单的情况下，这两个方法分别可以将 JavaScript 序列化为 JSON 字符串，以及将 JSON 解析（反序列化）为原生 JavaScript 值。例如：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> book = &#123;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Professional JavaScript&quot;</span>,
+    <span class="hljs-attr">authors</span>: [
+        <span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span>,
+        <span class="hljs-string">&quot;Matt Frisbie&quot;</span>
+    ],
+    <span class="hljs-attr">edition</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">2017</span>
+&#125;;
+<span class="hljs-keyword">let</span> jsonText = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(book);</code></pre></div>
+
+<p>这个例子使用 JSON.stringify() 把一个 JavaScript 对象序列化为一个 JSON 字符串，保存在变量 jsonText 中。默认情况下，JSON.stringify() 会输出<strong>不包含空格或缩进</strong>的 JSON 字符串，因此 jsonText 的值是这样的：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Professional JavaScript&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;authors&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&quot;Matt Frisbie&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;edition&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2017</span><span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>在序列化 JavaScript 对象时，所有<strong>函数和原型成员</strong>都会有意地在结果中<strong>省略</strong>。此外，值为 <strong>undefined</strong><br>的任何属性也会被跳过。最终得到的就是所有实例属性均为有效 JSON 数据类型的表示。</p>
+<p>JSON 字符串可以直接传给 JSON.parse()，然后得到相应的 JavaScript 值。比如，可以使用以下代码创建与 book 对象类似的新对象：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> bookCopy = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(jsonText);</code></pre></div>
+
+<p>注意，book 和 bookCopy 是两个完全不同的对象，没有任何关系。但是它们拥有相同的属性和值。</p>
+<p>如果给 JSON.parse() 传入的 JSON 字符串无效，则会导致抛出错误。</p>
+<h3 id="2-2-JSON-stringify-序列化"><a href="#2-2-JSON-stringify-序列化" class="headerlink" title="2.2 JSON.stringify() 序列化"></a>2.2 JSON.stringify() 序列化</h3><p>JSON.stringify() 方法除了要序列化的对象，还可以接收两个参数。这两个参数可以用于指定其他序列化 JavaScript 对象的方式。第一个参数是<strong>过滤器</strong>，可以是数组或函数；第二个参数是用于<strong>缩进</strong>结果JSON 字符串的选项。</p>
+<h4 id="2-2-1-过滤结果"><a href="#2-2-1-过滤结果" class="headerlink" title="2.2.1 过滤结果"></a>2.2.1 过滤结果</h4><p>如果第二个参数是一个<strong>数组</strong>，那么 JSON.stringify() 返回的结果只会包含该数组中列出的对象属性。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> book = &#123;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Professional JavaScript&quot;</span>,
+    <span class="hljs-attr">authors</span>: [
+        <span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span>,
+        <span class="hljs-string">&quot;Matt Frisbie&quot;</span>
+    ],
+    <span class="hljs-attr">edition</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">2017</span>
+&#125;;
+<span class="hljs-keyword">let</span> jsonText = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(book, [<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;edition&quot;</span>]);</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Professional JavaScript&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;edition&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>如果第二个参数是一个<strong>函数</strong>（称为 replacer）。提供的函数接收两个参数：属性名（key）和属性值（value）。可以根据这个 key 决定要对相应属性执行什么操作。这个 key 始终是字符串，只是在值不属于某个键&#x2F;值对时会是空字符串。</p>
+<p>为了改变对象的序列化，返回的值就是相应 key 应该包含的结果。注意，返回 undefined 会导致属性被忽略。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> book = &#123;
+  <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Professional JavaScript&quot;</span>,
+  <span class="hljs-attr">authors</span>: [<span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span>, <span class="hljs-string">&quot;Matt Frisbie&quot;</span>],
+  <span class="hljs-attr">edition</span>: <span class="hljs-number">4</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">2017</span>,
+&#125;;
+
+<span class="hljs-keyword">let</span> jsonText = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(book, <span class="hljs-function">(<span class="hljs-params">key, value</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">switch</span> (key) &#123;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;authors&quot;</span>:
+      <span class="hljs-keyword">return</span> value.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;,&quot;</span>);
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;year&quot;</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-number">5000</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;edition&quot;</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
+    <span class="hljs-attr">default</span>:
+      <span class="hljs-keyword">return</span> value;	<span class="hljs-comment">// 提供默认返回值</span>
+  &#125;
+&#125;);</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Professional JavaScript&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;authors&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Nicholas C. Zakas,Matt Frisbie&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">5000</span><span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>最后一定要提供<strong>默认返回值</strong>，以便返回其他属性传入的值。</p>
+<h4 id="2-2-2-字符串缩进"><a href="#2-2-2-字符串缩进" class="headerlink" title="2.2.2 字符串缩进"></a>2.2.2 字符串缩进</h4><p>JSON.stringify() 方法的第三个参数控制缩进和空格。</p>
+<p>在这个参数是<strong>数值</strong>时，表示每一级缩进的空格数。</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> book = &#123;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Professional JavaScript&quot;</span>,
+    <span class="hljs-attr">authors</span>: [
+        <span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span>,
+        <span class="hljs-string">&quot;Matt Frisbie&quot;</span>
+    ],
+    <span class="hljs-attr">edition</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">2017</span>
+&#125;;
+<span class="hljs-keyword">let</span> jsonText = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(book, <span class="hljs-literal">null</span>, <span class="hljs-number">4</span>);</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Professional JavaScript&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;authors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;Matt Frisbie&quot;</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;edition&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2017</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>注意，除了缩进，JSON.stringify() 方法还为方便阅读插入了换行符。这个行为对于所有有效的缩进参数都会发生。</p>
+<p>如果缩进参数是一个<strong>字符串</strong>而非数值，那么 JSON 字符串中就会使用这个字符串而不是空格来缩进。使用字符串，也可以将缩进字符设置为 Tab 或任意字符，如两个连字符：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> jsonText = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(book, <span class="hljs-literal">null</span>, <span class="hljs-string">&quot;--&quot;</span> );</code></pre></div>
+
+<p>这样，jsonText 的值会变成如下格式：</p>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+--<span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Professional JavaScript&quot;</span><span class="hljs-punctuation">,</span>
+--<span class="hljs-attr">&quot;authors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+----<span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span><span class="hljs-punctuation">,</span>
+----<span class="hljs-string">&quot;Matt Frisbie&quot;</span>
+--<span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+--<span class="hljs-attr">&quot;edition&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+--<span class="hljs-attr">&quot;year&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2017</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+
+<p>使用字符串时有 10 个字符的长度限制。如果字符串长度超过 10，则会在第 10 个字符处截断。</p>
+<h4 id="2-2-3-toJSON-方法"><a href="#2-2-3-toJSON-方法" class="headerlink" title="2.2.3 toJSON() 方法"></a>2.2.3 toJSON() 方法</h4><p>有时候，对象需要在 JSON.stringify() 之上自定义 JSON 序列化。此时，可以在要序列化的对象中添加 toJSON() 方法，序列化时会基于这个方法返回适当的 JSON 表示。事实上，原生 Date 对象就有一个 toJSON() 方法，能够自动将 JavaScript 的 Date 对象转换为 ISO 8601 日期字符串（本质上与在 Date 对象上调用 toISOString() 方法一样）。</p>
+<p>下面的对象为自定义序列化而添加了一个 toJSON() 方法：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> book = &#123;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Professional JavaScript&quot;</span>,
+    <span class="hljs-attr">authors</span>: [
+        <span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span>,
+        <span class="hljs-string">&quot;Matt Frisbie&quot;</span>
+    ],
+    <span class="hljs-attr">edition</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-attr">year</span>: <span class="hljs-number">2017</span>,
+    <span class="hljs-attr">toJSON</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">title</span>;
+    &#125;
+&#125;;
+<span class="hljs-keyword">let</span> jsonText = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(book);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(jsonText);</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-string">&quot;Professional JavaScript&quot;</span></code></pre></div>
+
+<p>这里 book 对象中定义的 toJSON() 方法简单地返回了图书的书名（this.title）。与 Date 对象类似，这个对象会被序列化为简单字符串而非对象。toJSON() 方法可以返回任意<strong>序列化值</strong>，都可以起到相应的作用。如果对象被嵌入在另一个对象中，返回 undefined 会导致值变成 null；或者如果是顶级对象，则本身就是 undefined。注意，箭头函数不能用来定义 toJSON() 方法。主要原因是箭头函数的词法作用域是全局作用域，在这种情况下不合适。</p>
+<p>toJSON() 方法可以与过滤函数一起使用，因此理解不同序列化流程的顺序非常重要。在把对象传给 JSON.stringify()时会执行如下步骤。</p>
+<p>(1) 如果可以获取实际的值，则调用 toJSON() 方法获取实际的值，否则使用默认的序列化。</p>
+<p>(2) 如果提供了第二个参数，则应用过滤。传入过滤函数的值就是第 (1) 步返回的值。</p>
+<p>(3) 第 (2) 步返回的每个值都会相应地进行序列化。</p>
+<p>(4) 如果提供了第三个参数，则相应地进行缩进。</p>
+<p>理解这个顺序有助于决定是创建 toJSON() 方法，还是使用过滤函数，抑或是两者都用。</p>
+<h3 id="2-3-JSON-parse-反序列化"><a href="#2-3-JSON-parse-反序列化" class="headerlink" title="2.3 JSON.parse() 反序列化"></a>2.3 JSON.parse() 反序列化</h3><p>JSON.parse() 方法也可以接收一个额外的参数，这个函数会针对每个键&#x2F;值对都调用一次。为区别于传给JSON.stringify() 的起过滤作用的替代函数（replacer），这个函数被称为还原函数（reviver）。</p>
+<p>实际上它们的格式完全一样，即还原函数也接收两个参数，属性名（key）和属性值（value），另外也需要返回值。如果还原函数返回 undefined，则结果中就会<strong>删除</strong>相应的键。如果返回了其他任何值，则该值就会成为相应键的值插入到结果中。还原函数经常被用于把日期字符串转换为 Date 对象。例如：</p>
+<div class="code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> book = &#123;
+  <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Professional JavaScript&quot;</span>,
+  <span class="hljs-attr">authors</span>: [<span class="hljs-string">&quot;Nicholas C. Zakas&quot;</span>, <span class="hljs-string">&quot;Matt Frisbie&quot;</span>],
+  <span class="hljs-attr">edition</span>: <span class="hljs-number">4</span>,
+  <span class="hljs-attr">year</span>: <span class="hljs-number">2017</span>,
+  <span class="hljs-attr">releaseDate</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2017</span>, <span class="hljs-number">11</span>, <span class="hljs-number">1</span>),
+&#125;;
+<span class="hljs-keyword">let</span> jsonText = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(book);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(jsonText);
+<span class="hljs-comment">// &#123;&quot;title&quot;:&quot;Professional JavaScript&quot;,&quot;authors&quot;:[&quot;Nicholas C. Zakas&quot;,&quot;Matt Frisbie&quot;],&quot;edition&quot;:4,&quot;year&quot;:2017,&quot;releaseDate&quot;:&quot;2017-11-30T16:00:00.000Z&quot;&#125;</span>
+
+<span class="hljs-keyword">let</span> bookCopy = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(jsonText, <span class="hljs-function">(<span class="hljs-params">key, value</span>) =&gt;</span>
+  key == <span class="hljs-string">&quot;releaseDate&quot;</span> ? <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(value) : value
+);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(bookCopy.<span class="hljs-property">releaseDate</span>.<span class="hljs-title function_">getFullYear</span>());  
+<span class="hljs-comment">// 2017</span></code></pre></div>
+
+<p>以上代码在 book 对象中增加了 releaseDate 属性，是一个 Date 对象。这个对象在被序列化为 JSON 字符串后，又被重新解析为一个对象 bookCopy。这里的还原函数会查找”releaseDate”键，如果找到就会根据它的日期字符串创建新的 Date 对象。得到的 bookCopy.releaseDate 属性又变回了 Date 对象，因此可以调用其 getFullYear() 方法。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【JavaScript红宝书】23.JSON</div>
+      <div>https://zhangtuo.online/archives/a0f7377d.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangTuo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/archives/f049ac93.html" title="【JavaScript红宝书】24.网络请求与远程资源">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【JavaScript红宝书】24.网络请求与远程资源</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/archives/871431d2.html" title="【JavaScript红宝书】22.模块">
+                        <span class="hidden-mobile">【JavaScript红宝书】22.模块</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      吉ICP备20001736号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
